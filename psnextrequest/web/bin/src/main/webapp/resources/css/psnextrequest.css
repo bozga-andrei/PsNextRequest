@@ -1,0 +1,204 @@
+/* ----------------------------------------------------------------------------------------
+/* GENERAL
+/* ---------------------------------------------------------------------------------------*/
+
+html {
+    height: 100%;
+}
+
+body {
+	min-height: 100%;
+	position: relative;
+}
+
+body, html {
+    color: #676767;
+    font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
+    font-size: 12px;
+	padding: 0;
+	margin: 0;
+	background-color: #292929;
+	background-image: url("images/background.jpg");
+	background-repeat: repeat;
+}
+
+.grey {
+	background-image: url("images/motif.png");
+	background-repeat: repeat;
+}
+
+.yellow {
+	color: #FFD050;
+}
+
+h1 {
+ 	color: white;
+	margin: 0;
+	font-size: 450%;
+	width: 1024px;
+	margin: 0 auto;
+	padding:0;
+}
+
+h2 {
+	font-size: 180%;
+	margin-bottom: 0em;
+	margin-top: 0;
+	margin-top: 4em;
+	padding-top: 0.25em;
+	color: #222;
+	border-bottom: 1px solid #AAA;
+}
+
+
+/* ----------------------------------------------------------------------------------------
+/* FOOTER
+/* ---------------------------------------------------------------------------------------*/
+
+.footer {
+    position: absolute;
+    background-color: #222;
+    bottom: 0;
+    left:0;
+	display: block;
+	width: 100%;
+	height: 100px;
+}
+
+.footer .footersub {
+	background: #FFD050;
+	height: 2px;
+}
+
+.footer p {
+	width: 1024px;
+	margin: 0 auto;
+	display: block;
+	padding-top: 1em;
+}
+
+/* ----------------------------------------------------------------------------------------
+/* HEADER
+/* ---------------------------------------------------------------------------------------*/
+
+.wrapper {
+	width: 1024px;
+	margin: 0 auto;
+	padding-top: 11px;
+}	
+
+.header {
+	width: 100%;
+	top: 0;
+	height: 120px;
+	background: black;
+}
+
+.header .sub1 {
+	background: black;
+	padding-top: 8em;
+}
+
+.header .sub2 {
+	background: #222;
+	height: 40px;
+}
+
+.header .sub2 .subtitle {
+	width: 1024px;
+	margin: 0 auto;
+	display: block;
+	padding-top: 0.8em;
+	font-size: 120%;
+}
+
+.header .sub3 {
+
+	height: 333px;
+}
+
+.content {
+}
+
+.command {
+	width: 998px;
+	padding: 1em;
+	display: inline-block;
+	margin-bottom: -3em;
+	overflow: hidden;
+	background-image: url("images/motif.png");
+	background-repeat: repeat;
+}
+
+.line {
+	margin-bottom: 1.5em;
+}
+
+.line .section {
+	margin-right: 2em;
+	border-bottom: 1px solid #CCC`;
+	display: inline-block;
+}
+
+.line .section:last-child {
+	border-bottom: 0px solid #CCC;
+}
+
+label {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+label.long {
+	width: 100px;
+	display:block;
+}
+
+textarea {
+	width: 800px;
+}
+
+input {
+	width: 175px;
+}
+
+.buttons {
+	background: #222;
+	padding: 0.55em 0.7em;
+	color: #FFD050;
+	display: inline-block;
+	margin-top: 1em;
+	float:right;
+	margin-bottom: -3.5em;
+	margin-top: -2.5em;
+}
+
+.buttons:hover {
+	background: #FFD050;
+	color: black;	
+}
+
+.display {
+
+}
+
+table {
+	border-collapse:collapse;	
+	background-color: transparent;
+}
+
+table th {
+	background: transparent;
+	background-image: none;
+	color: #222;
+	margin: 0em;
+	font-size: 150%;
+	border-bottom: 1px solid #AAA;
+}
+
+table tr td {
+	padding-top: 1em;
+	padding-bottom: 1em;
+	text-align: center;
+	background: transparent;
+}

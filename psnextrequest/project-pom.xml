@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <!-- Project Pom used for JDSS tools like sonar, continuum -->
+  <!-- PLEASE DO NOT MODIFY THIS FILE -->
+  <!-- Excep to add or remove modules when you modify your project structure -->
+
+  <!-- Parent information CAN NOT BE CHANGED -->
+  <parent>
+    <groupId>be.smals.master</groupId>
+    <artifactId>master-pom</artifactId>
+    <version>2.1.0</version>
+  </parent>
+
+  <!-- General attributes CAN NOT BE CHANGED -->
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>be.smals.psnextrequest</groupId>
+  <artifactId>psnextrequest</artifactId>
+  <version>SNAPSHOT</version>
+  <name>psnextrequest</name>
+  <description>psnextrequest</description>
+
+  <!-- Packaging CAN NOT BE CHANGED -->
+  <packaging>pom</packaging>
+
+  <!-- modules MUST BE UPDATED -->
+  <modules>
+    <module>web</module><module>business</module>
+  </modules>
+
+  <!-- Configuration of source control management -->
+  <scm>
+    <connection>scm:svn:http://svn01.smals-mvm.be/svn/pocs/psnextrequest/trunk</connection>
+    <developerConnection>scm:svn:http://svn01.smals-mvm.be/svn/pocs/psnextrequest/trunk</developerConnection>
+    <url>http://svn01.smals-mvm.be/viewvc/pocs/psnextrequest/trunk</url>
+    <!-- no tag -->
+  </scm>
+
+  <url>${sonar.projectdoc.url.prefix}/${groupId}</url>
+
+  <build>
+    <plugins>
+
+      <plugin>
+        <groupId>be.smals.mavenplugins</groupId>
+        <artifactId>mavenplugins-tableofcontentcreator</artifactId>
+        <version>1.2.0</version>
+        <executions>
+          <execution>
+            <id>generate project content</id>
+            <phase>pre-site</phase>
+            <goals>
+              <goal>project</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+  </build>
+
+  <!-- Configuration of reporting CAN NOT BE CHANGED -->
+  <reporting>
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <bottom>
+            <![CDATA[${project.name} ${project.version} API<BR />Copyright &copy; {inceptionYear}-{currentYear} ${project.organization.name}. All Rights Reserved.]]>
+          </bottom>
+          <source>${javaVersion}</source>
+          <links>
+            <link>${jdkApiDocs}</link>
+            <link>${jeeApiDocs}</link>
+            <!-- add here much more javadoc -->
+          </links>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </reporting>
+
+  <profiles> 
+    <profile> 
+      <!-- Must be activated in Continuum Build Definitions to publish web site of snapshot artifacts --> 
+      <id>continuum-snapshot</id> 
+      <distributionManagement> 
+        <site> 
+          <id>website</id> 
+          <name>${artifactId}</name> 
+          <url>${projectDocSnapshot}${groupId}</url> 
+        </site> 
+      </distributionManagement> 
+    </profile> 
+    <profile> 
+      <!-- Must be activated in Continuum Build Definitions to publish web site of release artifacts --> 
+      <id>continuum-release</id> 
+      <distributionManagement> 
+        <site> 
+          <id>website</id> 
+          <name>${artifactId}-${version}</name> 
+          <url>${projectDocRelease}${groupId}</url> 
+        </site> 
+      </distributionManagement> 
+    </profile> 
+  </profiles>
+  
+</project>

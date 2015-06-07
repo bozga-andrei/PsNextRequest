@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd ">
+  <persistence-unit name="PSNextRequestUnit" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    
+    <class>be.smals.psnextrequest.entity.Group</class>
+    <class>be.smals.psnextrequest.entity.Project</class>
+    <class>be.smals.psnextrequest.entity.ProjectTeam</class>
+    <class>be.smals.psnextrequest.entity.ReqHistoric</class>
+    <class>be.smals.psnextrequest.entity.Request</class>
+    <class>be.smals.psnextrequest.entity.ReqVisibleForResponsible</class>
+    <class>be.smals.psnextrequest.entity.Responsible</class>
+    <class>be.smals.psnextrequest.entity.Role</class>
+    <class>be.smals.psnextrequest.entity.Task</class>
+    <class>be.smals.psnextrequest.entity.User</class>
+ 
+    <properties>
+      <!-- Custom properties for eclipse link -->
+      <property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
+      <property name="eclipselink.ddl-generation.output-mode" value="database" />
+      <!-- <property name="eclipselink.ddl-generation.output-mode" value="both" />-->
+      <property name="eclipselink.logging.level" value="FINEST" />
+      <!-- disable the cache -->
+      <property name="eclipselink.cache.type.default" value="NONE" />
+      <property name="eclipselink.cache.shared.default" value="false" />
+      <!-- uncomment the following line to activate the preformance profiler of eclipselink -->
+      <!--property name="eclipselink.profiler" value="PerformanceProfiler"/ -->
+      <property name="eclipselink.weaving" value="false" />
+    </properties>
+    
+  </persistence-unit>
+</persistence>

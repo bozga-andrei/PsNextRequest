@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+  <wb-module deploy-name="psnextrequest-web">
+        <dependent-module archiveName="psnextrequest-business-common-0.1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/psnextrequest-business-common/psnextrequest-business-common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="psnextrequest-business-ejb-0.1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/psnextrequest-business-ejb/psnextrequest-business-ejb">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    <property name="context-root" value="psnextrequest/webapp"/>
+    <wb-resource deploy-path="/" source-path="src/main/webapp"/>
+    <property name="java-output-path" value="/target/classes"/>
+    <wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/java"/>
+    <wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/"/>
+  </wb-module>
+</project-modules>

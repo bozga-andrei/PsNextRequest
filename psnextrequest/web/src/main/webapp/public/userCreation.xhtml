@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/layout.xhtml">
+	
+	<ui:define name="content">
+
+		<h2>Créer un nouveau utilisateur</h2>	
+			
+			<h:form id="registerForm" onkeypress="if (event.keyCode == 13) submit();">
+
+				<div class="command">
+					
+					<div class="line" id="userCreationCenterDiv" >
+					
+						<p:messages id="msg" autoUpdate="true" closable="true" />
+						
+						<div class="section">
+							<h:outputLabel for="login" value="Nom d'utilisateur :"/>
+							<p:inputText type="text" name="login" id="login" value="#{userCreationController.login}" required="true" requiredMessage="Entrez un nom d'utilisateur svp!">
+								<f:validator validatorId="loginValidator"/>
+							</p:inputText>
+						</div>
+						
+						<div class="section">
+							<h:outputLabel for="pwd1" value="Mot de passe : "/>
+							<p:password redisplay="false" name="pwd1" id="pwd1" feedback="true" 
+										promptLabel="Entrez votre mot de passe" weakLabel="Faible" goodLabel="Bon" strongLabel="Fort"
+										value="#{userCreationController.password}" required="true" 
+										requiredMessage="Entrez un mot de passe svp!" 
+										validatorMessage="Le mot de passe doit contenir de 6 à 15 caractères alphanumériques">
+								<f:validateLength minimum="6" maximum="15" for="pwd1"/>
+							</p:password>
+						</div>
+						
+						<div class="section">
+							<h:outputLabel for="pwd2" value="Confirmez le mot de passe: "/>
+							<p:password redisplay="false" name="pwd2" id="pwd2" feedback="false" value="#{userCreationController.password}" required="true" requiredMessage="Confirmez le mot de passe svp!" >
+								<f:validator validatorId="passwordValidator"/>
+							</p:password>
+						</div>
+						
+						<div class="section">
+							<h:outputLabel for="name" value="Nom : "/>
+							<p:inputText type="text" name="name" id="name" value="#{userCreationController.name}" required="true" requiredMessage="Entrez votre nom svp!"/>
+						</div>
+						
+						<div class="section">
+							<h:outputLabel for="firstname" value="Prénom : "/>
+							<p:inputText type="text" name="firstname" id="firstname" value="#{userCreationController.firstname}" required="true" requiredMessage="Entrez votre prénom svp!"/>
+						</div>
+						
+						<div class="section">
+							<h:outputLabel for="email" value="Email : "/>
+							<p:inputText type="text" name="email" id="email" value="#{userCreationController.mail}" required="true" requiredMessage="Entrez votre adresse email svp!" validatorMessage="L'adresse email n'est pas valide.">
+								<f:validateRegex pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,6})$"/>
+							</p:inputText>
+						</div>
+						
+					</div>
+					<h:commandButton id="createControllerBtn" class="buttons" action="#{userCreationController.handleUserCreation}" value="S'enregistrer" type="submit" />	
+					<div style="float: left;">
+						<h:commandButton id="backToLogin" class="buttons" action="toLogin" value="Se connecter" immediate="true" />
+					</div>
+								
+					
+				</div>
+			
+			</h:form>
+			<script type="text/javascript">   
+		        window.onload = function() {
+		        	document.getElementById('registerForm:createControllerBtn').focus();
+		        }
+		    </script>
+	</ui:define>
+</ui:composition>

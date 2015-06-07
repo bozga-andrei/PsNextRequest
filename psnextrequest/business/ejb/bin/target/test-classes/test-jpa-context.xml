@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+  <!-- Business Beans -->
+  <bean id="psNextRequestServiceBean" class="be.smals.psnextrequest.service.PSNextRequestServiceBean">
+    <property name="logger" ref="logger" />
+  </bean>
+  
+<!-- Ecrypting beans-->
+  <bean id="encryptorConfiguration" class="org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig">
+    <property name="algorithm" value="PBEWithMD5AndDES" />
+    <property name="passwordSysPropertyName" value="beaver.encryption.password"/>
+  </bean>
+  <bean id="encryptor" class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor">
+    <property name="config" ref="encryptorConfiguration" />
+  </bean>
+  
+
+
+
+  <bean id="logger" class="be.smals.dimutils.server.log.LogMonitorAdaptorMockImpl"/>
+
+
+  <!-- Configuration beans -->
+  <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+ 
+  <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+    <property name="entityManagerFactory" ref="entityManagerFactory" />
+    <property name="jpaDialect" ref="jpaDialect" />
+    <property name="dataSource" ref="dataSource" />
+  </bean>
+
+  <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <property name="dataSource" ref="dataSource" />
+    <property name="persistenceXmlLocation" value="META-INF/test-persistence.xml" />
+    <property name="persistenceUnitName" value="PSNextRequestUnit" />
+    <property name="jpaVendorAdapter" ref="jpaAdapter" />
+  </bean>
+
+  <bean id="jpaAdapter" class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter">
+    <property name="databasePlatform" value="org.eclipse.persistence.platform.database.MySQLPlatform" />
+    <property name="showSql" value="true" />
+  </bean>
+
+<!--   <bean id="dataSource" class="org.unitils.database.UnitilsDataSourceFactoryBean" />
+ -->
+  <bean id="dataSource" class="be.smals.stve.unitilsmodules.util.TransactionalUnitilsDataSourceFactoryBean" />
+  <bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.EclipseLinkJpaDialect" />
+
+</beans>
+  

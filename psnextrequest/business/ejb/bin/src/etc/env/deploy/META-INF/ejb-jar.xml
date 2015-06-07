@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ejb-jar xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd" version="3.0">
+
+  <description>PSNext request</description>
+  <display-name>PSNextRequestJAR</display-name>
+  <!-- Deploy -->
+  <enterprise-beans>
+    <!-- Session Beans -->
+    <session>
+      <description><![CDATA[PSNext request backend]]></description>
+      <display-name>PSNextRequestEJB</display-name>
+
+      <ejb-name>psnextrequestbean</ejb-name>
+      <session-type>Stateless</session-type>
+
+      <env-entry>
+        <description><![CDATA[Smals application id.]]></description>
+        <env-entry-name>smalsApplicationId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>2157</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <description><![CDATA[Smals application urn.]]></description>
+        <env-entry-name>smalsApplicationURN</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>repository:relationship:employer-worker:student-at-work</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <description><![CDATA[Smals application urn.]]></description>
+        <env-entry-name>urn:be:smals:uam:system:urn</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>repository:relationship:employer-worker:student-at-work</env-entry-value>
+   	  </env-entry>
+
+      <resource-ref>
+        <description><![CDATA[Database datasource]]></description>
+        <res-ref-name>jdbc/StudentAtWorkDB</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+      </resource-ref>
+      
+    </session>
+
+  </enterprise-beans>
+
+</ejb-jar>

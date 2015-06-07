@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <!-- Information about the master eclipse project -->
+<!--   <parent> -->
+<!--     <groupId>be.smals.psnextrequest</groupId> -->
+<!--     <artifactId>psnextrequest-business-master</artifactId> -->
+<!--     <version>0.1.0-SNAPSHOT</version> -->
+<!--   </parent> -->
+
+  <!-- General attributes -->
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>be.smals.psnextrequest</groupId>
+  <artifactId>psnextrequest-web</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>PS-Next Request Web Application</name>
+  <description>PS-Next Request Web Application</description>
+
+  <!-- Project URL -->
+  <url>${sonar.projectdoc.url.prefix}/${groupId}</url>
+  
+  <!-- Packaging CAN NOT BE CHANGED -->
+  <packaging>war</packaging>
+
+  <!-- Properties -->
+  <properties>
+    <target>5</target>
+  </properties>
+
+  <!-- Configuration of bug tracking system -->
+<!--   <issueManagement> -->
+<!--     <system>JIRA</system> -->
+<!--     <url>http://jira.smals.be/browse/Key of your jira project</url> -->
+<!--   </issueManagement> -->
+
+  <!-- Configuration of source control management -->
+<!--   <scm> -->
+<!--     <connection>scm:svn:http://svn01.smals-mvm.be/svn/pocs/psnextrequest/trunk/web</connection> -->
+<!--     <developerConnection>scm:svn:http://svn01.smals-mvm.be/svn/pocs/psnextrequest/trunk/web</developerConnection> -->
+<!--     <url>http://svn01.smals-mvm.be/viewvc/pocs/psnextrequest/trunk/web</url> -->
+<!--     no tag -->
+<!--   </scm> -->
+
+  <!-- Configuration of continuous integration -->
+<!--   <ciManagement> -->
+<!--     <system>Jenkins</system> -->
+<!--     <url>http://albanil01.smals-mvm.be:8080/jenkins/</url> -->
+<!--     <notifiers> -->
+<!--       <notifier> -->
+<!--         <type>mail</type> -->
+<!--         <configuration> -->
+<!--           <address>bozga.andrei@gmail.com</address> -->
+<!--         </configuration> -->
+<!--       </notifier> -->
+<!--     </notifiers> -->
+<!--   </ciManagement> -->
+
+  <!-- Information about team members -->
+  <developers>
+    <!-- add here much more team members -->
+  </developers>
+
+  <!-- Information about contributors -->
+  <contributors>
+    <!-- add here much more contributors -->
+  </contributors>
+
+  <build>
+    <plugins>
+      <!-- configuration of eclipse plugin ********************************* -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-eclipse-plugin</artifactId>
+        <version>2.9</version>
+        <configuration>
+          <!-- add this to keep the JSF facets after a maven eclipse -->
+          <additionalProjectFacets>
+            <jst.jsf>2.0</jst.jsf>
+          </additionalProjectFacets>
+          <additionalProjectnatures>
+            <projectnature>org.eclipse.jdt.core.javanature</projectnature>
+            <projectnature>net.sf.eclipsecs.core.CheckstyleNature</projectnature>
+            <projectnature>be.smals.transversal.eclipseplugins.pomeditor.mavenNature</projectnature>
+          </additionalProjectnatures>
+          <additionalBuildcommands>
+            <buildcommand>org.eclipse.jdt.core.javabuilder</buildcommand>
+            <buildcommand>net.sf.eclipsecs.core.CheckstyleBuilder</buildcommand>
+            <buildcommand>be.smals.transversal.eclipseplugins.pomeditor.mavenBuilder</buildcommand>
+          </additionalBuildcommands>
+          <downloadSources>true</downloadSources>
+          <wtpversion>2.0</wtpversion>
+          <wtpContextName>psnextrequest/webapp</wtpContextName>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>weblogic-maven-plugin</artifactId>
+        <version>2.9.3-Smals</version>
+        <configuration>
+          <adminServerHostName>${applServerHostName}</adminServerHostName>
+          <adminServerPort>${applServerHostPort}</adminServerPort>
+          <adminServerProtocol>t3</adminServerProtocol>
+          <targetNames>${applServerName}</targetNames>
+          <name>${artifactId}</name>
+          <userId>${user}</userId>
+          <password>${pwd}</password>
+          <upload>true</upload>
+          <remote>true</remote>
+          <verbose>false</verbose>
+          <debug>false</debug>
+          <noExit>true</noExit>
+        </configuration>
+      </plugin>      
+<!--       war plugin to select the DD to put in the target artifact
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.1.1</version>
+        <configuration>
+          <webResources>
+            <resource>
+              <directory>src/env/${env}/WEB-INF</directory>
+              override the destination directory for this resource
+              <targetPath>WEB-INF</targetPath>
+              enable filtering
+              <filtering>true</filtering>
+            </resource>
+          </webResources>
+        </configuration>
+      </plugin> -->
+      <!-- Add here configuration of plugins -->
+      
+    </plugins>
+
+    <!-- Configuration of resources -->
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>false</filtering>
+      </resource>
+    </resources>
+
+  </build>
+  
+  <repositories>
+    <!--other repositories if any-->
+    <repository>
+        <id>project.local</id>
+        <name>project</name>
+        <url>file:${project.basedir}/repo</url>
+    </repository>
+  </repositories>
+
+  <!-- Configuration of dependencies -->
+  <dependencies>
+<dependency>
+      <groupId>org.glassfish</groupId>
+      <artifactId>javax.faces</artifactId>
+      <version>2.1.8</version>
+      <scope>compile</scope>
+    </dependency>
+    <!--
+    <dependency>
+      <groupId>javax.faces</groupId>
+      <artifactId>jsf-api</artifactId>
+      <version>2.0</version>
+      <scope>compile</scope>
+    </dependency>
+    -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.5</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2-Smals</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.4</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>be.smals.serbasys</groupId>
+      <artifactId>serbasys-service-commonsecurity</artifactId>
+      <version>6.6.3</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>weblogic</groupId>
+      <artifactId>wseefullclient</artifactId>
+      <version>10.3</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>be.smals.smalsfaces</groupId>
+      <artifactId>smalsfaces-framework-ui</artifactId>
+      <version>1.0.13</version>
+      <scope>compile</scope>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>be.smals.stve</groupId>
+      <artifactId>stve-unitilsmodules</artifactId>
+      <version>1.2.5</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>net.sf.ehcache</groupId>
+          <artifactId>ehcache</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!-- 
+    <dependency>
+      <groupId>org.apache.myfaces.test</groupId>
+      <artifactId>myfaces-test20</artifactId>
+      <version>1.0.4</version>
+      <scope>test</scope>
+    </dependency>
+    -->
+    <dependency>
+      <groupId>jdom</groupId>
+      <artifactId>jdom</artifactId>
+      <version>1.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>${groupId}</groupId>
+      <artifactId>psnextrequest-business-common</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>${groupId}</groupId>
+      <artifactId>psnextrequest-business-ejb</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+    	<groupId>javax.persistence</groupId>
+    	<artifactId>persistence-api</artifactId>
+    	<version>1.0.2</version>
+    	<scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <!-- Configuration of profiles MUST BE CONFIGURED -->
+  <profiles>
+    <profile>
+      <!-- Must be activated in Continuum Build Definitions to publish web site of snapshot artifacts -->
+      <id>continuum-snapshot</id>
+      <distributionManagement>
+        <site>
+          <id>website</id>
+          <name>${artifactId}</name>
+          <url>${projectDocSnapshot}${groupId}/${artifactId}</url>
+        </site>
+      </distributionManagement>
+    </profile>
+    <profile>
+      <!-- Must be activated in Continuum Build Definitions to publish web site of release artifacts -->
+      <id>continuum-release</id>
+      <distributionManagement>
+        <site>
+          <id>website</id>
+          <name>${artifactId}-${version}</name>
+          <url>${projectDocRelease}${groupId}/${artifactId}-${version}</url>
+        </site>
+      </distributionManagement>
+    </profile>
+    <profile>
+      <id>deploy</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>weblogic-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>undeploy-webapp</id>
+                <phase>package</phase>
+                <configuration>
+                  <continueOnFailure>true</continueOnFailure>
+                  <name>${artifactId}${suffix}</name>
+                </configuration>
+                <goals>
+                  <goal>undeploy</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>deploy-webapp</id>
+                <phase>package</phase>
+                <configuration>
+                  <continueOnFailure>true</continueOnFailure>
+                  <name>${artifactId}${suffix}</name>
+                </configuration>
+                <goals>
+                  <goal>deploy</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+</project>

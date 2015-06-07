@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd ">
+
+ <persistence-unit name="PSNextRequestUnit" transaction-type="JTA">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <jta-data-source>java:jboss/datasource/psnextrequest</jta-data-source>
+    <!-- <jta-data-source>java:jboss/PSNextRequestDataSource</jta-data-source> --> 
+    <!-- <jta-data-source>PSNextRequestDataSource</jta-data-source> -->
+    <class>be.smals.psnextrequest.entity.Group</class>
+    <class>be.smals.psnextrequest.entity.Project</class>
+    <class>be.smals.psnextrequest.entity.ProjectTeam</class>
+    <class>be.smals.psnextrequest.entity.ReqHistoric</class>
+    <class>be.smals.psnextrequest.entity.Request</class>
+    <class>be.smals.psnextrequest.entity.ReqVisibleForResponsible</class>
+    <class>be.smals.psnextrequest.entity.Responsible</class>
+    <class>be.smals.psnextrequest.entity.Role</class>
+    <class>be.smals.psnextrequest.entity.Task</class>
+    <class>be.smals.psnextrequest.entity.User</class>
+    
+
+
+  </persistence-unit>
+</persistence>

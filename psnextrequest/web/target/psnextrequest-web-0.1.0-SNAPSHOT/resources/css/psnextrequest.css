@@ -1,0 +1,751 @@
+/* CSS RESET */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+}
+textarea:disabled, input:not([type]):disabled, input[type="color"]:disabled, input[type="date"]:disabled, input[type="datetime"]:disabled, input[type="datetime-local"]:disabled, input[type="email"]:disabled, input[type="month"]:disabled, input[type="password"]:disabled, input[type="number"]:disabled, input[type="search"]:disabled, input[type="tel"]:disabled, input[type="text"]:disabled, input[type="time"]:disabled, input[type="url"]:disabled, input[type="week"]:disabled, select:disabled {
+background-color: rgb(235, 235, 228);
+}
+ol, ul {
+	list-style: none;
+}
+a{
+	text-decoration:none;
+}
+
+/* ----------------------------------------------------------------------------------------
+/* GENERAL
+/* ---------------------------------------------------------------------------------------*/
+
+html {
+    height: 100%;
+}
+
+body {
+	min-height: 100%;
+	position: relative;
+}
+
+body, html {
+    color: #676767;
+    font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
+    font-size: 12px;
+	padding: 0;
+	margin: 0;
+	background-color: #292929;
+	background-image: url("images/background.jpg");
+	background-repeat: repeat;
+}
+
+.displayNone{
+	display:none;
+}
+.displayInline-block{
+	display: inline-block;
+}
+.grey {
+	background-image: url("images/motif.png");
+	background-repeat: repeat;
+}
+
+.yellow {
+	color: #FFD050;
+}
+
+h1 {
+ 	color: white;
+	margin: 0;
+	font-size: 450%;
+	width: 1024px;
+	margin: 0 auto;
+	padding:0;
+}
+
+h2 {
+	font-size: 180%;
+	margin-bottom: 0em;
+	margin-top: 50px;
+	padding-top: 0.25em;
+	color: #222;
+	border-bottom: 1px solid #AAA;
+}
+
+.errorMessage{
+	color:red;
+	margin-left: 10px;
+	font-size: 16px;
+	font-weight: bold;
+}
+.infoMessage{
+	color:green;
+	margin-left: 10px;
+	font-size: 16px;
+	font-weight: bold;
+}
+.warnMessage{
+	color:red;
+	margin-left: 10px;
+	font-size: 16px;
+	font-weight: bold;
+}
+#errors{
+	/*background-color: rgba(255,255,255,0.5);*/
+	margin: 15px;
+	padding-top: 15px;
+	padding-left: 74px;
+}
+.notAcces{
+	font-weight: bold;
+	margin: auto;
+	width: 500px;
+	text-align: center;
+	margin-top: 100px;
+	color: red;
+}
+.pad20{
+	padding: 20px;
+}
+.padL20{
+	padding-left: 20px;
+}
+.padR20{
+	padding-right: 20px;
+}
+.padT10{
+	padding-top: 10px;
+}
+.h20{
+	margin-top: 20px;
+}
+.h40{
+	margin-top: 40px;
+}
+.h80{
+	margin-top: 80px;
+}
+.h160{
+	margin-top: 160px;
+}
+
+.boldtext{
+	font-weight: bold;
+}
+.textOut{
+	font: 16px 'Lucida Grande', arial, sans-serif;
+	padding-top:3px;
+	float:left;
+}
+.floatl{
+	float:left !important;
+}
+.floatr{
+	float:right !important;
+}
+
+
+#form{
+	border-top: 1px solid;
+}
+.user-connected{
+	height: 65px;
+	width: 400px;
+	float: right;
+	position: relative;
+	margin-right: 0px;
+	margin-top: 0px;
+}
+.user-connected #formDeconnect{
+	width: 600px;
+	text-align: right;
+}
+
+/* ----------------------------------------------------------------------------------------
+/* FOOTER
+/* ---------------------------------------------------------------------------------------*/
+
+.footer {
+    position: absolute;
+    background-color: #222;
+    bottom: 0;
+    left:0;
+	display: block;
+	width: 100%;
+	height: 40px;
+}
+
+.footer .footersub {
+	background: #FFD050;
+	height: 2px;
+}
+
+.footer p {
+	width: 1024px;
+	margin: 0 auto;
+	display: block;
+	padding-top: 1em;
+}
+.footer a{
+	color: #676767;
+    font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
+    font-size: 12px;
+}
+
+/* ----------------------------------------------------------------------------------------
+/* HEADER
+/* ---------------------------------------------------------------------------------------*/
+
+.wrapper {
+	width: 1024px;
+	margin: 0 auto;
+	padding:0px;
+}	
+
+.header {
+	width: 100%;
+	top: 0;
+	height: 120px;
+	background: black;
+}
+
+.header .sub1 {
+	background: black;
+	padding-top: 50px;
+}
+
+.header .sub2 {
+	background: #222;
+	height: 40px;
+}
+
+.header .sub2 .subtitle {
+	width: 1024px;
+	margin: 0 auto;
+	display: block;
+	padding-top: 0.8em;
+	font-size: 120%;
+}
+
+.header .sub3 {
+
+	height: 333px;
+}
+
+.content {
+}
+
+.command {
+	width: 1000px;
+	padding: 30px 12px 25px 12px;
+	display: inline-block;
+	margin-bottom: 40px;
+	overflow: hidden;
+	background-image: url("images/motif.png");
+	background-repeat: repeat;
+}
+
+.line {
+	margin-bottom: 1.5em;
+	display: block;
+}
+.sectionTop50{
+	margin-right: 2em;
+	border-bottom: 1px solid #CCC`;
+	display: inline-block;
+	margin-top:50px;
+}
+.sectionTop280{
+	margin-right: 2em;
+	border-bottom: 1px solid #CCC`;
+	display: inline-block;
+	margin-top: 280px;
+}
+
+.line .section {
+	margin-right: 2em;
+	border-bottom: 1px solid #CCC`;
+}
+
+.line .section:last-child {
+	border-bottom: 0px solid #CCC;
+}
+
+label {
+	float: left;
+	text-align: right;
+	width: 120px;
+	font-weight: bold;
+	margin-right: 10px;
+	padding-top: 6px;
+}
+
+label.long {
+	width: 150px;
+	display:block;
+}
+
+textarea {
+	width: 870px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border: 1px solid #8f8f8f;
+	border-radius: 3px;
+	font: 14px 'Lucida Grande', arial, sans-serif;
+}
+
+input, select{
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	border: 1px solid #8f8f8f;
+	width: 300px;
+	margin-bottom: 15px;
+	padding: 3px;
+	font: 14px 'Lucida Grande', arial, sans-serif;
+}
+select{
+	margin-bottom: 1px;
+}
+input:not([disabled]):not([type="submit"]):focus, input:not([disabled]):not([type="submit"]):hover, textarea:not([disabled]):not([type="submit"]):focus, textarea:not([disabled]):not([type="submit"]):hover, select:not([disabled]):not([type="submit"]):focus, select:not([disabled]):not([type="submit"]):hover{
+	-moz-box-shadow: 0px 0px 5px #85b2cb;
+	-webkit-box-shadow: 0px 0px 5px #85b2cb;
+	box-shadow: 0px 0px 5px #85b2cb;
+}
+
+input[type="submit"], input[type="button"]{
+	border: 2px outset;
+	width: 180px;
+	font-size: 14px;
+	cursor: pointer;
+	margin-left: 2px;
+}
+
+/*inputs primefaces*/
+.ui-inputfield{
+	/*margin: 0px 0px 15px 0px !important;*/
+	outline: medium none;
+	padding: 3px;
+	font-weight: normal;
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield, .ui-inputfield.ui-state-focus{
+	moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.display .ui-inputfield, .display .ui-widget-content .ui-inputfield, .display .ui-widget-header .ui-inputfield, .display .ui-inputfield.ui-state-focus {
+	-moz-box-shadow: inset 0 2px 2px #8f8f8f;
+	-webkit-box-shadow: inset 0 2px 2px #8f8f8f;
+	box-shadow: inset 0 2px 2px #8f8f8f;
+	color: #313131;
+}
+.ui-widget {
+	font:16px 'Lucida Grande', arial, sans-serif;
+}
+
+.buttons {
+	background: #222;
+	padding: 5px;
+	color: #FFD050;
+	display: inline-block;
+	margin-top: 10px;
+	float:right;
+}
+
+.buttons:hover {
+	background: #FFD050;
+	color: black;	
+}
+
+.layoutBtn{
+	width: 130px !important;
+	padding:3px !important;
+	margin-top:0px !important;
+}
+
+
+table {
+	border-collapse:collapse;	
+	background-color: transparent;
+}
+
+table th {
+	background: transparent;
+	background-image: none;
+	color: #222;
+	margin: 0em;
+	font-size: 120%;
+	border-bottom: 1px solid #AAA;
+}
+
+table tr td {
+	text-align: center;
+	background: transparent;
+}
+
+/*Tableau primefaces*/
+.ui-widget, .ui-widget .ui-widget {
+	font: 14px 'Lucida Grande', arial, sans-serif;
+}
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+	font-family: 'Lucida Grande', arial, sans-serif;
+	font-size: 14px;
+}
+
+
+/* ----------------------------------------------------------------------------------------
+/* LOGIN PAGE
+/* ---------------------------------------------------------------------------------------*/
+#loginCenterDiv{
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+}
+#loginCenterDiv p{
+	margin: 25px;
+}
+
+#loginCenterDiv label{
+	float:none;
+}
+#loginCenterDiv .section{
+	padding-left: 100px;
+	display: block;
+}
+
+/* ----------------------------------------------------------------------------------------
+/* UserCreation PAGE
+/* ---------------------------------------------------------------------------------------*/
+#userCreationCenterDiv{
+	width: 550px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 30px;
+	
+}
+
+#userCreationCenterDiv label{
+	float: left;
+	text-align: right;
+	width: 160px;
+	font-weight: bold;
+	margin-right: 10px;
+	padding-top: 5px;
+}
+#userCreationCenterDiv .ui-inputfield{
+	margin-bottom:15px;
+}
+
+/* ----------------------------------------------------------------------------------------
+/* UserUpdate PAGE
+/* ---------------------------------------------------------------------------------------*/
+#userUpdate{
+	
+}
+
+#userUpdate button{
+	float:right;
+}
+
+#userUpdate .ui-inputfield{
+	margin-bottom:15px;
+}
+#userUpdate #updateNameBtn{
+	float:right;
+	
+}
+#userUpdate .accordingPanelDiv{
+	width: 550px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+/* ----------------------------------------------------------------------------------------
+/* ManageRequest PAGES
+/* ---------------------------------------------------------------------------------------*/
+#manageRequest{
+	
+}
+#manageRequest input{
+	width:200px;
+	margin-bottom:0px;
+}
+#manageRequest input[type=submit], input[type="button"]{
+	margin-right:25px;
+}
+#manageRequest label{
+	width:90px;
+}
+#manageRequest select{
+	width:228px;;
+}
+#manageRequest .line .section{
+	display: inline-block;
+}
+
+/* ----------------------------------------------------------------------------------------
+/* RequestCreation PAGES
+/* ---------------------------------------------------------------------------------------*/
+#requestCreation{
+	
+}
+#requestCreation input{
+	width:200px;
+	margin-bottom:0px;
+}
+#requestCreation input[type=submit], input[type="button"]{
+	margin-right:25px;
+}
+#requestCreation label{
+	width:90px;
+}
+#requestCreation select{
+	width:228px;;
+}
+#requestCreation .line .section{
+	margin-right: 2em;
+	border-bottom: 1px solid #CCC`;
+	display: inline-block;
+}
+#requestCreation .infoTaskDialog .section{
+	padding: 10px 0;
+}
+#requestCreation .infoTaskDialog .section label{
+	width: 120px;
+	padding-top: 0px;
+	text-align: left;
+}
+#requestCreation .infoTaskDialog .section span{
+	display: block;
+	float: left;
+	width: 250px;
+}
+#requestCreation .infoTaskDialog .line .sectionSpace{
+	margin-right: 2em;
+	margin-top: 40px;
+}
+
+#requestCreation .infoTaskDialog .line .dialogFooter{
+	float: right;
+}
+#requestCreation .ui-button {
+	height: 29px;
+	float: right;
+}
+
+
+
+
+
+/* ----------------------------------------------------------------------------------------
+   RequestConsult PAGES
+/* ---------------------------------------------------------------------------------------*/
+#requestConsult{
+}
+#requestConsult input{
+	width:200px;
+	margin-bottom:0px;
+}
+#requestConsult input[type=submit], input[type="button"]{
+	margin-right:25px;
+}
+#requestConsult label{
+	width:90px;
+}
+#requestConsult .line .section{
+	margin-right: 2em;
+	border-bottom: 1px solid #CCC`;
+	display: inline-block;
+}
+#requestConsult .lastTextOut{
+	float:none; 
+	display: block;
+	font: 16px 'Lucida Grande', arial, sans-serif;
+	padding-top: 3px;
+}
+.ui-tooltip {
+	max-width: 500px;
+}
+/* DataTable primeface */
+#requestConsult .ui-datatable-scrollable .ui-datatable-scrollable-header-box, #requestConsult .ui-datatable-scrollable .ui-datatable-scrollable-footer-box {
+float: left;
+padding-right: 17px !importante;
+}
+
+/* ----------------------------------------------------------------------------------------
+ * manageProjectsAdmin PAGES
+ * ---------------------------------------------------------------------------------------*/
+.manageProjectsAdmin{
+	
+}
+.manageProjectsAdmin label{
+	width:250px;
+}
+
+.manageProjectsAdmin input[type="button"]{
+	margin-right:0px !important;
+}
+
+.manageProjectsAdmin textarea{
+	width: 434px;
+	margin-bottom: 18px;
+}
+
+.manageProjectsAdmin .buttonsRight{
+	margin-top: 5px !important;
+	margin-bottom: 5px !important;
+}
+
+.manageProjectsAdmin .line{
+	margin: auto;
+}
+
+.manageProjectsAdmin .row {
+	float: right !important;
+	width: 180px !important;
+	margin-right: 50px !important;
+}
+
+/* ----------------------------------------------------------------------------------------
+ * adminPage PAGES
+ * --------------------------------------------------------------------------------------- */
+.adminPage{
+	
+}
+.adminPage label{
+	width:250px;
+}
+.adminPage .row {
+	width: 180px !important;
+	height: 250px;
+	margin-top: 50px;
+	margin-right: auto !important;
+	margin-left: auto;
+	display: block;
+}
+
+/*PrimeFaces table Projets
+.manageProjectsAdmin .ui-datatable-scrollable .ui-datatable-scrollable-header-box, .manageProjectsAdmin .ui-datatable-scrollable .ui-datatable-scrollable-footer-box {
+	width: 100% !important;
+	display: block !important;
+}
+.manageProjectsAdmin .ui-datatable-scrollable .ui-datatable-scrollable-body table, .manageProjectsAdmin .ui-datatable-scrollable .ui-datatable-scrollable-header table, .manageProjectsAdmin .ui-datatable-scrollable .ui-datatable-scrollable-footer table {
+	width:100% !important;
+}
+.manageProjectsAdmin .ui-datatable-data td, .manageProjectsAdmin .ui-datatable-data-empty td {
+	width: 510px;
+}
+.manageProjectsAdmin .ui-datatable .ui-datatable-header, .manageProjectsAdmin .ui-datatable .ui-datatable-footer{
+	padding-right: 38px;
+}
+.manageProjectsAdmin .ui-datatable .ui-sortable-column {
+	cursor: pointer;
+	width: 501px;
+}
+*/
+
+
+/* ----------------------------------------------------------------------------------------
+ * projectConsult PAGE
+ * ---------------------------------------------------------------------------------------*/
+
+.projectConsult{
+	
+}
+.projectConsult label{
+	width:250px;
+}
+
+.projectConsult textarea{
+	width: 434px;
+	margin-bottom: 18px;
+}
+
+.projectConsult .buttonsRight{
+	margin-top: 5px !important;
+	margin-bottom: 5px !important;
+	margin-right: 0px !important;
+}
+
+.projectConsult .line{
+	margin: auto;
+}
+
+.projectConsult .row {
+	float: right !important;
+	width: 180px !important;
+	margin-right: 50px !important;
+}
+
+.projectConsult .ui-picklist .ui-picklist-list{
+	background-color: rgb(235, 235, 228);
+}
+
+.projectConsult input[type="button"]:disabled, .projectConsult input[type="submit"]:disabled, .projectConsult input[type="reset"]:disabled, .projectConsult input[type="file"]:disabled::-webkit-file-upload-button, .projectConsult button:disabled, .projectConsult select:disabled, .projectConsult keygen:disabled, .projectConsult optgroup:disabled, .projectConsult option:disabled, .projectConsult select[disabled] > option {
+	color: graytext;
+	background-color: rgb(235, 235, 228);
+}
+
+.projectConsult .createTaskDialog label{
+	text-align: left !important;
+}
+.projectConsult .createTaskDialog .buttons{
+	margin-top: 0px !important;
+}
+.projectConsult .createTaskDialog .line{
+	padding-left:15px;
+}
+.projectConsult .createTaskDialog .ui-picklist .ui-picklist-list{
+	background-color: rgb(255, 255, 255);
+}
+
+.projectConsult .dialogFooter{
+	float:right;
+	margin-top: 10px; 
+	margin-right: 37px;
+}
+
+/* ----------------------------------------------------------------------------------------
+ * projectUpdate PAGE
+ * ---------------------------------------------------------------------------------------*/
+.projectUpdate {
+	
+}
+.projectUpdate label{
+	width:250px;
+}
+
+.projectUpdate textarea{
+	width: 434px;
+	margin-bottom: 18px;
+}
+
+.projectUpdate .buttonsRight{
+	margin-top: 5px !important;
+	margin-bottom: 5px !important;
+}
+
+.projectUpdate .line{
+	margin: auto;
+}
+
+.projectUpdate .row {
+	float: right !important;
+	width: 180px !important;
+	margin-right: 50px !important;
+}
+.projectUpdate select {
+	width: auto !important;
+}
