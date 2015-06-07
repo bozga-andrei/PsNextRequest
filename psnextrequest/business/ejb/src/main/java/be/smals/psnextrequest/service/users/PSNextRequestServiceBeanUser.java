@@ -29,7 +29,7 @@ import be.smals.psnextrequest.service.exception.PSNextRequestServiceException;
 
 /**
  * User Service Bean
- * PSNextRequest service users implementation (EJB).
+ * PSNextRequest service users implementation (EJB).ss
  * 
  * @author AndreiBozga
  * 
