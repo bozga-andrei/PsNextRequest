@@ -10,22 +10,22 @@ import javax.faces.validator.ValidatorException;
 
 @FacesValidator("updatePasswordValidator")
 public class UpdatePasswordValidator implements Validator {
-	/**
-	 * @see javax.faces.validator.Validator#validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent, java.lang.Object)
-	 */
-	public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-		UIInput password = (UIInput) context.getViewRoot().findComponent("updateForm:panel:pwd1");
-		if (password == null){
-			FacesMessage message2 = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Impossible de trouver le composant 'pwd1'.", "");
-			throw new ValidatorException(message2);
-		}
-		String pwd1 = (String) password.getValue();
-		String pwd2 = (String) value;
-		
-		if (!pwd2.equals(pwd1)) {
-	        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Les mots de passe ne correspondent pas!", "Les mots de passe ne correspondent pas!");
-	        throw new ValidatorException(message);
-	    }
-		
-	}
+    /**
+     * @see javax.faces.validator.Validator#validate(javax.faces.context.FacesContext, javax.faces.component.UIComponent, java.lang.Object)
+     */
+    public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
+        UIInput password = (UIInput) context.getViewRoot().findComponent("updateForm:panel:pwd1");
+        if (password == null) {
+            FacesMessage message2 = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Impossible de trouver le composant 'pwd1'.", "");
+            throw new ValidatorException(message2);
+        }
+        String pwd1 = (String) password.getValue();
+        String pwd2 = (String) value;
+
+        if (!pwd2.equals(pwd1)) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Les mots de passe ne correspondent pas!", "Les mots de passe ne correspondent pas!");
+            throw new ValidatorException(message);
+        }
+
+    }
 }

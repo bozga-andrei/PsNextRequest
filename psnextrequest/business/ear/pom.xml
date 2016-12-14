@@ -1,122 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-  <!-- Information about the master eclipse project -->
-  <parent>
-    <groupId>be.smals.psnextrequest</groupId>
-    <artifactId>psnextrequest-business-master</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
-  </parent>
+    <!-- Information about the master eclipse project -->
+    <parent>
+        <groupId>bozga</groupId>
+        <artifactId>psnextrequest-business-master</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
 
-  <!-- General attributes -->
-  <modelVersion>4.0.0</modelVersion>
-  <!-- groupId is inherited from master pom -->
-  <artifactId>psnextrequest-business-ear</artifactId>
-  <!-- version is inherited from master pom -->
-  <name>psnextrequest-business-ear</name>
-  <description>psnextrequest-business-ear</description>
+    <!-- General attributes -->
+    <modelVersion>4.0.0</modelVersion>
+    <!-- groupId is inherited from master pom -->
+    <artifactId>psnextrequest-business-ear</artifactId>
+    <!-- version is inherited from master pom -->
+    <name>psnextrequest-business-ear</name>
+    <description>psnextrequest-business-ear</description>
 
-  <!-- Packaging CAN NOT BE CHANGED -->
-  <packaging>ear</packaging>
+    <!-- Packaging CAN NOT BE CHANGED -->
+    <packaging>ear</packaging>
 
-  <!-- Properties -->
-  <properties>
-    <!-- Add properties -->
-  </properties>
+    <!-- Properties -->
+    <properties>
+        <!-- Add properties -->
+    </properties>
 
-  <build>
-    <plugins>
-      <!--  Configuration of ear plugin CAN BE CONFIGURED -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-ear-plugin</artifactId>
-        <version>2.3.1</version>
-        <configuration>
-          <defaultJavaBundleDir>APP-INF/lib</defaultJavaBundleDir>
-          <modules>
-            <ejbModule>
-              <groupId>${groupId}</groupId>
-              <artifactId>psnextrequest-business-ejb</artifactId>
-            </ejbModule>
-          </modules>
-        </configuration>
-      </plugin>
-      
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>weblogic-maven-plugin</artifactId>
-        <version>2.9.1</version>
-        <configuration>
-          <adminServerHostName>[adminServerHostName]</adminServerHostName>
-          <adminServerPort>[adminServerPort]</adminServerPort>
-          <adminServerProtocol>t3</adminServerProtocol>
-          <targetNames>[targetNames]</targetNames>
-          <name>${artifactId}</name>
-          <userId>deploy</userId>
-          <password>deploy</password>
-          <upload>true</upload>
-          <remote>true</remote>
-          <verbose>false</verbose>
-          <debug>false</debug>
-        </configuration>
-      </plugin>      
-      
-      <!-- Add here configuration of plugins -->
-    </plugins>
+    <build>
+        <plugins>
+            <!--  Configuration of ear plugin CAN BE CONFIGURED -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>2.3.1</version>
+                <configuration>
+                    <defaultJavaBundleDir>APP-INF/lib</defaultJavaBundleDir>
+                    <modules>
+                        <ejbModule>
+                            <groupId>${groupId}</groupId>
+                            <artifactId>psnextrequest-business-ejb</artifactId>
+                        </ejbModule>
+                    </modules>
+                </configuration>
+            </plugin>
 
-    <!-- Configuration of resources -->
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-        <filtering>false</filtering>
-      </resource>
-    </resources>
-  </build>
+            <!-- Add here configuration of plugins -->
+        </plugins>
 
-  <!-- Configuration of dependencies -->
-  <dependencies>
-<!--     <dependency> -->
-<!--       <groupId>${groupId}</groupId> -->
-<!--       <artifactId>psnextrequest-business-ejb</artifactId> -->
-<!--       <version>${version}</version> -->
-<!--       <type>ejb</type> -->
-<!--       <scope>compile</scope> -->
-<!--     </dependency> -->
-    <dependency>
-    	<groupId>be.smals.psnextrequest</groupId>
-    	<artifactId>psnextrequest-business-ejb</artifactId>
-    	<version>0.1.0-SNAPSHOT</version>
-    	<type>ejb</type>
-    	<scope>compile</scope>
-    </dependency>
-  </dependencies>
+        <!-- Configuration of resources -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+    </build>
 
-  <!-- Configuration of profiles MUST BE CONFIGURED -->
-  <profiles>
-    <profile>
-      <!-- Must be activated in Continuum Build Definitions to publish web site of snapshot artifacts -->
-      <id>continuum-snapshot</id>
-      <distributionManagement>
-        <site>
-          <id>website</id>
-          <name>${artifactId}</name>
-          <url>${projectDocSnapshot}${groupId}/${pom.parent.artifactId}/${artifactId}</url>
-        </site>
-      </distributionManagement>
-    </profile>
-    <profile>
-      <!-- Must be activated in Continuum Build Definitions to publish web site of release artifacts -->
-      <id>continuum-release</id>
-      <distributionManagement>
-        <site>
-          <id>website</id>
-          <name>${artifactId}-${version}</name>
-          <url>${projectDocRelease}${groupId}/${pom.parent.artifactId}-${pom.parent.version}/${artifactId}</url>
-        </site>
-      </distributionManagement>
-    </profile>
-  </profiles>
-  
+    <!-- Configuration of dependencies -->
+    <dependencies>
+        <dependency>
+            <groupId>bozga</groupId>
+            <artifactId>psnextrequest-business-ejb</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+            <type>ejb</type>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
 </project>

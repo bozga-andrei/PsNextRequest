@@ -3,7 +3,7 @@
 
   <!-- Information about the master eclipse project -->
   <parent>
-    <groupId>be.smals.psnextrequest</groupId>
+    <groupId>bozga</groupId>
     <artifactId>psnextrequest-business-master</artifactId>
     <version>0.1.0-SNAPSHOT</version>
   </parent>

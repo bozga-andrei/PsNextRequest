@@ -2,28 +2,15 @@ package be.smals.psnextrequest.service;
 
 
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Resource;
-import javax.ejb.SessionContext;
-import javax.sql.DataSource;
-
+import be.smals.psnextrequest.service.projects.PSNextRequestServiceBeanProject;
+import be.smals.psnextrequest.service.users.PSNextRequestServiceBeanUser;
 import junit.framework.Assert;
-
-import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import be.smals.psnextrequest.entity.Project;
-import be.smals.psnextrequest.entity.User;
-import be.smals.psnextrequest.service.exception.PSNextRequestServiceException;
-import be.smals.psnextrequest.service.projects.PSNextRequestServiceBeanProject;
-import be.smals.psnextrequest.service.users.PSNextRequestServiceBeanUser;
 
 
 
@@ -44,14 +31,10 @@ public class PSNextRequestServiceBeanProjectTest {
     
 	@Autowired
     private PSNextRequestServiceBeanUser psNextRequestServiceBeanUser;
-    
-	@Resource
-	private SessionContext sessionContext;
-    
+
+
     @Before
     public void setUp() {
-        EasyMock.expect(sessionContext.getCallerPrincipal()).andReturn(null).anyTimes();
-        EasyMock.replay(sessionContext);
     }
     
     @Test

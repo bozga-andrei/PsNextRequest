@@ -73,7 +73,7 @@ public class PSNextRequestServiceBeanRequest implements PSNextRequestServiceRemo
             em.merge(request.getUser());
 		    em.merge(request);
             em.flush();
-            logger.log(Level.INFO, "Nouvelle demande créée par: " + request.getUser().getUserFirstName() + ". Pour la tâche: " +request.getTask().getTaskName()+ ". Description demande: " + request.getRequestDescription());
+            logger.log(Level.INFO, "Nouvelle demande crÃ©Ã©e par: " + request.getUser().getUserFirstName() + ". Pour la tÃ¢che: " +request.getTask().getTaskName()+ ". Description demande: " + request.getRequestDescription());
             em.getTransaction().commit();
             return request;
         } catch (PersistenceException e) {
@@ -81,7 +81,7 @@ public class PSNextRequestServiceBeanRequest implements PSNextRequestServiceRemo
 				em.getTransaction().rollback();
 			}
 			if(e.getMessage().contains("Error Code: 1048")){
-				throw new PSNextRequestServiceException("Un des champs n'a pas été correctement complété ou récuperé.", e);
+				throw new PSNextRequestServiceException("Un des champs n'a pas Ã©tÃ© correctement complÃ©tÃ© ou rÃ©cuperÃ©.", e);
 			} else {
 				throw new PSNextRequestServiceException("Contrainte violation exception!", e);
 			} 
@@ -109,7 +109,7 @@ public class PSNextRequestServiceBeanRequest implements PSNextRequestServiceRemo
     			em.flush();
     			em.getTransaction().commit();    		}
     		else 
-    			throw new PSNextRequestServiceException("La demande n'a pas pu être recupérée.");
+    			throw new PSNextRequestServiceException("La demande n'a pas pu Ãªtre recupÃ©rÃ©e.");
     	} catch (PSNextRequestServiceException e) {
             throw new PSNextRequestServiceException(e.getMessage());
         } catch (Exception e) {

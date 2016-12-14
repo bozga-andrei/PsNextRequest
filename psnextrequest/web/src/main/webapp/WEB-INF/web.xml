@@ -1,205 +1,207 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-  id="test" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         id="test" version="2.5">
 
-  <context-param>
-    <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
-    <param-value>.xhtml</param-value>
-  </context-param>
+    <context-param>
+        <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+        <param-value>.xhtml</param-value>
+    </context-param>
 
-  <!-- The choices for the project stage are Development, UnitTest, SystemTest, and Production. In the development stage, you get more informative error messages. -->
-  <context-param>
-    <param-name>javax.faces.PROJECT_STAGE</param-name>
-    <param-value>Development</param-value>
-  </context-param>
+    <!-- The choices for the project stage are Development, UnitTest, SystemTest, and Production. In the development stage, you get more informative error messages. -->
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
 
-  <!-- JSQF ViewExpiredException fix http://devharbor.blogspot.com/2009/05/jsf-viewexpiredexception-fix.html -->
-  <context-param>
-    <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
-    <param-value>client</param-value>
-  </context-param>
-  
-  <!-- Recommendation from GAE pages  fix InitialContex ERROR: http://java.dzone.com/news/jsf2-configuration-google-app--> 
-<!--   <context-param>  -->
-<!--     <param-name>javax.faces.PROJECT_STAGE</param-name>  -->
-<!--     <param-value>Production</param-value>  -->
-<!--   </context-param> -->
-  
-  <!-- Disable use of threading for single-threaded environments such as
-     the Google AppEngine. -->
-  <context-param>
-	<param-name>com.sun.faces.enableThreading</param-name>
-	<param-value>false</param-value>
-	<!--   
-	<description>
-	When enabled, the runtime initialization and default ResourceHandler 
-	implementation will use threads to perform their functions. Set this 
-	value to false if threads aren't desired (as in the case of running 
-	within the Google Application Engine).
-	
-	Note that when this option is disabled, the ResourceHandler will not 
-	pick up new versions of resources when ProjectStage is development.
-	</description>
-	-->
-  </context-param>
+    <!-- JSQF ViewExpiredException fix http://devharbor.blogspot.com/2009/05/jsf-viewexpiredexception-fix.html -->
+    <context-param>
+        <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+        <param-value>client</param-value>
+    </context-param>
 
-  <context-param>
-    <param-name>javax.faces.SKIP_COMMENTS</param-name>
-    <param-value>true</param-value>
-  </context-param>
+    <!-- Recommendation from GAE pages  fix InitialContex ERROR: http://java.dzone.com/news/jsf2-configuration-google-app-->
+    <!--   <context-param>  -->
+    <!--     <param-name>javax.faces.PROJECT_STAGE</param-name>  -->
+    <!--     <param-value>Production</param-value>  -->
+    <!--   </context-param> -->
 
-  <context-param>
-    <param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
-    <param-value>true</param-value>
-  </context-param>
+    <!-- Disable use of threading for single-threaded environments such as
+       the Google AppEngine. -->
+   <!-- <context-param>
+        <param-name>com.sun.faces.enableThreading</param-name>
+        <param-value>false</param-value>
+        &lt;!&ndash;
+        <description>
+        When enabled, the runtime initialization and default ResourceHandler
+        implementation will use threads to perform their functions. Set this
+        value to false if threads aren't desired (as in the case of running
+        within the Google Application Engine).
 
-  <context-param>
-    <param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
-    <param-value>true</param-value>
-  </context-param>
+        Note that when this option is disabled, the ResourceHandler will not
+        pick up new versions of resources when ProjectStage is development.
+        </description>
+        &ndash;&gt;
+    </context-param>-->
 
-  <context-param>
-    <param-name>javax.faces.VALIDATE_EMPTY_FIELDS</param-name>
-    <param-value>true</param-value>
-  </context-param>
+    <context-param>
+        <param-name>javax.faces.SKIP_COMMENTS</param-name>
+        <param-value>true</param-value>
+    </context-param>
 
-  <!-- When using Mojarra 2.x, enable allowTextChildren configuration. -->
-  <context-param>
-    <param-name>com.sun.faces.allowTextChildren</param-name>
-    <param-value>true</param-value>
-  </context-param>
-  
-  <context-param>
-    <param-name>org.richfaces.SKIN</param-name>
-    <param-value>blueSky</param-value>
-  </context-param>
-  
-  <context-param>
-    <param-name>org.richfaces.CONTROL_SKINNING</param-name>
-    <param-value>enable</param-value>
-  </context-param>
-  
-  <context-param>
-    <param-name>org.richfaces.push.jms.enabled</param-name>
-    <param-value>true</param-value>
-  </context-param>
+    <context-param>
+        <param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
+        <param-value>true</param-value>
+    </context-param>
 
-  <context-param>
-    <param-name>org.ajax4jsf.VIEW_HANDLERS</param-name>
-	<param-value>com.sun.facelets.FaceletViewHandler</param-value>
-  </context-param>
-  
-  
-  <!-- Application parameters -->
-  <context-param>
-      <param-name>mail</param-name>
-      <param-value>bozga.andrei@gmail.com</param-value>
-  </context-param>
+    <context-param>
+        <param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
+        <param-value>true</param-value>
+    </context-param>
 
-  <servlet>
-    <servlet-name>Faces Servlet</servlet-name>
-    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>/faces/*</url-pattern>
-  </servlet-mapping>
+    <context-param>
+        <param-name>javax.faces.VALIDATE_EMPTY_FIELDS</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+    <!-- When using Mojarra 2.x, enable allowTextChildren configuration. -->
+    <context-param>
+        <param-name>com.sun.faces.allowTextChildren</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>org.richfaces.SKIN</param-name>
+        <param-value>blueSky</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>org.richfaces.CONTROL_SKINNING</param-name>
+        <param-value>enable</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>org.richfaces.push.jms.enabled</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>org.ajax4jsf.VIEW_HANDLERS</param-name>
+        <param-value>com.sun.facelets.FaceletViewHandler</param-value>
+    </context-param>
 
 
-  <session-config>
-    <session-timeout>120</session-timeout>
-  </session-config>
+    <!-- Application parameters -->
+    <context-param>
+        <param-name>mail</param-name>
+        <param-value>bozga.andrei@gmail.com</param-value>
+    </context-param>
 
-  <welcome-file-list>
-    <welcome-file>faces/public/login.xhtml</welcome-file>
-  </welcome-file-list>
-
-
-  <!-- SECURITY CONFIGURATION -->
-
-  <login-config>
-    <auth-method>FORM</auth-method>
-    <form-login-config>
-      <form-login-page>/faces/public/login.xhtml</form-login-page>
-      <form-error-page>/faces/public/error.xhtml</form-error-page>
-    </form-login-config>
-  </login-config>
-
-  <!-- for weblogic... otherwise he starts complaining about mime-types -->
-<!--   <mime-mapping> -->
-<!--     <extension>xhtml</extension> -->
-<!--     <mime-type>application/xhtml+xml</mime-type> -->
-<!--   </mime-mapping> -->
-<!--   <mime-mapping> -->
-<!--     <extension>png</extension> -->
-<!--     <mime-type>image/png</mime-type> -->
-<!--   </mime-mapping> -->
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
+    </servlet-mapping>
 
 
-  <!-- FILTER -->
-  <filter>
-	<filter-name>EncodeFilter</filter-name>
-	<filter-class>be.smals.psnextrequest.filter.EncodeFilter</filter-class>
-  </filter>
- 
-  <filter-mapping>
-	<filter-name>EncodeFilter</filter-name>
-	<url-pattern>/faces/*</url-pattern>
-  </filter-mapping>
-  
-  <filter>
-    <filter-name>checkSessionFilter</filter-name>
-    <filter-class>be.smals.psnextrequest.filter.CheckSessionFilter</filter-class>
-  </filter>
-<!--   <filter> -->
-<!--     <filter-name>forceNoCacheFilter</filter-name> -->
-<!--     <filter-class>be.smals.psnextrequest.filter.ForceNoCacheFilter</filter-class> -->
-<!--   </filter> -->
+    <session-config>
+        <session-timeout>120</session-timeout>
+    </session-config>
 
-  <filter-mapping>
-    <filter-name>checkSessionFilter</filter-name>
-    <url-pattern>/faces/html/*</url-pattern>
-  </filter-mapping>
-  
-<!--   <filter-mapping> -->
-<!--     <filter-name>forceNoCacheFilter</filter-name> -->
-<!--     <url-pattern>*.xhtml</url-pattern> -->
-<!--   </filter-mapping> -->
+    <welcome-file-list>
+        <welcome-file>faces/public/login.xhtml</welcome-file>
+    </welcome-file-list>
 
-  <!-- ERROR PAGE -->
-  <error-page>
-    <exception-type>java.io.FileNotFoundException</exception-type>
-    <location>/faces/public/pageNotFound.xhtml</location>
-  </error-page>
-<!--   <error-page> -->
-<!--     <exception-type>java.lang.Exception</exception-type> -->
-<!--     <location>/faces/html/errorPage.xhtml</location> -->
-<!--   </error-page> -->
-  
-    
+
+    <!-- SECURITY CONFIGURATION -->
+
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/faces/public/login.xhtml</form-login-page>
+            <form-error-page>/faces/public/error.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+
+    <!-- for weblogic... otherwise he starts complaining about mime-types -->
+    <!--   <mime-mapping> -->
+    <!--     <extension>xhtml</extension> -->
+    <!--     <mime-type>application/xhtml+xml</mime-type> -->
+    <!--   </mime-mapping> -->
+    <!--   <mime-mapping> -->
+    <!--     <extension>png</extension> -->
+    <!--     <mime-type>image/png</mime-type> -->
+    <!--   </mime-mapping> -->
+
+
+    <!-- FILTER -->
+    <filter>
+        <filter-name>EncodeFilter</filter-name>
+        <filter-class>be.smals.psnextrequest.filter.EncodeFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>EncodeFilter</filter-name>
+        <url-pattern>/faces/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>checkSessionFilter</filter-name>
+        <filter-class>be.smals.psnextrequest.filter.CheckSessionFilter</filter-class>
+    </filter>
+    <!--   <filter> -->
+    <!--     <filter-name>forceNoCacheFilter</filter-name> -->
+    <!--     <filter-class>be.smals.psnextrequest.filter.ForceNoCacheFilter</filter-class> -->
+    <!--   </filter> -->
+
+    <filter-mapping>
+        <filter-name>checkSessionFilter</filter-name>
+        <url-pattern>/faces/html/*</url-pattern>
+    </filter-mapping>
+
+    <!--   <filter-mapping> -->
+    <!--     <filter-name>forceNoCacheFilter</filter-name> -->
+    <!--     <url-pattern>*.xhtml</url-pattern> -->
+    <!--   </filter-mapping> -->
+
+    <!-- ERROR PAGE -->
+    <error-page>
+        <exception-type>java.io.FileNotFoundException</exception-type>
+        <location>/faces/public/pageNotFound.xhtml</location>
+    </error-page>
+    <!--   <error-page> -->
+    <!--     <exception-type>java.lang.Exception</exception-type> -->
+    <!--     <location>/faces/html/errorPage.xhtml</location> -->
+    <!--   </error-page> -->
+
+
     <ejb-ref>
         <ejb-ref-name>ejb/PSNextRequestBeanUser</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>
         <remote>be.smals.psnextrequest.service.users.PSNextRequestServiceRemoteUser</remote>
     </ejb-ref>
-    
+
     <ejb-ref>
         <ejb-ref-name>ejb/PSNextRequestBeanProject</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>
         <remote>be.smals.psnextrequest.service.projects.PSNextRequestServiceRemoteProject</remote>
     </ejb-ref>
-    
+
     <ejb-ref>
         <ejb-ref-name>ejb/PSNextRequestBeanTask</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>
         <remote>be.smals.psnextrequest.service.tasks.PSNextRequestServiceRemoteTask</remote>
     </ejb-ref>
-    
+
     <ejb-ref>
         <ejb-ref-name>ejb/PSNextRequestBeanRequest</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>
         <remote>be.smals.psnextrequest.service.requests.PSNextRequestServiceRemoteRequest</remote>
     </ejb-ref>
-    
+
 </web-app>

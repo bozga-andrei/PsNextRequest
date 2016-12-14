@@ -3,8 +3,9 @@
 
  <persistence-unit name="PSNextRequestUnit" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <jta-data-source>java:jboss/datasource/psnextrequest</jta-data-source>
-    <!-- <jta-data-source>java:jboss/PSNextRequestDataSource</jta-data-source> --> 
+   <!-- <jta-data-source>java:jboss/datasource/psnextrequest</jta-data-source>-->
+    <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
+    <!-- <jta-data-source>java:jboss/PSNextRequestDataSource</jta-data-source> -->
     <!-- <jta-data-source>PSNextRequestDataSource</jta-data-source> -->
     <class>be.smals.psnextrequest.entity.Group</class>
     <class>be.smals.psnextrequest.entity.Project</class>

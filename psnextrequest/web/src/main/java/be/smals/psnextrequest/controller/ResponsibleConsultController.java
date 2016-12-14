@@ -1,8 +1,12 @@
 
 package be.smals.psnextrequest.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import be.smals.psnextrequest.bean.SessionBean;
+import be.smals.psnextrequest.entity.Request;
+import be.smals.psnextrequest.service.exception.PSNextRequestServiceException;
+import be.smals.psnextrequest.service.requests.PSNextRequestServiceRemoteRequest;
+import be.smals.psnextrequest.service.users.PSNextRequestServiceRemoteUser;
+import org.primefaces.event.SelectEvent;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -12,253 +16,242 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
-
-import org.primefaces.event.SelectEvent;
-
-import be.smals.psnextrequest.bean.SessionBean;
-import be.smals.psnextrequest.entity.Request;
-import be.smals.psnextrequest.service.exception.PSNextRequestServiceException;
-import be.smals.psnextrequest.service.requests.PSNextRequestServiceRemoteRequest;
-import be.smals.psnextrequest.service.users.PSNextRequestServiceRemoteUser;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * Managed bean controller for the consult Requests selection screen.
- * 
+ *
  * @author AndreiBozga
- * 
- * @since
- * 
  */
 
 @ManagedBean(name = "responsibleConsultController")
 @RequestScoped
 public class ResponsibleConsultController {
-    
-	private Request request = new Request();
-	
-	private String shortDescription;
-	
+
+    private Request request = new Request();
+
+    private String shortDescription;
+
     private List<Request> requests;
-    
+
     private List<Request> filteredRequests;
-    
+
     private Request selectedRequest;
-    
+
     private boolean reqChecked;
-    
+
     @ManagedProperty(value = "#{sessionBean}")
     private SessionBean sessionBean;
-    
+
     @EJB(name = "ejb/PSNextRequestBeanRequest")
-	private PSNextRequestServiceRemoteRequest serviceRequest;
-    
+    private PSNextRequestServiceRemoteRequest serviceRequest;
+
     @EJB(name = "ejb/PSNextRequestBeanUser")
-	private PSNextRequestServiceRemoteUser serviceUser;
-	
-	FacesContext context = FacesContext.getCurrentInstance();
-    
- 
-	 /**
+    private PSNextRequestServiceRemoteUser serviceUser;
+
+    FacesContext context = FacesContext.getCurrentInstance();
+
+
+    /**
      * Initiation.
      */
     @PostConstruct
-	public void init() {
-		this.setRequests();
-	}
+    public void init() {
+        this.setRequests();
+    }
+
     //recuperer la seletion du tableau
-    public void onSelection(SelectEvent event){
-    	
-    	sessionBean.setResponsibleRequest((Request)event.getObject());
-    } 
-    
+    public void onSelection(SelectEvent event) {
+
+        sessionBean.setResponsibleRequest((Request) event.getObject());
+    }
+
     /**
      * Validate request by the Responsible
-     * 
      */
-    public void validateByResponsible(AjaxBehaviorEvent event){
-    	request = new Request();
-		try {
-			if(checkResponsibleSelection()){
-				request = sessionBean.getResponsibleRequest();
-				if(request.getRequestStatus() == 1 || request.getRequestStatus() == 2){
-					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "La demande a dÈj‡ ÈtÈ validÈe", ""));
-				} else if(request.getRequestCommentResp() == null  || request.getRequestCommentResp().equals("")){
-					//AcceptÈ
-					request.setRequestStatus(1);
-					request.setRequestManagedBy(sessionBean.getUser().getUserDistinguishedName());
-					serviceRequest.updateRequest(request);
-					this.setRequests();
-					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Demande validÈe", ""));
-				} else {
-					//AcceptÈ avec commentaire
-					request.setRequestStatus(2);
-					request.setRequestManagedBy(sessionBean.getUser().getUserDistinguishedName());
-					serviceRequest.updateRequest(request);
-					this.setRequests();
-					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Demande validÈe", ""));
-				}
-			}
-		} catch (PSNextRequestServiceException e) {
-			e.printStackTrace();
-			context.addMessage("validateBtn", new FacesMessage("Erreur: " + e.getMessage()));
-		}
+    public void validateByResponsible(AjaxBehaviorEvent event) {
+        request = new Request();
+        try {
+            if (checkResponsibleSelection()) {
+                request = sessionBean.getResponsibleRequest();
+                if (request.getRequestStatus() == 1 || request.getRequestStatus() == 2) {
+                    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "La demande a d√©j√† √©t√© valid√©e", ""));
+                } else if (request.getRequestCommentResp() == null || request.getRequestCommentResp().equals("")) {
+                    //Accept√©
+                    request.setRequestStatus(1);
+                    request.setRequestManagedBy(sessionBean.getUser().getUserDistinguishedName());
+                    serviceRequest.updateRequest(request);
+                    this.setRequests();
+                    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Demande valid√©e", ""));
+                } else {
+                    //Accept√© avec commentaire
+                    request.setRequestStatus(2);
+                    request.setRequestManagedBy(sessionBean.getUser().getUserDistinguishedName());
+                    serviceRequest.updateRequest(request);
+                    this.setRequests();
+                    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Demande valid√©e", ""));
+                }
+            }
+        } catch (PSNextRequestServiceException e) {
+            e.printStackTrace();
+            context.addMessage("validateBtn", new FacesMessage("Erreur: " + e.getMessage()));
+        }
     }
-     
-    
+
+
     /**
      * Cancel request by the Responsible
-     * 
      */
-    public String refuseByResponsible(AjaxBehaviorEvent event){
-    	request = new Request();
-		try {
-			if(checkResponsibleSelection()){
-				request = sessionBean.getResponsibleRequest();
-				if(request.getRequestStatus() == 3){
-					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "La demande a dÈj‡ ÈtÈ refusÈe", "La demande a dÈj‡ ÈtÈ refusÈe"));
-					return null;
-				} else {
-					// Status 3 = RefusÈe
-					request.setRequestStatus(3);
-					request.setRequestManagedBy(sessionBean.getUser().getUserDistinguishedName());
-					serviceRequest.updateRequest(request);
-					this.setRequests();
-					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Demande refusÈe", "La demande a ÈtÈ refusÈe"));
-					return null;
-				}
-				
-			}
-			return null;
-		} catch (PSNextRequestServiceException e) {
-			e.printStackTrace();
-			context.addMessage("cancelBtn", new FacesMessage("Erreur: " + e.getMessage()));
-			return null;
-		}
+    public String refuseByResponsible(AjaxBehaviorEvent event) {
+        request = new Request();
+        try {
+            if (checkResponsibleSelection()) {
+                request = sessionBean.getResponsibleRequest();
+                if (request.getRequestStatus() == 3) {
+                    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "La demande a d√©j√† √©t√© refus√©e", "La demande a d√©j√† √©t√© refus√©e"));
+                    return null;
+                } else {
+                    // Status 3 = Refus√©e
+                    request.setRequestStatus(3);
+                    request.setRequestManagedBy(sessionBean.getUser().getUserDistinguishedName());
+                    serviceRequest.updateRequest(request);
+                    this.setRequests();
+                    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Demande refus√©e", "La demande a √©t√© refus√©e"));
+                    return null;
+                }
+
+            }
+            return null;
+        } catch (PSNextRequestServiceException e) {
+            e.printStackTrace();
+            context.addMessage("cancelBtn", new FacesMessage("Erreur: " + e.getMessage()));
+            return null;
+        }
     }
-    
+
     /**
      * Request: set visible for responsible attribut to "false" and and return the appropriate outcome
-     * 
+     *
      * @return the outcome.
      */
-    public String deleteByResponsible(){
-    	request = new Request();
-    	try {
-    		if(checkResponsibleSelection()){
-    			request = sessionBean.getResponsibleRequest();
-        		if(request.getRequestStatus() == 0 ){
-    				context.addMessage("deleteBtn", new FacesMessage("La demande ne peut pas Ítre supprimÈ elle est en cours de validation."));
-    				return null;
-        		}
-        		serviceRequest.setRequestVisibleForResp(request, sessionBean.getUser(),false);
-    			sessionBean.setResponsibleRequest(null);
-    			this.setRequests();
-    			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Demande supprimÈ", "La demande a ÈtÈ refusÈe"));
-				return null;
-    		}
-    		return null;
-		} catch (PSNextRequestServiceException e) {
-			e.printStackTrace();
-			context.addMessage("deleteBtn", new FacesMessage("Demande n'a pas ÈtÈ supprimÈ: " + e.getMessage()));
-			return null;
-		} catch (Exception e) {
-			e.printStackTrace();
-			context.addMessage(null, new FacesMessage (e.getMessage()));
-			return null;
-		}
+    public String deleteByResponsible() {
+        request = new Request();
+        try {
+            if (checkResponsibleSelection()) {
+                request = sessionBean.getResponsibleRequest();
+                if (request.getRequestStatus() == 0) {
+                    context.addMessage("deleteBtn", new FacesMessage("La demande ne peut pas √™tre supprim√© elle est en cours de validation."));
+                    return null;
+                }
+                serviceRequest.setRequestVisibleForResp(request, sessionBean.getUser(), false);
+                sessionBean.setResponsibleRequest(null);
+                this.setRequests();
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Demande supprim√©", "La demande a √©t√© refus√©e"));
+                return null;
+            }
+            return null;
+        } catch (PSNextRequestServiceException e) {
+            e.printStackTrace();
+            context.addMessage("deleteBtn", new FacesMessage("Demande n'a pas √©t√© supprim√©: " + e.getMessage()));
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            context.addMessage(null, new FacesMessage(e.getMessage()));
+            return null;
+        }
     }
-    	
-    public boolean checkResponsibleSelection(){
-    	if(sessionBean.getResponsibleRequest() == null){
-    		context.addMessage("form:modificationBtn", new FacesMessage("Selectionnez une demande svp!"));
-    		return false;
-    	} else {
-    		return true;
-    	}
+
+    public boolean checkResponsibleSelection() {
+        if (sessionBean.getResponsibleRequest() == null) {
+            context.addMessage("form:modificationBtn", new FacesMessage("Selectionnez une demande svp!"));
+            return false;
+        } else {
+            return true;
+        }
     }
-    
-    
-	public void setRequests() {
-		try{
-			requests = new ArrayList<Request>();
-			List<Request> visibleRequests = new ArrayList<Request>();
-			
-			//Select only visible requests for table psnext_req_visible_for_responsible
-			visibleRequests = serviceRequest.getVisibleRequestsForRespByUser(sessionBean.getUser());
-			
-			for(Request req : visibleRequests){
-				if(req.getRequestStatus() != 4){
-        			if(req.getRequestDescription().length() > 25){
-            			req.setRequestShortDescription(req.getRequestDescription().substring(0,25)+ "...");
-            		} else 
-            			req.setRequestShortDescription(req.getRequestDescription());
-            		requests.add(req);
-        		}
-			}
-			
-		} catch (PSNextRequestServiceException e) {
-			e.printStackTrace();
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, e.getMessage(), ""));
-		} catch (Exception e) {
-			e.printStackTrace();
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Unexpected error please try again!", ""));
-		}
-		
-	}
-	
-	public List<Request> getRequests(){
-		return requests;
-	}
-	
-	public SessionBean getSessionBean() {
-		return sessionBean;
-	}
 
-	public void setSessionBean(SessionBean sessionBean) {
-		this.sessionBean = sessionBean;
-	}
 
-	public List<Request> getFilteredRequests() {
-		return filteredRequests;
-	}
+    public void setRequests() {
+        try {
+            requests = new ArrayList<Request>();
+            List<Request> visibleRequests = new ArrayList<Request>();
 
-	public void setFilteredRequests(List<Request> filteredRequests) {
-		this.filteredRequests = filteredRequests;
-	}
+            //Select only visible requests for table psnext_req_visible_for_responsible
+            visibleRequests = serviceRequest.getVisibleRequestsForRespByUser(sessionBean.getUser());
 
-	public Request getSelectedRequest() {
-		return selectedRequest;
-	}
+            for (Request req : visibleRequests) {
+                if (req.getRequestStatus() != 4) {
+                    if (req.getRequestDescription().length() > 25) {
+                        req.setRequestShortDescription(req.getRequestDescription().substring(0, 25) + "...");
+                    } else
+                        req.setRequestShortDescription(req.getRequestDescription());
+                    requests.add(req);
+                }
+            }
 
-	public void setSelectedRequest(Request selectedRequest) {
-		this.selectedRequest = selectedRequest;
-	}
+        } catch (PSNextRequestServiceException e) {
+            e.printStackTrace();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, e.getMessage(), ""));
+        } catch (Exception e) {
+            e.printStackTrace();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Unexpected error please try again!", ""));
+        }
 
-	public boolean isReqChecked() {
-		return reqChecked;
-	}
+    }
 
-	public void setReqChecked(boolean reqChecked) {
-		this.reqChecked = reqChecked;
-	}
+    public List<Request> getRequests() {
+        return requests;
+    }
 
-	public Request getRequest() {
-		return request;
-	}
+    public SessionBean getSessionBean() {
+        return sessionBean;
+    }
 
-	public void setRequest(Request request) {
-		this.request = request;
-	}
+    public void setSessionBean(SessionBean sessionBean) {
+        this.sessionBean = sessionBean;
+    }
 
-	public String getShortDescription() {
-		return shortDescription;
-	}
+    public List<Request> getFilteredRequests() {
+        return filteredRequests;
+    }
 
-	public void setShortDescription(String shortDescription) {
-		this.shortDescription = shortDescription;
-	}
-	
-	
-	
+    public void setFilteredRequests(List<Request> filteredRequests) {
+        this.filteredRequests = filteredRequests;
+    }
+
+    public Request getSelectedRequest() {
+        return selectedRequest;
+    }
+
+    public void setSelectedRequest(Request selectedRequest) {
+        this.selectedRequest = selectedRequest;
+    }
+
+    public boolean isReqChecked() {
+        return reqChecked;
+    }
+
+    public void setReqChecked(boolean reqChecked) {
+        this.reqChecked = reqChecked;
+    }
+
+    public Request getRequest() {
+        return request;
+    }
+
+    public void setRequest(Request request) {
+        this.request = request;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+
 }

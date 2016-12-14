@@ -1,34 +1,33 @@
 package be.smals.psnextrequest.converter;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 @ManagedBean
 @ViewScoped
 @FacesConverter("generalConverter")
 public class GeneralConverter implements Converter, Serializable {
- 
+
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5733084560564276412L;
-	
-	private Map <UUID, Object> temporaryStore = new HashMap <UUID, Object> ();
- 
+     *
+     */
+    private static final long serialVersionUID = 5733084560564276412L;
+
+    private Map<UUID, Object> temporaryStore = new HashMap<UUID, Object>();
+
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         return temporaryStore.get(UUID.fromString(value));
     }
- 
+
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         UUID id = UUID.randomUUID();

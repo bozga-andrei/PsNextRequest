@@ -30,6 +30,7 @@
   <context-param>
 	<param-name>com.sun.faces.enableThreading</param-name>
 	<param-value>false</param-value>
+	<!--   
 	<description>
 	When enabled, the runtime initialization and default ResourceHandler 
 	implementation will use threads to perform their functions. Set this 
@@ -39,6 +40,7 @@
 	Note that when this option is disabled, the ResourceHandler will not 
 	pick up new versions of resources when ProjectStage is development.
 	</description>
+	-->
   </context-param>
 
   <context-param>

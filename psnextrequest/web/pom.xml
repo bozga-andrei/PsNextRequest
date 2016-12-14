@@ -1,308 +1,192 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-  <!-- Information about the master eclipse project -->
-  <parent>
-    <groupId>be.smals.psnextrequest</groupId>
-    <artifactId>psnextrequest-business-master</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
-  </parent>
+    <!-- Information about the master eclipse project -->
+    <parent>
+        <groupId>bozga</groupId>
+        <artifactId>psnextrequest-business-master</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
 
-  <!-- General attributes -->
-  <modelVersion>4.0.0</modelVersion>
-  <!-- groupId is inherited from master pom -->
-  <artifactId>psnextrequest-web</artifactId>
-  <!-- version is inherited from master pom -->
-  <name>PS-Next Request Web Application</name>
-  <description>PS-Next Request Web Application</description>
-
-  <!-- Project URL -->
-  <url>${sonar.projectdoc.url.prefix}/${groupId}</url>
-  
-  <!-- Packaging CAN NOT BE CHANGED -->
-  <packaging>war</packaging>
-
-  <!-- Properties -->
-  <properties>
-    <target>5</target>
-  </properties>
+    <!-- General attributes -->
+    <modelVersion>4.0.0</modelVersion>
+    <!-- groupId is inherited from master pom -->
+    <artifactId>psnextrequest-web</artifactId>
+    <!-- version is inherited from master pom -->
+    <name>PS-Next Request Web Application</name>
+    <description>PS-Next Request Web Application</description>
 
 
-  <!-- Information about team members -->
-  <developers>
-    <!-- add here much more team members -->
-  </developers>
+    <!-- Packaging CAN NOT BE CHANGED -->
+    <packaging>war</packaging>
 
-  <!-- Information about contributors -->
-  <contributors>
-    <!-- add here much more contributors -->
-  </contributors>
+    <!-- Properties -->
+    <properties>
+        <target>5</target>
+    </properties>
 
-  <build>
-    <plugins>
-      <!-- configuration of eclipse plugin ********************************* -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-eclipse-plugin</artifactId>
-        <version>2.9</version>
-        <configuration>
-          <!-- add this to keep the JSF facets after a maven eclipse -->
-          <additionalProjectFacets>
-            <jst.jsf>2.0</jst.jsf>
-          </additionalProjectFacets>
-          <additionalProjectnatures>
-            <projectnature>org.eclipse.jdt.core.javanature</projectnature>
-            <projectnature>net.sf.eclipsecs.core.CheckstyleNature</projectnature>
-            <projectnature>be.smals.transversal.eclipseplugins.pomeditor.mavenNature</projectnature>
-          </additionalProjectnatures>
-          <additionalBuildcommands>
-            <buildcommand>org.eclipse.jdt.core.javabuilder</buildcommand>
-            <buildcommand>net.sf.eclipsecs.core.CheckstyleBuilder</buildcommand>
-            <buildcommand>be.smals.transversal.eclipseplugins.pomeditor.mavenBuilder</buildcommand>
-          </additionalBuildcommands>
-          <downloadSources>true</downloadSources>
-          <wtpversion>2.0</wtpversion>
-          <wtpContextName>psnextrequest/webapp</wtpContextName>
-        </configuration>
-      </plugin>
-      
-      <plugin>
-	   <groupId>com.google.appengine</groupId>
-	   <artifactId>appengine-maven-plugin</artifactId>
-	  </plugin>
-      
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>weblogic-maven-plugin</artifactId>
-        <version>2.9.3-Smals</version>
-        <configuration>
-          <adminServerHostName>${applServerHostName}</adminServerHostName>
-          <adminServerPort>${applServerHostPort}</adminServerPort>
-          <adminServerProtocol>t3</adminServerProtocol>
-          <targetNames>${applServerName}</targetNames>
-          <name>${artifactId}</name>
-          <userId>${user}</userId>
-          <password>${pwd}</password>
-          <upload>true</upload>
-          <remote>true</remote>
-          <verbose>false</verbose>
-          <debug>false</debug>
-          <noExit>true</noExit>
-        </configuration>
-      </plugin>      
-<!--       war plugin to select the DD to put in the target artifact
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>2.1.1</version>
-        <configuration>
-          <webResources>
-            <resource>
-              <directory>src/env/${env}/WEB-INF</directory>
-              override the destination directory for this resource
-              <targetPath>WEB-INF</targetPath>
-              enable filtering
-              <filtering>true</filtering>
-            </resource>
-          </webResources>
-        </configuration>
-      </plugin> -->
-      <!-- Add here configuration of plugins -->
-      
-    </plugins>
 
-    <!-- Configuration of resources -->
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-        <filtering>false</filtering>
-      </resource>
-    </resources>
+    <!-- Information about team members -->
+    <developers>
+        <!-- add here much more team members -->
+    </developers>
 
-  </build>
-  
+    <!-- Information about contributors -->
+    <contributors>
+        <!-- add here much more contributors -->
+    </contributors>
 
-  <!-- Configuration of dependencies -->
-  <dependencies>
-<!--     <dependency> -->
-<!--       <groupId>org.glassfish</groupId> -->
-<!--       <artifactId>javax.faces</artifactId> -->
-<!--     </dependency> -->
-   
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-    </dependency>
-    
-    <dependency>
-      <groupId>javax.faces</groupId>
-      <artifactId>jsf-api</artifactId>
-    </dependency>
-<!-- 	<dependency> -->
-<!--       <groupId>com.sun.faces</groupId> -->
-<!--       <artifactId>jsf-api</artifactId> -->
-<!--     </dependency> -->
-<!--     <dependency> -->
-<!-- 	  <groupId>com.sun.faces</groupId> -->
-<!-- 	  <artifactId>jsf-impl</artifactId> -->
-<!-- 	</dependency> -->
-    
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>jstl</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-    </dependency>
-    
-    <dependency>
-	  <groupId>javax.ejb</groupId>
-	  <artifactId>ejb-api</artifactId>
-	</dependency>
-    <!-- 
-    <dependency>
-      <groupId>org.apache.myfaces.test</groupId>
-      <artifactId>myfaces-test20</artifactId>
-      <version>1.0.4</version>
-      <scope>test</scope>
-    </dependency>
-    -->
-    <dependency>
-      <groupId>jdom</groupId>
-      <artifactId>jdom</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>${groupId}</groupId>
-      <artifactId>psnextrequest-business-common</artifactId>
-      <version>${version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>${groupId}</groupId>
-      <artifactId>psnextrequest-business-ejb</artifactId>
-      <version>${version}</version>
-      <scope>compile</scope>
-    </dependency>
-
-    <dependency>
-    	<groupId>javax.persistence</groupId>
-    	<artifactId>persistence-api</artifactId>
-    </dependency>
-    
-    <dependency>
-        <groupId>org.richfaces.core</groupId>
-        <artifactId>richfaces-core-impl</artifactId>
-    </dependency>
-
-    <dependency>
-    	<groupId>org.richfaces.ui</groupId>
-    	<artifactId>richfaces-components-ui</artifactId>
-    </dependency>
-    <dependency>
-    	<groupId>org.richfaces</groupId>
-    	<artifactId>richfaces-bom</artifactId>
-    	<type>pom</type>
-    </dependency>
-    <dependency>
-    	<groupId>com.google.guava</groupId>
-    	<artifactId>guava</artifactId>
-    </dependency>
-    <dependency>
-    	<groupId>net.sourceforge.cssparser</groupId>
-    	<artifactId>cssparser</artifactId>
-    </dependency>
-    <dependency>
-		<groupId>org.primefaces</groupId>
-		<artifactId>primefaces</artifactId>
-    </dependency>
-
-    <dependency>
-    	<groupId>org.primefaces.extensions</groupId>
-    	<artifactId>primefaces-extensions</artifactId>
-    </dependency>
-    
-  </dependencies>
-
-  <!-- Configuration of profiles MUST BE CONFIGURED -->
-  <profiles>
-    <profile>
-      <!-- Must be activated in Continuum Build Definitions to publish web site of snapshot artifacts -->
-      <id>continuum-snapshot</id>
-      <distributionManagement>
-        <site>
-          <id>website</id>
-          <name>${artifactId}</name>
-          <url>${projectDocSnapshot}${groupId}/${artifactId}</url>
-        </site>
-      </distributionManagement>
-    </profile>
-    <profile>
-      <!-- Must be activated in Continuum Build Definitions to publish web site of release artifacts -->
-      <id>continuum-release</id>
-      <distributionManagement>
-        <site>
-          <id>website</id>
-          <name>${artifactId}-${version}</name>
-          <url>${projectDocRelease}${groupId}/${artifactId}-${version}</url>
-        </site>
-      </distributionManagement>
-    </profile>
-    <profile>
-      <id>deploy</id>
-      <build>
+    <build>
         <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>weblogic-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>undeploy-webapp</id>
-                <phase>package</phase>
-                <configuration>
-                  <continueOnFailure>true</continueOnFailure>
-                  <name>${artifactId}${suffix}</name>
-                </configuration>
-                <goals>
-                  <goal>undeploy</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>deploy-webapp</id>
-                <phase>package</phase>
-                <configuration>
-                  <continueOnFailure>true</continueOnFailure>
-                  <name>${artifactId}${suffix}</name>
-                </configuration>
-                <goals>
-                  <goal>deploy</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
+
+            <plugin>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
+            </plugin>
+
+
+            <!--       war plugin to select the DD to put in the target artifact
+                  <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.1.1</version>
+                    <configuration>
+                      <webResources>
+                        <resource>
+                          <directory>src/env/${env}/WEB-INF</directory>
+                          override the destination directory for this resource
+                          <targetPath>WEB-INF</targetPath>
+                          enable filtering
+                          <filtering>true</filtering>
+                        </resource>
+                      </webResources>
+                    </configuration>
+                  </plugin> -->
+            <!-- Add here configuration of plugins -->
+
         </plugins>
-      </build>
-    </profile>
-    
-    <profile>
-	  <!-- When built in OpenShift the 'openshift' profile will be used when invoking mvn. -->
-	  <!-- Use this profile for any OpenShift specific customization your app will need. -->
-	  <!-- By default that is to put the resulting archive into the 'deployments' folder. -->
-	  <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
-	  <id>openshift</id>
-	    <build>
-	      <plugins>
-	        <plugin>
-	          <artifactId>maven-war-plugin</artifactId>
-	          <version>2.1.1</version>
-	          <configuration>
-	            <outputDirectory>deployments</outputDirectory>
-	            <warName>ROOT</warName>
-	          </configuration>
-	        </plugin>
-	      </plugins>
-	    </build>
-	</profile>
-  </profiles>
+
+        <!-- Configuration of resources -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+
+    </build>
+
+
+    <!-- Configuration of dependencies -->
+    <dependencies>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-impl</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.ejb</groupId>
+            <artifactId>ejb-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>jdom</groupId>
+            <artifactId>jdom</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${groupId}</groupId>
+            <artifactId>psnextrequest-business-common</artifactId>
+            <version>${version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>${groupId}</groupId>
+            <artifactId>psnextrequest-business-ejb</artifactId>
+            <version>${version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.richfaces.core</groupId>
+            <artifactId>richfaces-core-impl</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.richfaces.ui</groupId>
+            <artifactId>richfaces-components-ui</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.richfaces</groupId>
+            <artifactId>richfaces-bom</artifactId>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.cssparser</groupId>
+            <artifactId>cssparser</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.primefaces.extensions</groupId>
+            <artifactId>primefaces-extensions</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <!-- Configuration of profiles MUST BE CONFIGURED -->
+    <profiles>
+
+        <profile>
+            <!-- When built in OpenShift the 'openshift' profile will be used when invoking mvn. -->
+            <!-- Use this profile for any OpenShift specific customization your app will need. -->
+            <!-- By default that is to put the resulting archive into the 'deployments' folder. -->
+            <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
+            <id>openshift</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>2.1.1</version>
+                        <configuration>
+                            <outputDirectory>deployments</outputDirectory>
+                            <warName>ROOT</warName>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
