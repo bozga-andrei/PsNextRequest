@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 
@@ -113,7 +113,6 @@
             </dependency>
 
 
-
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
@@ -220,9 +219,9 @@
                 <version>2.1</version>
             </dependency>-->
             <dependency>
-              <groupId>com.sun.faces</groupId>
-              <artifactId>jsf-api</artifactId>
-              <version>2.2.14</version>
+                <groupId>com.sun.faces</groupId>
+                <artifactId>jsf-api</artifactId>
+                <version>2.2.14</version>
             </dependency>
 
             <dependency>
@@ -239,20 +238,9 @@
 
 
             <dependency>
-                <groupId>org.richfaces.ui</groupId>
-                <artifactId>richfaces-components-ui</artifactId>
-                <version>4.3.0.20121214-M3</version>
-            </dependency>
-            <dependency>
-                <groupId>org.richfaces.core</groupId>
-                <artifactId>richfaces-core-impl</artifactId>
-                <version>4.3.0.20121214-M3</version>
-            </dependency>
-            <dependency>
                 <groupId>org.richfaces</groupId>
-                <artifactId>richfaces-bom</artifactId>
-                <version>4.3.0.20121214-M3</version>
-                <type>pom</type>
+                <artifactId>richfaces</artifactId>
+                <version>4.5.17.Final</version>
             </dependency>
 
             <dependency>
@@ -264,16 +252,6 @@
                 <groupId>net.sourceforge.cssparser</groupId>
                 <artifactId>cssparser</artifactId>
                 <version>0.9.7</version>
-            </dependency>
-            <dependency>
-                <groupId>org.richfaces.framework</groupId>
-                <artifactId>richfaces-api</artifactId>
-                <version>4.0.0.ALPHA1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.richfaces.ui</groupId>
-                <artifactId>extendedDataTable</artifactId>
-                <version>3.2.2.SR1</version>
             </dependency>
 
             <dependency>
