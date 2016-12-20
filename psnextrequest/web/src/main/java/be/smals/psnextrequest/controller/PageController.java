@@ -1,7 +1,6 @@
 package be.smals.psnextrequest.controller;
 
 import javax.faces.bean.ManagedBean;
-
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 

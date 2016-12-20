@@ -27,53 +27,35 @@ import java.util.List;
 @RequestScoped
 public class ProjectController {
 
-    private Project project;
-
-    private Long projectId;
-
-    private String projectName;
-
-    private String projectDescription;
-
-    private int projectStatus;
-
-    private List<Project> projects;
-
-    private Project selectedProject;
-
-    private List<User> selectedMembersTeam;
-
-    private boolean showConfirmMembersEmpty = true;
-
-    @SuppressWarnings("unused")
-    private ArrayList<User> users;
-
-    //pickList
-    private DualListModel<User> pickListUsers;
     List<User> source;
     List<User> sourceFiltered = new ArrayList<User>();
     List<User> target;
-
+    FacesContext context = FacesContext.getCurrentInstance();
+    private Project project;
+    private Long projectId;
+    private String projectName;
+    private String projectDescription;
+    private int projectStatus;
+    private List<Project> projects;
+    private Project selectedProject;
+    private List<User> selectedMembersTeam;
+    private boolean showConfirmMembersEmpty = true;
+    @SuppressWarnings("unused")
+    private ArrayList<User> users;
+    //pickList
+    private DualListModel<User> pickListUsers;
     @ManagedProperty(value = "#{sessionBean}")
     private SessionBean sessionBean;
-
     @ManagedProperty(value = "#{projectSessionBean}")
     private ProjectSessionBean projectSessionBean;
-
     @EJB(name = "ejb/PSNextRequestBeanUser")
     private PSNextRequestServiceRemoteUser serviceUser;
-
     @EJB(name = "ejb/PSNextRequestBeanProject")
     private PSNextRequestServiceRemoteProject serviceProject;
-
     @EJB(name = "ejb/PSNextRequestBeanRequest")
     private PSNextRequestServiceRemoteRequest serviceRequest;
-
     @EJB(name = "ejb/PSNextRequestBeanTask")
     private PSNextRequestServiceRemoteTask serviceTask;
-
-    FacesContext context = FacesContext.getCurrentInstance();
-
 
     @PostConstruct
     public void init() {
@@ -194,10 +176,6 @@ public class ProjectController {
         }
     }
 
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
-    }
-
     public List<Project> getProjects() {
         try {
             projects = new ArrayList<Project>();
@@ -208,6 +186,10 @@ public class ProjectController {
             return null;
         }
         return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 
     public List<User> getUsers() {

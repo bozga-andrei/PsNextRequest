@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE jboss
-  PUBLIC "-//JBoss//DTD JBOSS 3.0//EN" "http://www.jboss.org/j2ee/dtd/jboss_3_0.dtd">
+        PUBLIC "-//JBoss//DTD JBOSS 3.0//EN" "http://www.jboss.org/j2ee/dtd/jboss_3_0.dtd">
 <jboss>
-   <enterprise-beans>
-      <session>
-         <ejb-name>PSNextRequestServiceBean</ejb-name>
-         <jndi-name>java:jboss/datasource/psnextrequest</jndi-name>
-      </session>
-      <session>
-         <ejb-name>PSNextRequestServiceBeanProject</ejb-name>
-         <jndi-name>java:jboss/datasource/psnextrequest</jndi-name>
-      </session>
-      <session>
-         <ejb-name>PSNextRequestServiceBeanUser</ejb-name>
-         <jndi-name>java:jboss/datasource/psnextrequest</jndi-name>
-      </session>
-      <session>
-         <ejb-name>PSNextRequestServiceBeanTask</ejb-name>
-         <jndi-name>java:jboss/datasource/psnextrequest</jndi-name>
-      </session>
-      <session>
-         <ejb-name>PSNextRequestServiceBeanRequest</ejb-name>
-         <jndi-name>java:jboss/datasource/psnextrequest</jndi-name>
-      </session>
-   </enterprise-beans>
+    <enterprise-beans>
+        <session>
+            <ejb-name>PSNextRequestServiceBean</ejb-name>
+            <jndi-name>java:jboss/datasource/psnextrequest</jndi-name>
+        </session>
+        <session>
+            <ejb-name>PSNextRequestServiceBeanProject</ejb-name>
+            <jndi-name>java:jboss/datasource/psnextrequest</jndi-name>
+        </session>
+        <session>
+            <ejb-name>PSNextRequestServiceBeanUser</ejb-name>
+            <jndi-name>java:jboss/datasource/psnextrequest</jndi-name>
+        </session>
+        <session>
+            <ejb-name>PSNextRequestServiceBeanTask</ejb-name>
+            <jndi-name>java:jboss/datasource/psnextrequest</jndi-name>
+        </session>
+        <session>
+            <ejb-name>PSNextRequestServiceBeanRequest</ejb-name>
+            <jndi-name>java:jboss/datasource/psnextrequest</jndi-name>
+        </session>
+    </enterprise-beans>
 </jboss>

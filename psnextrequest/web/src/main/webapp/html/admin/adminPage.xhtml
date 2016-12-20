@@ -1,41 +1,43 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui" 
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/template/layout.xhtml">
-	
-	<ui:define name="content" >
-		<h2>Gestion de projets</h2>
-		
-			<h:form styleClass="notAcces" rendered="#{!sessionBean.isAdmin}">
-				<p>Bienvenue, #{sessionBean.user.userFirstName} vous n'avez pas le droit d'acceder. </p>
-				<h:commandButton class="h160 buttons" action="toRequestsConsult" value="Retour" immediate="true"/>
-			</h:form>
-			
-			<h:panelGroup rendered="#{sessionBean.isAdmin}" class="adminPage">
-			
-				<h:form id="form" >
-					<div class="command">
-						
-						<p:messages id="msg" autoUpdate="true" closable="true" />
-	
-						<div class="line">
-							
-							<div class="row section">
-								<h:commandButton class="buttonsRight buttons" id="navProjectManageBtn" action="toProjectManage" value="Gestion Projets" />
-								<h:commandButton class="buttonsRight buttons" id="navTaskManageBtn" action="toTaskManage" value="Gestion Tâches" />
-								<h:commandButton class="buttonsRight buttons" id="navGrupManageBtn" action="toGroupManage" value="Gestion Groups" />
-							</div>
-							
-						</div>
-					</div>
-				
-	
-				</h:form>			
-		
-	
-			</h:panelGroup>
-	</ui:define>
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/layout.xhtml">
+
+    <ui:define name="content">
+        <h2>Gestion de projets</h2>
+
+        <h:form styleClass="notAcces" rendered="#{!sessionBean.isAdmin}">
+            <p>Bienvenue, #{sessionBean.user.userFirstName} vous n'avez pas le droit d'acceder. </p>
+            <h:commandButton class="h160 buttons" action="toRequestsConsult" value="Retour" immediate="true"/>
+        </h:form>
+
+        <h:panelGroup rendered="#{sessionBean.isAdmin}" class="adminPage">
+
+            <h:form id="form">
+                <div class="command">
+
+                    <p:messages id="msg" autoUpdate="true" closable="true"/>
+
+                    <div class="line">
+
+                        <div class="row section">
+                            <h:commandButton class="buttonsRight buttons" id="navProjectManageBtn"
+                                             action="toProjectManage" value="Gestion Projets"/>
+                            <h:commandButton class="buttonsRight buttons" id="navTaskManageBtn" action="toTaskManage"
+                                             value="Gestion Tâches"/>
+                            <h:commandButton class="buttonsRight buttons" id="navGrupManageBtn" action="toGroupManage"
+                                             value="Gestion Groups"/>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </h:form>
+
+
+        </h:panelGroup>
+    </ui:define>
 </ui:composition>

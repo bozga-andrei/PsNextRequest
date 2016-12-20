@@ -1,8 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
-         xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          id="test" version="2.5">
+
+
+    <!-- Application parameters -->
+    <context-param>
+        <param-name>mail</param-name>
+        <param-value>bozga.andrei@gmail.com</param-value>
+    </context-param>
+
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
+        <url-pattern>*.jsf</url-pattern>
+    </servlet-mapping>
+
+
+    <session-config>
+        <session-timeout>120</session-timeout>
+    </session-config>
+
+    <welcome-file-list>
+        <welcome-file>faces/public/login.xhtml</welcome-file>
+    </welcome-file-list>
+
 
     <context-param>
         <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
@@ -29,21 +56,21 @@
 
     <!-- Disable use of threading for single-threaded environments such as
        the Google AppEngine. -->
-   <!-- <context-param>
-        <param-name>com.sun.faces.enableThreading</param-name>
-        <param-value>false</param-value>
-        &lt;!&ndash;
-        <description>
-        When enabled, the runtime initialization and default ResourceHandler
-        implementation will use threads to perform their functions. Set this
-        value to false if threads aren't desired (as in the case of running
-        within the Google Application Engine).
+    <!-- <context-param>
+         <param-name>com.sun.faces.enableThreading</param-name>
+         <param-value>false</param-value>
+         &lt;!&ndash;
+         <description>
+         When enabled, the runtime initialization and default ResourceHandler
+         implementation will use threads to perform their functions. Set this
+         value to false if threads aren't desired (as in the case of running
+         within the Google Application Engine).
 
-        Note that when this option is disabled, the ResourceHandler will not
-        pick up new versions of resources when ProjectStage is development.
-        </description>
-        &ndash;&gt;
-    </context-param>-->
+         Note that when this option is disabled, the ResourceHandler will not
+         pick up new versions of resources when ProjectStage is development.
+         </description>
+         &ndash;&gt;
+     </context-param>-->
 
     <context-param>
         <param-name>javax.faces.SKIP_COMMENTS</param-name>
@@ -90,32 +117,6 @@
         <param-name>org.ajax4jsf.VIEW_HANDLERS</param-name>
         <param-value>com.sun.facelets.FaceletViewHandler</param-value>
     </context-param>
-
-
-    <!-- Application parameters -->
-    <context-param>
-        <param-name>mail</param-name>
-        <param-value>bozga.andrei@gmail.com</param-value>
-    </context-param>
-
-    <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
-    </servlet-mapping>
-
-
-    <session-config>
-        <session-timeout>120</session-timeout>
-    </session-config>
-
-    <welcome-file-list>
-        <welcome-file>faces/public/login.xhtml</welcome-file>
-    </welcome-file-list>
 
 
     <!-- SECURITY CONFIGURATION -->

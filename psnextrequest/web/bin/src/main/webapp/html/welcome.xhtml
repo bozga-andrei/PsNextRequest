@@ -1,137 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/template/layout.xhtml">
-	
-	<ui:define name="content">
-		<h2>Demander une tache</h2>
-		
-			<h:form>
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/layout.xhtml">
 
-				<div class="command">
-					
-					<div class="line">
-						
-						<div class="section">
-							<label for="project_select">Projet :</label>
-							<select name="project_select" id="project_select">
-							    <option>project 1</option>
-							    <option>project 2</option>
-							    <option>project 3</option>
-							</select>
-						</div>
-						
-						<div class="section">
-							<label for="task_select">Taches :</label>
-							<select name="task_select" id="task_select">
-							    <option>task 1</option>
-							    <option>task 2</option>
-							    <option>task 3</option>
-							</select>
-						</div>
-						
-					</div>
-					
-					<div class="line">
-						<div class="section">
-							<label for="hour_select">Heures :</label>
-							<input type="text" name="hour_select" id="hour_select" />
-						</div>
-	
-	
-						<div class="section">
-							<label for="from_select">Du : </label>
-							<input type="text" name="from_select" id="from_select" />
-						</div>
-		
-						<div class="section">
-							<label for="to_select">A : </label>
-							<input type="text" name="to_select" id="to_select" />
-						</div>
-					</div>
-					
-					<div class="line">
-						<label class="long" for="hour_select">Description :</label>
-						<div class="section">
+    <ui:define name="content">
+        <h2>Demander une tache</h2>
+
+        <h:form>
+
+            <div class="command">
+
+                <div class="line">
+
+                    <div class="section">
+                        <label for="project_select">Projet :</label>
+                        <select name="project_select" id="project_select">
+                            <option>project 1</option>
+                            <option>project 2</option>
+                            <option>project 3</option>
+                        </select>
+                    </div>
+
+                    <div class="section">
+                        <label for="task_select">Taches :</label>
+                        <select name="task_select" id="task_select">
+                            <option>task 1</option>
+                            <option>task 2</option>
+                            <option>task 3</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="line">
+                    <div class="section">
+                        <label for="hour_select">Heures :</label>
+                        <input type="text" name="hour_select" id="hour_select"/>
+                    </div>
+
+
+                    <div class="section">
+                        <label for="from_select">Du : </label>
+                        <input type="text" name="from_select" id="from_select"/>
+                    </div>
+
+                    <div class="section">
+                        <label for="to_select">A : </label>
+                        <input type="text" name="to_select" id="to_select"/>
+                    </div>
+                </div>
+
+                <div class="line">
+                    <label class="long" for="hour_select">Description :</label>
+                    <div class="section">
 							<textarea rows="4" cols="50">
 							</textarea>
-						</div>
-					</div>
-					
-					<div class="buttons">
-						<a>Enregistrer</a>
-					</div>
-					
-					<h:commandButton action="#{requestController.addRequest}" value="Enregistrer" />
-					
-				</div>
-			
-			</h:form>			
-		
-			
-			<br/><br/><br/><br/><br/>
-			
-			<div class="display">
-				<table >
-					<tr>
-						<th>Statut</th>
-						<th>Projet</th>
-						<th>Responsable</th>
-						<th>Tache</th>
-						<th>Du</th>
-						<th>Au</th>
-						<th>Heure</th>
-						<th>Description</th>
-						<th>Actions</th>
-					</tr>
-					<tr class="grey">
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-					</tr>
-					<tr class="grey">
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-					</tr>
-					<tr class="grey">
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-					</tr>
-					<tr class="grey">
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-						<td>Table Cell</td>
-					</tr>
-				</table>
-			</div>
-			
-	</ui:define>
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <a>Enregistrer</a>
+                </div>
+
+                <h:commandButton action="#{requestController.addRequest}" value="Enregistrer"/>
+
+            </div>
+
+        </h:form>
+
+
+        <br/><br/><br/><br/><br/>
+
+        <div class="display">
+            <table>
+                <tr>
+                    <th>Statut</th>
+                    <th>Projet</th>
+                    <th>Responsable</th>
+                    <th>Tache</th>
+                    <th>Du</th>
+                    <th>Au</th>
+                    <th>Heure</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+                <tr class="grey">
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                </tr>
+                <tr class="grey">
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                </tr>
+                <tr class="grey">
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                </tr>
+                <tr class="grey">
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                    <td>Table Cell</td>
+                </tr>
+            </table>
+        </div>
+
+    </ui:define>
 </ui:composition>

@@ -1,103 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="
-	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
-	http://www.springframework.org/schema/aop 	http://www.springframework.org/schema/aop/spring-aop-2.5.xsd 
-	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
-  
-  
-  	<!-- 
-		IMPORTANT !
-		Transactional behavior of the DAOs is defined via annotations in the DAO
-		source code and activated by the tx:annotation-driven tag below.
-	 -->
-  	<tx:annotation-driven transaction-manager="transactionManager" />
-  	<tx:jta-transaction-manager />
-  	
-  	<!--  ========================================================================= -->
-	<!-- Add DAOs here -->
-	<!--  ========================================================================= -->
-	<!--  No DAO -->
-	
-	<!--  =========================================================================
-		PostProcessors to perform exception translation on @Repository classes
-		and injection according to the JPA specification.
-		A JPA namespace handler will simplify specification of entity manager factories
-		and remove the requirement for these bean definitions in 2.0 final.
-        ========================================================================= -->
-	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
-	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
-	
-	<!--  ========================================================================= -->
-	<!-- Entity Manager -->
-	<!--  ========================================================================= -->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 
- 	<!-- This is the EntityManagerFactory configuration for Hibernate -->
-	
-	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+
+    <!--
+      IMPORTANT !
+      Transactional behavior of the DAOs is defined via annotations in the DAO
+      source code and activated by the tx:annotation-driven tag below.
+   -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <tx:jta-transaction-manager/>
+
+    <!--  ========================================================================= -->
+    <!-- Add DAOs here -->
+    <!--  ========================================================================= -->
+    <!--  No DAO -->
+
+    <!--  =========================================================================
+        PostProcessors to perform exception translation on @Repository classes
+        and injection according to the JPA specification.
+        A JPA namespace handler will simplify specification of entity manager factories
+        and remove the requirement for these bean definitions in 2.0 final.
+        ========================================================================= -->
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
+    <!--  ========================================================================= -->
+    <!-- Entity Manager -->
+    <!--  ========================================================================= -->
+
+    <!-- This is the EntityManagerFactory configuration for Hibernate -->
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="database" value="MYSQL" />
-                <property name="showSql" value="true" />
+                <property name="database" value="MYSQL"/>
+                <property name="showSql" value="true"/>
                 <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect"/>
             </bean>
         </property>
- 
-    
-    	<property name="jpaPropertyMap">
-      	<map>
-        	<entry key="hibernate.transaction.manager_lookup_class"
-               value="org.hibernate.transaction.JBossTransactionManagerLookup"/>
-        	<entry key="hibernate.transaction.flush_before_completion"
-               value="true"/>
-        	<entry key="hibernate.transaction.auto_close_session"
-               value="true"/>
-        	<entry key="hibernate.current_session_context_class"
-               value="jta"/>
-        	<entry key="hibernate.connection.release_mode"
-               value="auto"/>                            
-      	</map>
-    	</property>
-    	
-    	<!-- 
-    		Post processor that sets the persistence unit's transaction mode
-    		to JTA, and sets the JTADataSource, if jtaMode is set to true.
-    		This is necessary because of two reasons :
-    		- the TransactionType is set explicitly in persistence.xml
-    		- If a DataSource is defined in Spring's entity manager, it is
-    		  injected into the persistence unit as a non-JTA-datasource.
-    	 -->
-    	<property name="persistenceUnitPostProcessors">
-           <list>
-      		<bean class="com.acme.persistence.jpa.JtaPersistenceUnitPostProcessor">
-        		<property name="jtaMode" value="true"/>	
-        		<property name="jtaDataSource" ref="dataSource"/>
-      		</bean>
-           </list>
-    	</property>
-    	
+
+
+        <property name="jpaPropertyMap">
+            <map>
+                <entry key="hibernate.transaction.manager_lookup_class"
+                       value="org.hibernate.transaction.JBossTransactionManagerLookup"/>
+                <entry key="hibernate.transaction.flush_before_completion"
+                       value="true"/>
+                <entry key="hibernate.transaction.auto_close_session"
+                       value="true"/>
+                <entry key="hibernate.current_session_context_class"
+                       value="jta"/>
+                <entry key="hibernate.connection.release_mode"
+                       value="auto"/>
+            </map>
+        </property>
+
+        <!--
+            Post processor that sets the persistence unit's transaction mode
+            to JTA, and sets the JTADataSource, if jtaMode is set to true.
+            This is necessary because of two reasons :
+            - the TransactionType is set explicitly in persistence.xml
+            - If a DataSource is defined in Spring's entity manager, it is
+              injected into the persistence unit as a non-JTA-datasource.
+         -->
+        <property name="persistenceUnitPostProcessors">
+            <list>
+                <bean class="com.acme.persistence.jpa.JtaPersistenceUnitPostProcessor">
+                    <property name="jtaMode" value="true"/>
+                    <property name="jtaDataSource" ref="dataSource"/>
+                </bean>
+            </list>
+        </property>
+
     </bean>
-	
-	<!-- Datasource Lookup -->
-	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="resourceRef">
-			<value>false</value>
-		</property>
-		<property name="jndiName">
-			<value>java:jboss/datasource/psnextrequest</value>
-		</property>
-	</bean>	
-	
-	<!-- Transaction Manager -->
-	<bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">
-		<property name="transactionManagerName" value="java:/TransactionManager"></property>
-		<property name="autodetectUserTransaction" value="false"></property>
-	</bean>
-    	
-       
+
+    <!-- Datasource Lookup -->
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="resourceRef">
+            <value>false</value>
+        </property>
+        <property name="jndiName">
+            <value>java:jboss/datasource/psnextrequest</value>
+        </property>
+    </bean>
+
+    <!-- Transaction Manager -->
+    <bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">
+        <property name="transactionManagerName" value="java:/TransactionManager"></property>
+        <property name="autodetectUserTransaction" value="false"></property>
+    </bean>
+
+
 </beans>

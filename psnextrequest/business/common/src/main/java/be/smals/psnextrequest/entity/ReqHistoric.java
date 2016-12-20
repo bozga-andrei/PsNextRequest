@@ -1,162 +1,161 @@
 package be.smals.psnextrequest.entity;
 
-import java.io.Serializable;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 
 /**
  * The persistent class for the psnext_req_historic database table.
- * 
+ *
  * @author AndreiBozga
- * 
  */
 @Entity
-@Table(name="psnext_req_historic")
+@Table(name = "psnext_req_historic")
 public class ReqHistoric implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "REQ_HIST_ID", updatable = false)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long reqHistId;
+    private static final long serialVersionUID = 1L;
 
-	@Column(name="REQ_HIST_COMMENT_RESP")
-	private String reqHistCommentResp;
+    @Id
+    @Column(name = "REQ_HIST_ID", updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long reqHistId;
 
-	@Column(name="REQ_HIST_DESCRIPTION", nullable = false)
-	private String reqHistDescription;
+    @Column(name = "REQ_HIST_COMMENT_RESP")
+    private String reqHistCommentResp;
 
-	@Column(name="REQ_HIST_DURATION", nullable = false)
-	private String reqHistDuration;
+    @Column(name = "REQ_HIST_DESCRIPTION", nullable = false)
+    private String reqHistDescription;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="REQ_HIST_END_DATE", nullable = false)
-	private Date reqHistEndDate;
+    @Column(name = "REQ_HIST_DURATION", nullable = false)
+    private String reqHistDuration;
 
-	@Column(name="REQ_HIST_MANAGED_BY")
-	private String reqHistManagedBy;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "REQ_HIST_END_DATE", nullable = false)
+    private Date reqHistEndDate;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="REQ_HIST_START_DATE")
-	private Date reqHistStartDate;
+    @Column(name = "REQ_HIST_MANAGED_BY")
+    private String reqHistManagedBy;
 
-	@Column(name="REQ_HIST_STATUS", nullable = false)
-	private int reqHistStatus;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "REQ_HIST_START_DATE")
+    private Date reqHistStartDate;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="REQ_HIST_UPDATE_DATE", nullable = false)
-	private Date reqHistUpdateDate;
+    @Column(name = "REQ_HIST_STATUS", nullable = false)
+    private int reqHistStatus;
 
-	@Column(name="REQ_HIST_VISIBLE_FOR_RESP")
-	private boolean reqHistVisibleForResp;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "REQ_HIST_UPDATE_DATE", nullable = false)
+    private Date reqHistUpdateDate;
 
-	@Column(name="REQ_HIST_VISIBLE_FOR_USER")
-	private boolean reqHistVisibleForUser;
+    @Column(name = "REQ_HIST_VISIBLE_FOR_RESP")
+    private boolean reqHistVisibleForResp;
 
-	//bi-directional many-to-one association to Request
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="REQ_HIST_REQ_ID")
-	private Request request;
+    @Column(name = "REQ_HIST_VISIBLE_FOR_USER")
+    private boolean reqHistVisibleForUser;
 
-	public ReqHistoric() {
-	}
+    //bi-directional many-to-one association to Request
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "REQ_HIST_REQ_ID")
+    private Request request;
 
-	public Long getReqHistId() {
-		return this.reqHistId;
-	}
+    public ReqHistoric() {
+    }
 
-	public void setReqHistId(Long reqHistId) {
-		this.reqHistId = reqHistId;
-	}
+    public Long getReqHistId() {
+        return this.reqHistId;
+    }
 
-	public String getReqHistCommentResp() {
-		return this.reqHistCommentResp;
-	}
+    public void setReqHistId(Long reqHistId) {
+        this.reqHistId = reqHistId;
+    }
 
-	public void setReqHistCommentResp(String reqHistCommentResp) {
-		this.reqHistCommentResp = reqHistCommentResp;
-	}
+    public String getReqHistCommentResp() {
+        return this.reqHistCommentResp;
+    }
 
-	public String getReqHistDescription() {
-		return this.reqHistDescription;
-	}
+    public void setReqHistCommentResp(String reqHistCommentResp) {
+        this.reqHistCommentResp = reqHistCommentResp;
+    }
 
-	public void setReqHistDescription(String reqHistDescription) {
-		this.reqHistDescription = reqHistDescription;
-	}
+    public String getReqHistDescription() {
+        return this.reqHistDescription;
+    }
 
-	public String getReqHistDuration() {
-		return this.reqHistDuration;
-	}
+    public void setReqHistDescription(String reqHistDescription) {
+        this.reqHistDescription = reqHistDescription;
+    }
 
-	public void setReqHistDuration(String reqHistDuration) {
-		this.reqHistDuration = reqHistDuration;
-	}
+    public String getReqHistDuration() {
+        return this.reqHistDuration;
+    }
 
-	public Date getReqHistEndDate() {
-		return this.reqHistEndDate;
-	}
+    public void setReqHistDuration(String reqHistDuration) {
+        this.reqHistDuration = reqHistDuration;
+    }
 
-	public void setReqHistEndDate(Date reqHistEndDate) {
-		this.reqHistEndDate = reqHistEndDate;
-	}
+    public Date getReqHistEndDate() {
+        return this.reqHistEndDate;
+    }
 
-	public String getReqHistManagedBy() {
-		return this.reqHistManagedBy;
-	}
+    public void setReqHistEndDate(Date reqHistEndDate) {
+        this.reqHistEndDate = reqHistEndDate;
+    }
 
-	public void setReqHistManagedBy(String reqHistManagedBy) {
-		this.reqHistManagedBy = reqHistManagedBy;
-	}
+    public String getReqHistManagedBy() {
+        return this.reqHistManagedBy;
+    }
 
-	public Date getReqHistStartDate() {
-		return this.reqHistStartDate;
-	}
+    public void setReqHistManagedBy(String reqHistManagedBy) {
+        this.reqHistManagedBy = reqHistManagedBy;
+    }
 
-	public void setReqHistStartDate(Date reqHistStartDate) {
-		this.reqHistStartDate = reqHistStartDate;
-	}
+    public Date getReqHistStartDate() {
+        return this.reqHistStartDate;
+    }
 
-	public int getReqHistStatus() {
-		return this.reqHistStatus;
-	}
+    public void setReqHistStartDate(Date reqHistStartDate) {
+        this.reqHistStartDate = reqHistStartDate;
+    }
 
-	public void setReqHistStatus(int reqHistStatus) {
-		this.reqHistStatus = reqHistStatus;
-	}
+    public int getReqHistStatus() {
+        return this.reqHistStatus;
+    }
 
-	public Date getReqHistUpdateDate() {
-		return this.reqHistUpdateDate;
-	}
+    public void setReqHistStatus(int reqHistStatus) {
+        this.reqHistStatus = reqHistStatus;
+    }
 
-	public void setReqHistUpdateDate(Date reqHistUpdateDate) {
-		this.reqHistUpdateDate = reqHistUpdateDate;
-	}
+    public Date getReqHistUpdateDate() {
+        return this.reqHistUpdateDate;
+    }
 
-	public boolean getReqHistVisibleForResp() {
-		return this.reqHistVisibleForResp;
-	}
+    public void setReqHistUpdateDate(Date reqHistUpdateDate) {
+        this.reqHistUpdateDate = reqHistUpdateDate;
+    }
 
-	public void setReqHistVisibleForResp(boolean reqHistVisibleForResp) {
-		this.reqHistVisibleForResp = reqHistVisibleForResp;
-	}
+    public boolean getReqHistVisibleForResp() {
+        return this.reqHistVisibleForResp;
+    }
 
-	public boolean getReqHistVisibleForUser() {
-		return this.reqHistVisibleForUser;
-	}
+    public void setReqHistVisibleForResp(boolean reqHistVisibleForResp) {
+        this.reqHistVisibleForResp = reqHistVisibleForResp;
+    }
 
-	public void setReqHistVisibleForUser(boolean reqHistVisibleForUser) {
-		this.reqHistVisibleForUser = reqHistVisibleForUser;
-	}
+    public boolean getReqHistVisibleForUser() {
+        return this.reqHistVisibleForUser;
+    }
 
-	public Request getRequest() {
-		return this.request;
-	}
+    public void setReqHistVisibleForUser(boolean reqHistVisibleForUser) {
+        this.reqHistVisibleForUser = reqHistVisibleForUser;
+    }
 
-	public void setRequest(Request request) {
-		this.request = request;
-	}
+    public Request getRequest() {
+        return this.request;
+    }
+
+    public void setRequest(Request request) {
+        this.request = request;
+    }
 
 }

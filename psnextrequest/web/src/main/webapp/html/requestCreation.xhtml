@@ -1,129 +1,148 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:pe="http://primefaces.org/ui/extensions" 
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:a4j="http://richfaces.org/a4j"
-    xmlns:rich="http://richfaces.org/rich"
-	template="/template/layout.xhtml">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                template="/template/layout.xhtml">
 
-<h:outputScript library="js" target="body"/>
-	
-	<ui:define name="content">
-		<h2>Faire une demande</h2>
-		
-			<h:form id="form">
-				<div class="command" id="requestCreation">
-					
-					<p:messages id="msg" autoUpdate="true" closable="true" />
-					
-					<div class="line">
-						<div class="section">
-							<h:outputLabel for="project_select" value="Projet :" />
-							<h:selectOneMenu id="project_select" value="#{requestControllerBean.selectedProjectId}" required="true" requiredMessage="Sélectionnez un projet svp!">
-								<f:selectItem itemValue="0" itemLabel="-- sélectionner --"/>
-								<f:selectItems value="#{requestControllerBean.projects}" var="projectVar" itemValue="#{projectVar.projectId}" itemLabel="#{projectVar.projectName}"/>
-								<p:ajax process="project_select" listener="#{requestControllerBean.getTasksByProject}" onsuccess="setTimeout ( '$(\'#form\\\\:msg\').hide(1000)', 3000);" update="task_select task_select_Empty infoPanel"/>
-							</h:selectOneMenu>
-						</div>
-						
-						<div class="section">
-							<h:outputLabel for="task_select" value="Tâche :" />
-							<h:selectOneMenu id="task_select_Empty" disabled="true" styleClass="#{requestControllerBean.tasksVisible ? 'displayInline-block' : 'displayNone'}" >
-								<f:selectItem itemLabel="-- sélectionner --"/>
-							</h:selectOneMenu>
-							<h:selectOneMenu id="task_select" value="#{requestControllerBean.selectedTaskId}" styleClass="#{requestControllerBean.tasksVisible ? 'displayNone' : 'displayInline-block'}" required="true" requiredMessage="Sélectionnez une tâche svp!" >
-								<f:selectItems value="#{requestControllerBean.tasks}" var="taskVar" itemValue="#{taskVar.taskId}" itemLabel="#{taskVar.taskName}"/>
-								<p:ajax process="task_select" update="infoPanel" />
-							</h:selectOneMenu>
-							
-							<h:panelGroup id="infoPanel">
-								<p:commandButton id="infoTaskBtn" onclick="infoTaskDialog.show();" rendered="#{requestControllerBean.selectedTask.taskDescription != null}" type="button" value="Info" />
-								
-								<p:dialog styleClass="infoTaskDialog" header="Info Tâche" widgetVar="infoTaskDialog" modal="false" resizable="false" showEffect="clip" hideEffect="clip" width="450">  
-									<div class="line">
-										<div class="section">
-											<h:outputLabel for="project_name" value="Nom de la tâche : " />
-											<h:outputText id="project_name" value="#{requestControllerBean.selectedTask.taskName}"/>
-										</div>
-										<div class="section">
-											<h:outputLabel for="descriptionDialog" value="Description: " />
-											<h:outputText name="descriptionDialog" id="descriptionDialog" value="#{requestControllerBean.selectedTask.taskDescription}" />
-										</div>
-										<div class="sectionSpace"></div>
-										<div class="dialogFooter">
-											<h:form>
-												<p:commandButton id="retourBtn" onclick="infoTaskDialog.hide();" type="button" value="Fermer"/>
-											</h:form>
-										</div>
-									</div>
-								</p:dialog>
-							</h:panelGroup>							
-						</div>
+    <h:outputScript library="js" target="body"/>
 
-					</div>
-					
-					<div class="line">
-						<div class="section">
-							<h:outputLabel for="from_calendar" value="Du : " />
-							<a4j:outputPanel layout="block" style="float:left">
-				                <rich:calendar value="#{requestControllerBean.startDate}" id="from_calendar" required="true" requiredMessage="Sélectionnez la date de début svp!"
-				                     locale="fr/FR"
-				                     popup="true"
-				                     datePattern="dd/MM/yyyy"
-				                     cellWidth="24px" cellHeight="22px" />
-				            	<a4j:commandLink onclick="$('form:from_calendar').component.doExpand(event)" value=""/> 
-			            	</a4j:outputPanel>
-						</div>
-		
-						<div class="section">
-							<h:outputLabel for="to_calendar" value="A : " />
-							<a4j:outputPanel layout="block" style="float:left">
-				                <rich:calendar value="#{requestControllerBean.endDate}" id="to_calendar" required="true" requiredMessage="Sélectionnez la date de fin svp!"
-				                     locale="fr/FR"
-				                     popup="true"
-				                     datePattern="dd/MM/yyyy"
-				                     cellWidth="24px" cellHeight="22px" />
-				            	<a4j:commandLink onclick="$('form:to_calendar').component.doExpand(event)" value=""/> 
-			            	</a4j:outputPanel>
-						</div>
-					</div>
-					
-					<div class="line">
-						<div class="section">
-							<h:outputLabel for="hours" value="Heures: " />
-							<h:inputText type="text" name="hours" id="hours" value="#{requestControllerBean.duration}" required="true" requiredMessage="Entrez la durée que vous avez passé sur la tache svp!" />
-							<span> (jj hh mm)</span>
-						</div>
-					</div>
-					
-					<div class="line">
-						<h:outputLabel for="description" value="Description: " />
-						<div class="section">
-							<h:inputTextarea name="description" id="description" rows="4" cols="50" value="#{requestControllerBean.description}" required="true" requiredMessage="Decrivez la tâche svp!"/>
-						</div>
-					</div>
-					
-					<div class="line">
-						<h:commandButton class="buttons" id="requestCreationBtn" 
-							action="#{requestControllerBean.createRequest}" 
-							onsuccess="setTimeout ( '$(\'#form\\\\:msg\').hide(1000)', 3500);" 
-							value="Enregistrer" />
-						<h:commandButton class="buttons" id="cancelBtn" immediate="true" 
-							action="toRequestsConsult" 
-							value="Annuler" />
-					</div>
-				</div>
-			
-			</h:form>			
-		
-			
-			<div class="h40"></div>
-			
-			
-	</ui:define>
+    <ui:define name="content">
+        <h2>Faire une demande</h2>
+
+        <h:form id="form">
+            <div class="command" id="requestCreation">
+
+                <p:messages id="msg" autoUpdate="true" closable="true"/>
+
+                <div class="line">
+                    <div class="section">
+                        <h:outputLabel for="project_select" value="Projet :"/>
+                        <h:selectOneMenu id="project_select" value="#{requestControllerBean.selectedProjectId}"
+                                         required="true" requiredMessage="Sélectionnez un projet svp!">
+                            <f:selectItem itemValue="0" itemLabel="-- sélectionner --"/>
+                            <f:selectItems value="#{requestControllerBean.projects}" var="projectVar"
+                                           itemValue="#{projectVar.projectId}" itemLabel="#{projectVar.projectName}"/>
+                            <p:ajax process="project_select" listener="#{requestControllerBean.getTasksByProject}"
+                                    onsuccess="setTimeout ( '$(\'#form\\\\:msg\').hide(1000)', 3000);"
+                                    update="task_select task_select_Empty infoPanel"/>
+                        </h:selectOneMenu>
+                    </div>
+
+                    <div class="section">
+                        <h:outputLabel for="task_select" value="Tâche :"/>
+                        <h:selectOneMenu id="task_select_Empty" disabled="true"
+                                         styleClass="#{requestControllerBean.tasksVisible ? 'displayInline-block' : 'displayNone'}">
+                            <f:selectItem itemLabel="-- sélectionner --"/>
+                        </h:selectOneMenu>
+                        <h:selectOneMenu id="task_select" value="#{requestControllerBean.selectedTaskId}"
+                                         styleClass="#{requestControllerBean.tasksVisible ? 'displayNone' : 'displayInline-block'}"
+                                         required="true" requiredMessage="Sélectionnez une tâche svp!">
+                            <f:selectItems value="#{requestControllerBean.tasks}" var="taskVar"
+                                           itemValue="#{taskVar.taskId}" itemLabel="#{taskVar.taskName}"/>
+                            <p:ajax process="task_select" update="infoPanel"/>
+                        </h:selectOneMenu>
+
+                        <h:panelGroup id="infoPanel">
+                            <p:commandButton id="infoTaskBtn" onclick="infoTaskDialog.show();"
+                                             rendered="#{requestControllerBean.selectedTask.taskDescription != null}"
+                                             type="button" value="Info"/>
+
+                            <p:dialog styleClass="infoTaskDialog" header="Info Tâche" widgetVar="infoTaskDialog"
+                                      modal="false" resizable="false" showEffect="clip" hideEffect="clip" width="450">
+                                <div class="line">
+                                    <div class="section">
+                                        <h:outputLabel for="project_name" value="Nom de la tâche : "/>
+                                        <h:outputText id="project_name"
+                                                      value="#{requestControllerBean.selectedTask.taskName}"/>
+                                    </div>
+                                    <div class="section">
+                                        <h:outputLabel for="descriptionDialog" value="Description: "/>
+                                        <h:outputText name="descriptionDialog" id="descriptionDialog"
+                                                      value="#{requestControllerBean.selectedTask.taskDescription}"/>
+                                    </div>
+                                    <div class="sectionSpace"></div>
+                                    <div class="dialogFooter">
+                                        <h:form>
+                                            <p:commandButton id="retourBtn" onclick="infoTaskDialog.hide();"
+                                                             type="button" value="Fermer"/>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </p:dialog>
+                        </h:panelGroup>
+                    </div>
+
+                </div>
+
+                <div class="line">
+                    <div class="section">
+                        <h:outputLabel for="from_calendar" value="Du : "/>
+                        <a4j:outputPanel layout="block" style="float:left">
+                            <rich:calendar value="#{requestControllerBean.startDate}" id="from_calendar" required="true"
+                                           requiredMessage="Sélectionnez la date de début svp!"
+                                           locale="fr/FR"
+                                           popup="true"
+                                           datePattern="dd/MM/yyyy"
+                                           cellWidth="24px" cellHeight="22px"/>
+                            <a4j:commandLink onclick="$('form:from_calendar').component.doExpand(event)" value=""/>
+                        </a4j:outputPanel>
+                    </div>
+
+                    <div class="section">
+                        <h:outputLabel for="to_calendar" value="A : "/>
+                        <a4j:outputPanel layout="block" style="float:left">
+                            <rich:calendar value="#{requestControllerBean.endDate}" id="to_calendar" required="true"
+                                           requiredMessage="Sélectionnez la date de fin svp!"
+                                           locale="fr/FR"
+                                           popup="true"
+                                           datePattern="dd/MM/yyyy"
+                                           cellWidth="24px" cellHeight="22px"/>
+                            <a4j:commandLink onclick="$('form:to_calendar').component.doExpand(event)" value=""/>
+                        </a4j:outputPanel>
+                    </div>
+                </div>
+
+                <div class="line">
+                    <div class="section">
+                        <h:outputLabel for="hours" value="Heures: "/>
+                        <h:inputText type="text" name="hours" id="hours" value="#{requestControllerBean.duration}"
+                                     required="true"
+                                     requiredMessage="Entrez la durée que vous avez passé sur la tache svp!"/>
+                        <span> (jj hh mm)</span>
+                    </div>
+                </div>
+
+                <div class="line">
+                    <h:outputLabel for="description" value="Description: "/>
+                    <div class="section">
+                        <h:inputTextarea name="description" id="description" rows="4" cols="50"
+                                         value="#{requestControllerBean.description}" required="true"
+                                         requiredMessage="Decrivez la tâche svp!"/>
+                    </div>
+                </div>
+
+                <div class="line">
+                    <h:commandButton class="buttons" id="requestCreationBtn"
+                                     action="#{requestControllerBean.createRequest}"
+                                     onsuccess="setTimeout ( '$(\'#form\\\\:msg\').hide(1000)', 3500);"
+                                     value="Enregistrer"/>
+                    <h:commandButton class="buttons" id="cancelBtn" immediate="true"
+                                     action="toRequestsConsult"
+                                     value="Annuler"/>
+                </div>
+            </div>
+
+        </h:form>
+
+
+        <div class="h40"></div>
+
+
+    </ui:define>
 
 </ui:composition>
 

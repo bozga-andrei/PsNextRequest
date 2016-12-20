@@ -1,4 +1,3 @@
-
 package be.smals.psnextrequest.controller;
 
 import be.smals.psnextrequest.bean.SessionBean;
@@ -30,29 +29,19 @@ import java.util.List;
 @RequestScoped
 public class ResponsibleConsultController {
 
+    FacesContext context = FacesContext.getCurrentInstance();
     private Request request = new Request();
-
     private String shortDescription;
-
     private List<Request> requests;
-
     private List<Request> filteredRequests;
-
     private Request selectedRequest;
-
     private boolean reqChecked;
-
     @ManagedProperty(value = "#{sessionBean}")
     private SessionBean sessionBean;
-
     @EJB(name = "ejb/PSNextRequestBeanRequest")
     private PSNextRequestServiceRemoteRequest serviceRequest;
-
     @EJB(name = "ejb/PSNextRequestBeanUser")
     private PSNextRequestServiceRemoteUser serviceUser;
-
-    FacesContext context = FacesContext.getCurrentInstance();
-
 
     /**
      * Initiation.

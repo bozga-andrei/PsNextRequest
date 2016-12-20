@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ejb-jar version="3.0" xmlns:j2ee="http://java.sun.com/xml/ns/j2ee" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/ejb-jar_3_0.xsd ">
-<!-- AAA -->
+<ejb-jar xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         version="3.0"
+>
+    <!-- AAA -->
 
 </ejb-jar>

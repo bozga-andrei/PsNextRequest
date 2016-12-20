@@ -32,60 +32,39 @@ import java.util.List;
 @RequestScoped
 public class TaskController {
 
-    private Project project;
-
-    private Task task;
-
-    private Long taskId;
-
-    private String taskDescription;
-
-    private int taskStatus;
-
-    private String taskName;
-
-    private List<Task> tasks;
-
-    private Task selectedTask;
-
-    private List<User> selectedResponsibles;
-
-    private List<User> valueSelectedResponsibles;
-
-    private List<SelectItem> responsiblesItems;
-
-    @SuppressWarnings("unused")
-    private ArrayList<User> users;
-
-    //pickList
-    private DualListModel<User> pickListUsers;
     List<User> source;
     List<User> sourceFiltered = new ArrayList<User>();
     List<User> target;
-
+    FacesContext context = FacesContext.getCurrentInstance();
+    private Project project;
+    private Task task;
+    private Long taskId;
+    private String taskDescription;
+    private int taskStatus;
+    private String taskName;
+    private List<Task> tasks;
+    private Task selectedTask;
+    private List<User> selectedResponsibles;
+    private List<User> valueSelectedResponsibles;
+    private List<SelectItem> responsiblesItems;
+    @SuppressWarnings("unused")
+    private ArrayList<User> users;
+    //pickList
+    private DualListModel<User> pickListUsers;
     @ManagedProperty(value = "#{sessionBean}")
     private SessionBean sessionBean;
-
     @ManagedProperty(value = "#{taskSessionBean}")
     private TaskSessionBean taskSessionBean;
-
     @ManagedProperty(value = "#{projectSessionBean}")
     private ProjectSessionBean projectSessionBean;
-
     @EJB(name = "ejb/PSNextRequestBeanTask")
     private PSNextRequestServiceRemoteTask serviceTask;
-
     @EJB(name = "ejb/PSNextRequestBeanUser")
     private PSNextRequestServiceRemoteUser serviceUser;
-
     @EJB(name = "ejb/PSNextRequestBeanProject")
     private PSNextRequestServiceRemoteProject serviceProject;
-
     @EJB(name = "ejb/PSNextRequestBeanRequest")
     private PSNextRequestServiceRemoteRequest serviceRequest;
-
-    FacesContext context = FacesContext.getCurrentInstance();
-
 
     @PostConstruct
     public void init() {

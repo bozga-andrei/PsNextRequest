@@ -1,4 +1,3 @@
-
 package be.smals.psnextrequest.controller;
 
 import be.smals.psnextrequest.bean.SessionBean;
@@ -31,55 +30,32 @@ import java.util.List;
 @RequestScoped
 public class RequestConsultController {
 
+    FacesContext context = FacesContext.getCurrentInstance();
     private List<Object> dataList;
-
     private List<Request> requests;
-
     private List<User> responsibles;
-
     private String responsiblesString;
-
     private String responsiblesStringShort;
-
     private List<SelectItem> responsiblesItems;
-
     private List<Request> filteredRequests;
-
     private boolean reqChecked;
-
     private RequestConsultController selectedRequest;
-
     private List<RequestConsultController> selectedRequests;
-
     private int selectedResp;
-
     private Long id;
-
     private int status;
-
     private String projectName;
-
     private String taskName;
-
     private Date startDate;
-
     private Date endDate;
-
     private Date creationDate;
-
     private String duration;
-
     private String description;
-
     private String shortDescription;
-
     @ManagedProperty(value = "#{sessionBean}")
     private SessionBean sessionBean;
-
     @EJB(name = "ejb/PSNextRequestBeanRequest")
     private PSNextRequestServiceRemoteRequest serviceRequest;
-
-    FacesContext context = FacesContext.getCurrentInstance();
 
 
     public RequestConsultController() {

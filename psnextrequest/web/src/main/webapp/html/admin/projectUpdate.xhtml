@@ -1,87 +1,99 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui" 
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/template/layout.xhtml">
-	
-	<ui:define name="content" >
-		<h2>Gestion de projets</h2>
-		
-		<h:form styleClass="notAcces" rendered="#{!sessionBean.isAdmin}">
-			<p>Bienvenue, #{sessionBean.user.userFirstName} vous n'avez pas le droit d'acceder. </p>
-			<h:commandButton class="h160 buttons" action="toRequestsConsult" value="Retour" immediate="true"/>
-		</h:form>
-			
-		<h:panelGroup rendered="#{sessionBean.isAdmin}" class="projectUpdate">
-			
-			<h:form id="form" >
-				<div class="command">
-					
-					<p:messages id="msg" autoUpdate="true" closable="true" />
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/layout.xhtml">
 
-					<div class="line">
-						<div class="section">
-							<h:outputLabel for="project_name" value="Nom du Projet : " />
-							<h:inputText id="project_name" value="#{projectSessionBean.selectedProject.projectName}" disabled="true" style="width: 432px;"/>
-						</div>
+    <ui:define name="content">
+        <h2>Gestion de projets</h2>
 
-						<div class="section">
-							<h:outputLabel for="description" value="Description: " />
-							<h:inputTextarea name="description" id="description" rows="4" cols="50" value="#{projectSessionBean.selectedProject.projectDescription}" />
-						</div>
-						
-						<div class="row section">
-							<h:commandButton class="buttonsRight buttons" id="createProjectBtn" action="#{projectControllerBean.updateProject}" value="Enregistrer" />
-							<h:commandButton class="buttonsRight buttons" action="toProjectConsult" immediate="true" value="Annuler"  />
-						</div>
-					
-						<div class="section">
-							<h:outputLabel for="pickList" value="Sélectionner le(s) membre(s) de l'équipe: " />
-							<p:pickList id="pickList" value="#{projectSessionBean.pickListTeamMembers}" var="user"
-					                    itemValue="#{user}" itemLabel="#{user.userFirstName}" converter="userConverter"  
-					                    showSourceFilter="true" showTargetFilter="true">
-					  					
-						    	<f:facet name="sourceCaption">Disponibles</f:facet>  
-						        <f:facet name="targetCaption">Sélectionné</f:facet>  
-	
-						        <p:column>  
-						            #{user.userFirstName} #{user.userLastName}
-						        </p:column> 
-						        
-					    	</p:pickList>  
-				    	</div>
-				    	
-				    	<div class="section" style= "margin-top: 15px;">
-							<h:outputLabel for="project_statut0" value="Statut du projet : " />
-							<h:selectOneMenu rendered="#{projectSessionBean.selectedProject.projectStatus == 0}" name="project_statut0" id="project_statut0" value="#{projectSessionBean.selectedProject.projectStatus}">
-								<f:selectItem itemLabel="Actif" itemValue="0"/>	
-								<f:selectItem itemLabel="En Pause" itemValue="1"/>
-								<f:selectItem itemLabel="Terminé" itemValue="2"/>		
-							</h:selectOneMenu>
-							<h:selectOneMenu rendered="#{projectSessionBean.selectedProject.projectStatus == 1}" name="project_statut1" id="project_statut1" value="#{projectSessionBean.selectedProject.projectStatus}">
-								<f:selectItem itemLabel="En Pause" itemValue="1"/>	
-								<f:selectItem itemLabel="Actif" itemValue="0"/>
-								<f:selectItem itemLabel="Terminé" itemValue="2"/>
-							</h:selectOneMenu>
-							<h:selectOneMenu rendered="#{projectSessionBean.selectedProject.projectStatus == 2}" name="project_statut2" id="project_statut2" value="#{projectSessionBean.selectedProject.projectStatus}">
-								<f:selectItem itemLabel="Terminé" itemValue="2"/>	
-								<f:selectItem itemLabel="Actif" itemValue="0"/>
-								<f:selectItem itemLabel="En Pause" itemValue="1"/>
-							</h:selectOneMenu>
-						</div>
-				  
-					</div>
-				</div>
-			
-				<p:confirmDialog message="Voulez vous annuler la creation de projet?" header="Confirmation" severity="alert" widgetVar="confirmationCancel">
-					<p:commandButton value="Oui" actionListener="#{projectControllerBean.showProjects}" update=":form" oncomplete="confirmationCancel.hide()" />
-					<p:commandButton value="Non" oncomplete="confirmationCancel.hide()" type="button"/>
-				</p:confirmDialog>
+        <h:form styleClass="notAcces" rendered="#{!sessionBean.isAdmin}">
+            <p>Bienvenue, #{sessionBean.user.userFirstName} vous n'avez pas le droit d'acceder. </p>
+            <h:commandButton class="h160 buttons" action="toRequestsConsult" value="Retour" immediate="true"/>
+        </h:form>
 
-			</h:form>			
-		
-		</h:panelGroup>
-	</ui:define>
+        <h:panelGroup rendered="#{sessionBean.isAdmin}" class="projectUpdate">
+
+            <h:form id="form">
+                <div class="command">
+
+                    <p:messages id="msg" autoUpdate="true" closable="true"/>
+
+                    <div class="line">
+                        <div class="section">
+                            <h:outputLabel for="project_name" value="Nom du Projet : "/>
+                            <h:inputText id="project_name" value="#{projectSessionBean.selectedProject.projectName}"
+                                         disabled="true" style="width: 432px;"/>
+                        </div>
+
+                        <div class="section">
+                            <h:outputLabel for="description" value="Description: "/>
+                            <h:inputTextarea name="description" id="description" rows="4" cols="50"
+                                             value="#{projectSessionBean.selectedProject.projectDescription}"/>
+                        </div>
+
+                        <div class="row section">
+                            <h:commandButton class="buttonsRight buttons" id="createProjectBtn"
+                                             action="#{projectControllerBean.updateProject}" value="Enregistrer"/>
+                            <h:commandButton class="buttonsRight buttons" action="toProjectConsult" immediate="true"
+                                             value="Annuler"/>
+                        </div>
+
+                        <div class="section">
+                            <h:outputLabel for="pickList" value="Sélectionner le(s) membre(s) de l'équipe: "/>
+                            <p:pickList id="pickList" value="#{projectSessionBean.pickListTeamMembers}" var="user"
+                                        itemValue="#{user}" itemLabel="#{user.userFirstName}" converter="userConverter"
+                                        showSourceFilter="true" showTargetFilter="true">
+
+                                <f:facet name="sourceCaption">Disponibles</f:facet>
+                                <f:facet name="targetCaption">Sélectionné</f:facet>
+
+                                <p:column>
+                                    #{user.userFirstName} #{user.userLastName}
+                                </p:column>
+
+                            </p:pickList>
+                        </div>
+
+                        <div class="section" style="margin-top: 15px;">
+                            <h:outputLabel for="project_statut0" value="Statut du projet : "/>
+                            <h:selectOneMenu rendered="#{projectSessionBean.selectedProject.projectStatus == 0}"
+                                             name="project_statut0" id="project_statut0"
+                                             value="#{projectSessionBean.selectedProject.projectStatus}">
+                                <f:selectItem itemLabel="Actif" itemValue="0"/>
+                                <f:selectItem itemLabel="En Pause" itemValue="1"/>
+                                <f:selectItem itemLabel="Terminé" itemValue="2"/>
+                            </h:selectOneMenu>
+                            <h:selectOneMenu rendered="#{projectSessionBean.selectedProject.projectStatus == 1}"
+                                             name="project_statut1" id="project_statut1"
+                                             value="#{projectSessionBean.selectedProject.projectStatus}">
+                                <f:selectItem itemLabel="En Pause" itemValue="1"/>
+                                <f:selectItem itemLabel="Actif" itemValue="0"/>
+                                <f:selectItem itemLabel="Terminé" itemValue="2"/>
+                            </h:selectOneMenu>
+                            <h:selectOneMenu rendered="#{projectSessionBean.selectedProject.projectStatus == 2}"
+                                             name="project_statut2" id="project_statut2"
+                                             value="#{projectSessionBean.selectedProject.projectStatus}">
+                                <f:selectItem itemLabel="Terminé" itemValue="2"/>
+                                <f:selectItem itemLabel="Actif" itemValue="0"/>
+                                <f:selectItem itemLabel="En Pause" itemValue="1"/>
+                            </h:selectOneMenu>
+                        </div>
+
+                    </div>
+                </div>
+
+                <p:confirmDialog message="Voulez vous annuler la creation de projet?" header="Confirmation"
+                                 severity="alert" widgetVar="confirmationCancel">
+                    <p:commandButton value="Oui" actionListener="#{projectControllerBean.showProjects}" update=":form"
+                                     oncomplete="confirmationCancel.hide()"/>
+                    <p:commandButton value="Non" oncomplete="confirmationCancel.hide()" type="button"/>
+                </p:confirmDialog>
+
+            </h:form>
+
+        </h:panelGroup>
+    </ui:define>
 </ui:composition>

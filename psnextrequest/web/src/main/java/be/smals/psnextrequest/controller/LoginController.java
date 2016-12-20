@@ -1,4 +1,3 @@
-
 package be.smals.psnextrequest.controller;
 
 import be.smals.psnextrequest.bean.SessionBean;
@@ -27,22 +26,17 @@ import java.util.List;
 @RequestScoped
 public class LoginController {
 
-    @EJB(name = "ejb/PSNextRequestBeanUser")
-    private PSNextRequestServiceRemoteUser serviceUser;
-
-    @ManagedProperty(value = "#{sessionBean}")
-    private SessionBean sessionBean;
-
-
     FacesContext context = FacesContext.getCurrentInstance();
     ExternalContext externalContext = context.getExternalContext();
-
+    List<FacesMessage> errors = new ArrayList<FacesMessage>();
+    @EJB(name = "ejb/PSNextRequestBeanUser")
+    private PSNextRequestServiceRemoteUser serviceUser;
+    @ManagedProperty(value = "#{sessionBean}")
+    private SessionBean sessionBean;
     private String login;
     private String password;
-
     //@ManagedProperty(value = "#{user}")
     private User user;
-    List<FacesMessage> errors = new ArrayList<FacesMessage>();
 
     public String handleConnexion() throws PSNextRequestServiceException {
         try {

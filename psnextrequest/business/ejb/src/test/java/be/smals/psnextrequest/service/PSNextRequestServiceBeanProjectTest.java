@@ -1,7 +1,6 @@
 package be.smals.psnextrequest.service;
 
 
-
 import be.smals.psnextrequest.service.projects.PSNextRequestServiceBeanProject;
 import be.smals.psnextrequest.service.users.PSNextRequestServiceBeanUser;
 import junit.framework.Assert;
@@ -13,35 +12,31 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
-
 /**
  * Unit test for the for PSNextRequestServiceBeanProject class.
- * 
+ *
  * @author AndreiBozga
- * 
- * @since 
- * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({ "/test-jpa-context.xml" })
+@ContextConfiguration({"/test-jpa-context.xml"})
 public class PSNextRequestServiceBeanProjectTest {
-    
-	@Autowired
+
+    @Autowired
     private PSNextRequestServiceBeanProject psNextRequestServiceBeanProject;
-    
-	@Autowired
+
+    @Autowired
     private PSNextRequestServiceBeanUser psNextRequestServiceBeanUser;
 
 
     @Before
     public void setUp() {
     }
-    
+
     @Test
     public void testCheckSpringContext() {
         Assert.assertNotNull(psNextRequestServiceBeanProject);
     }
-    
+
 
 //    /**
 //     * Simple test for the createProject method: Create Project and team.

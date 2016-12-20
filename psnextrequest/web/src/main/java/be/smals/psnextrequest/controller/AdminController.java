@@ -29,74 +29,45 @@ import java.util.List;
 @RequestScoped
 public class AdminController {
 
-    private Project project;
-
-    private String description;
-
-    private Long projectId;
-
-    private Request request;
-
-    private List<Request> requests;
-
-    private List<Project> projects;
-
-    private List<User> valueSelectedResponsibles;
-
-    private List<SelectItem> responsiblesItems;
-
-    private String projectName;
-
-    private User user;
-
-    @SuppressWarnings("unused")
-    private ArrayList<User> users;
-
-    private List<AdminController> listTableProjects;
-
-    private int tableRespSelectedRespId;
-
-    private List<Request> filteredRequests;
-
-    private boolean reqChecked;
-
-    private boolean showTheRequests = false;
-
-    private boolean showTheProjects = true;
-
-    private Request selectedRequest;
-
-    private AdminController selectedProject;
-
-    private List<SelectItem> selectedTableResp;
-
-    private List<SelectItem> selectedResponsiblesItems;
-
-    private List<User> selectedResponsibles;
-
-    //pickList
-    private DualListModel<User> pickListUsers;
     List<User> source;
     List<User> sourceFiltered = new ArrayList<User>();
     List<User> target;
-
+    FacesContext context = FacesContext.getCurrentInstance();
+    private Project project;
+    private String description;
+    private Long projectId;
+    private Request request;
+    private List<Request> requests;
+    private List<Project> projects;
+    private List<User> valueSelectedResponsibles;
+    private List<SelectItem> responsiblesItems;
+    private String projectName;
+    private User user;
+    @SuppressWarnings("unused")
+    private ArrayList<User> users;
+    private List<AdminController> listTableProjects;
+    private int tableRespSelectedRespId;
+    private List<Request> filteredRequests;
+    private boolean reqChecked;
+    private boolean showTheRequests = false;
+    private boolean showTheProjects = true;
+    private Request selectedRequest;
+    private AdminController selectedProject;
+    private List<SelectItem> selectedTableResp;
+    private List<SelectItem> selectedResponsiblesItems;
+    private List<User> selectedResponsibles;
+    //pickList
+    private DualListModel<User> pickListUsers;
     @ManagedProperty(value = "#{sessionBean}")
     private SessionBean sessionBean;
-
     @ManagedProperty(value = "#{projectSessionBean}")
     private ProjectSessionBean projectSessionBean;
-
     @EJB(name = "ejb/PSNextRequestBeanUser")
     private PSNextRequestServiceRemoteUser serviceUser;
-
     @EJB(name = "ejb/PSNextRequestBeanProject")
     private PSNextRequestServiceRemoteProject serviceProject;
-
     @EJB(name = "ejb/PSNextRequestBeanRequest")
     private PSNextRequestServiceRemoteRequest serviceRequest;
-
-    FacesContext context = FacesContext.getCurrentInstance();
-
 
     @PostConstruct
     public void init() {
@@ -256,10 +227,6 @@ public class AdminController {
         return requests;
     }
 
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
-    }
-
     /**
      * Remplir la liste avec les projets
      *
@@ -275,6 +242,10 @@ public class AdminController {
             return null;
         }
         return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 
     /**
@@ -313,13 +284,12 @@ public class AdminController {
         this.description = description;
     }
 
+    public User getUser() {
+        return user;
+    }
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public User getUser() {
-        return user;
     }
 
     public Project getProject() {

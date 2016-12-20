@@ -1,72 +1,82 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui" 
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/template/layout.xhtml">
-	
-	<ui:define name="content" >
-		<h2>Gestion de projets</h2>
-		
-			<h:form styleClass="notAcces" rendered="#{!sessionBean.isAdmin}">
-				<p>Bienvenue, #{sessionBean.user.userFirstName} vous n'avez pas le droit d'acceder. </p>
-				<h:commandButton class="h160 buttons" action="toRequestsConsult" value="Retour" immediate="true"/>
-			</h:form>
-			
-			<h:panelGroup rendered="#{sessionBean.isAdmin}" class="manageProjectsAdmin">
-			
-				<h:form id="form" >
-					<div class="command">
-						
-						<p:messages id="msg" autoUpdate="true" closable="true" />
-	
-						<div class="line">
-							<div class="section">
-								<h:outputLabel for="task_name" value="Nom de la tâche : " />
-								<h:inputText id="task_name" value="#{taskControllerBean.taskName}" style="width: 432px;"/>
-							</div>
-							
-							<div class="row section">
-								<h:commandButton class="buttonsRight buttons" id="createProjectBtn" action="#{adminControllerBean.createProject}" value="Créer le projet" />
-								<h:commandButton class="buttonsRight buttons" action="toProjectManage" immediate="true" value="Annuler"  />
-								<h:commandButton class="buttonsRight buttons" action="#{adminControllerBean.updateProject}" immediate="true" value="Modifier" />
-							</div>
-							
-							<div class="section">
-								<h:outputLabel for="pickList" value="Sélectionner le(s) responsable(s): " />
-								<p:pickList id="pickList" value="#{adminControllerBean.pickListUsers}" var="user"
-						                    itemValue="#{user}" itemLabel="#{user.userFirstName}" converter="userConverter"  
-						                    showSourceFilter="true" showTargetFilter="true">
-						  					
-							    	<f:facet name="sourceCaption">Disponibles</f:facet>  
-							        <f:facet name="targetCaption">Sélectionné</f:facet>  
-		
-							        <p:column>  
-							            #{user.userFirstName} #{user.userLastName}
-							        </p:column> 
-							        
-						    	</p:pickList>  
-					    	</div>
-					    	
-					    	<div class="sectionTop50 floatr">
-						    	<h:form>
-									<h:commandButton class="buttons floatl" id="showAllRequestsBtn" actionListener="#{adminControllerBean.showRequests}" update=":formRequests, :form" value="Toutes les Demandes" immediate="true"/>
-									<h:commandButton class="buttons floatl" id="showAllProjectsBtn" actionListener="#{adminControllerBean.showProjects}"  update=":formProjets, :form" value="Tous les projets" immediate="true"/>
-								</h:form>
-							</div>
-						</div>
-					</div>
-				
-					<p:confirmDialog message="Voulez vous annuler la demande?" header="Confirmation" severity="alert" widgetVar="confirmationCancel">
-						<p:commandButton value="Oui" actionListener="#{adminControllerBean.showProjects}" update=":formRequests, :form" oncomplete="confirmationCancel.hide()" />
-						<p:commandButton value="Non" oncomplete="confirmationCancel.hide()" type="button"/>
-					</p:confirmDialog>
-	
-				</h:form>			
-			
-			
-			
-			</h:panelGroup>
-	</ui:define>
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/layout.xhtml">
+
+    <ui:define name="content">
+        <h2>Gestion de projets</h2>
+
+        <h:form styleClass="notAcces" rendered="#{!sessionBean.isAdmin}">
+            <p>Bienvenue, #{sessionBean.user.userFirstName} vous n'avez pas le droit d'acceder. </p>
+            <h:commandButton class="h160 buttons" action="toRequestsConsult" value="Retour" immediate="true"/>
+        </h:form>
+
+        <h:panelGroup rendered="#{sessionBean.isAdmin}" class="manageProjectsAdmin">
+
+            <h:form id="form">
+                <div class="command">
+
+                    <p:messages id="msg" autoUpdate="true" closable="true"/>
+
+                    <div class="line">
+                        <div class="section">
+                            <h:outputLabel for="task_name" value="Nom de la tâche : "/>
+                            <h:inputText id="task_name" value="#{taskControllerBean.taskName}" style="width: 432px;"/>
+                        </div>
+
+                        <div class="row section">
+                            <h:commandButton class="buttonsRight buttons" id="createProjectBtn"
+                                             action="#{adminControllerBean.createProject}" value="Créer le projet"/>
+                            <h:commandButton class="buttonsRight buttons" action="toProjectManage" immediate="true"
+                                             value="Annuler"/>
+                            <h:commandButton class="buttonsRight buttons" action="#{adminControllerBean.updateProject}"
+                                             immediate="true" value="Modifier"/>
+                        </div>
+
+                        <div class="section">
+                            <h:outputLabel for="pickList" value="Sélectionner le(s) responsable(s): "/>
+                            <p:pickList id="pickList" value="#{adminControllerBean.pickListUsers}" var="user"
+                                        itemValue="#{user}" itemLabel="#{user.userFirstName}" converter="userConverter"
+                                        showSourceFilter="true" showTargetFilter="true">
+
+                                <f:facet name="sourceCaption">Disponibles</f:facet>
+                                <f:facet name="targetCaption">Sélectionné</f:facet>
+
+                                <p:column>
+                                    #{user.userFirstName} #{user.userLastName}
+                                </p:column>
+
+                            </p:pickList>
+                        </div>
+
+                        <div class="sectionTop50 floatr">
+                            <h:form>
+                                <h:commandButton class="buttons floatl" id="showAllRequestsBtn"
+                                                 actionListener="#{adminControllerBean.showRequests}"
+                                                 update=":formRequests, :form" value="Toutes les Demandes"
+                                                 immediate="true"/>
+                                <h:commandButton class="buttons floatl" id="showAllProjectsBtn"
+                                                 actionListener="#{adminControllerBean.showProjects}"
+                                                 update=":formProjets, :form" value="Tous les projets"
+                                                 immediate="true"/>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+
+                <p:confirmDialog message="Voulez vous annuler la demande?" header="Confirmation" severity="alert"
+                                 widgetVar="confirmationCancel">
+                    <p:commandButton value="Oui" actionListener="#{adminControllerBean.showProjects}"
+                                     update=":formRequests, :form" oncomplete="confirmationCancel.hide()"/>
+                    <p:commandButton value="Non" oncomplete="confirmationCancel.hide()" type="button"/>
+                </p:confirmDialog>
+
+            </h:form>
+
+
+        </h:panelGroup>
+    </ui:define>
 </ui:composition>

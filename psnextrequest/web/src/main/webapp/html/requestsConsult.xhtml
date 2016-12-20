@@ -1,177 +1,201 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui" 
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/template/layout.xhtml">
-	
-	<ui:define name="content" id="content">
-		<h2>Consulter les demandes</h2>
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/layout.xhtml">
 
-			<h:form id="form">
-				<div class="command" id="requestConsult">
-					
-					<p:messages id="msg" autoUpdate="true" closable="true" />
-					
-					<div class="line">
-						<div class="section">
-							<h:outputLabel for="project_select" value="Projet : " />
-							<h:outputText styleClass="textOut" id="project_select" disabled="true" value="#{sessionBean.request.task.project.projectName}"/>
-						</div>
-					
-						<div class="section">
-							<h:outputLabel for="task_select" value="Tâche : " />
-							<h:outputText  styleClass="textOut" id="task_select" disabled="true" value="#{sessionBean.request.task.taskName}"/>
-						</div>
-					</div>
-					
-					<div class="line floatr">
-						<h:outputLabel for="respComment" value="Commentaire :" />
-						<h:inputTextarea id="respComment" disabled="true" value="#{sessionBean.request.requestCommentResp}" rows="4" style="width:200px;"/>
-					</div>
-					
-					<div class="line">
-						<div class="section">
-							<h:outputLabel for="from_select" value="Du : " />
-							<h:inputText id="from_select" disabled="true" value="#{sessionBean.request.requestStartDate}">
-				        		<f:convertDateTime pattern="dd/MM/yyyy" />
-				       		</h:inputText>
-						</div>
-						<div class="section">
-							<h:outputLabel for="to_select" value="A : " />
-							<h:inputText id="to_select" disabled="true" value="#{sessionBean.request.requestEndDate}">
-				        		<f:convertDateTime pattern="dd/MM/yyyy" />
-				       		</h:inputText>
-						</div>
-					</div>
-					
-					<div class="line">
-						<div class="section">
-							<h:outputLabel for="hours" value="Temps : " />
-							<h:inputText id="hours" disabled="true" value="#{sessionBean.request.requestDuration}"/>
-						</div>
-					</div>
-					
-					<div class="line">
-						<h:outputLabel for="description" value="Description :" />
-						<h:inputTextarea id="description" disabled="true" value="#{sessionBean.request.requestDescription}" rows="4" style="width:538px;"/>
-					</div>
-					
-					<div class="line">
-						<h:outputLabel for="creationDate" style="width:100px" value="Date de création :" />
-						<h:outputText id="creationDate" styleClass="lastTextOut" value="#{sessionBean.request.requestCreationDate}">
-					        		<f:convertDateTime timeZone="#{sessionBean.timeZone}" type="date" pattern="dd/MM/yyyy" />
-					    </h:outputText>
-					</div>
-					
-					<h:panelGroup class="line" rendered="#{sessionBean.request.requestStatus == 0}">
-						<h:outputLabel for="request0" value="Demande : " />
-						<h:outputText id="request0" styleClass="lastTextOut" value="En Cours" />
-					</h:panelGroup>
-					<h:panelGroup class="line" rendered="#{sessionBean.request.requestStatus == 1 or sessionBean.request.requestStatus == 2}">
-						<h:outputLabel for="request1and2" value="Demande : " />
-						<h:outputText id="request1and2" styleClass="lastTextOut" value="Acceptée" />
-					</h:panelGroup>
-					<h:panelGroup class="line" rendered="#{sessionBean.request.requestStatus == 3}">
-						<h:outputLabel for="request3" value="Demande : " />
-						<h:outputText id="request3" styleClass="lastTextOut" value="Refusée" />
-					</h:panelGroup>
-					<h:panelGroup class="line" rendered="#{sessionBean.request.requestStatus == 4}">
-						<h:outputLabel for="request4" value="Demande : " />
-						<h:outputText id="request4" styleClass="lastTextOut" value="Annulée" />
-					</h:panelGroup>
-					
-					<div class="line">
-						<h:commandButton class="buttons floatl" id="updateBtn" value="Modifier" action="#{requestConsultController.prepareToUpdate}" rendered="#{(sessionBean.request != null) and (sessionBean.request.requestStatus == 0) or (sessionBean.request.requestStatus == 3)}" />
-						<h:commandButton class="buttons floatl" id="deleteBtn" value="Supprimer" onclick="alertDelete.show()" type="button" rendered="#{(sessionBean.request != null) and (sessionBean.request.requestStatus != 0)}"/>
-						<h:commandButton class="buttons floatl" id="cancelBtn" value="Annuler" onclick="confirmationCancel.show()" type="button" rendered="#{(sessionBean.request != null) and (sessionBean.request.requestStatus == 0)}"/>
-						<h:commandButton class="buttons floatl" id="reactivateBtn" value="Réactiver" action="#{requestControllerBean.reactivateRequest}" rendered="#{(sessionBean.request != null) and (sessionBean.request.requestStatus == 4)}"/>
-						<h:commandButton class="buttons floatr" id="newRequestBtn" value="Faire une demande" action="toRequestCreation"  immediate="true"/>
-					</div>
-					<p:confirmDialog message="Voulez vous supprimer la demande?" header="Confirmation" severity="alert" widgetVar="alertDelete">
-						<p:commandButton value="Oui" actionListener="#{requestControllerBean.deleteRequest}" update=":form2, :form" oncomplete="alertDelete.hide()"/>
-						<p:commandButton value="Non" onclick="alertDelete.hide()" type="button" />
-					</p:confirmDialog>
-					<p:confirmDialog message="Voulez vous annuler la demande?" header="Confirmation" severity="alert" widgetVar="confirmationCancel">
-						<p:commandButton value="Oui" actionListener="#{requestControllerBean.cancelRequest}" update=":form2, :form" oncomplete="confirmationCancel.hide()"/>
-						<p:commandButton value="Non" onclick="confirmationCancel.hide()" type="button"/>
-					</p:confirmDialog>
-					
-				</div>
-			
-			</h:form>			
-		
-			<h:form id="form2">
-				<div class="display" style="margin-bottom:100px;">
-					<p:dataTable id="requestsTable" var="dataObj" value="#{requestConsultController.dataList}" 
-						selectionMode="single"
-						style="width: 100%"
-						rowKey="#{dataObj.id}"
-	                	selection="#{requestConsultController.selectedRequest}" 
-	                	sortBy="#{dataObj.status}"
-	                	filteredValue="#{requestConsultController.filteredRequests}" >
-	
-						<p:ajax event="rowSelect" update=":form" listener="#{requestConsultController.onSelection}" />
-						
-				        <f:facet name="header">
-				            Demandes
-				        </f:facet>
-				
-						<p:column headerText="Etat" sortBy="#{dataObj.status}" id="reqStatut" style="width:5%; padding-left: 8px; padding-right: 8px;">
-							<p:graphicImage value="../resources/images/status/#{dataObj.status}.gif"/>  
-				        </p:column>
-				        
-				        <p:column headerText="Projet" sortBy="#{dataObj.projectName}" filterBy="#{dataObj.projectName}" id="projectName" style="width:14.7%">
-				            #{dataObj.projectName}
-				        </p:column>
-				        
-				        <p:column headerText="Tâche" sortBy="#{dataObj.taskName}" filterBy="#{dataObj.taskName}" id="taskName" style="width:20%">
-				            #{dataObj.taskName}
-				        </p:column>
-				
-				        <p:column headerText="Responsable" id="responsibleName" style="width:20%">
-				        	<h:outputText id="responsibleNameOutput" value="#{dataObj.responsiblesStringShort}" />  
-						    <p:tooltip for="responsibleNameOutput" value="#{dataObj.responsiblesString}" showEffect="fade" hideEffect="fade" />  
-				        </p:column>
-				
-				        <p:column headerText="Du" id="startDate" style="width:10%">
-				        	<h:outputText value="#{dataObj.startDate}" >
-				        		<f:convertDateTime pattern="dd/MM/yyyy" />
-				       		</h:outputText>
-				        </p:column>
-				
-				        <p:column headerText="Au" id="endDate" style="width:10%">
-				        	<h:outputText value="#{dataObj.endDate}">
-				        		<f:convertDateTime pattern="dd/MM/yyyy" />
-				       		</h:outputText>
-				        </p:column>
-				        
-				        <p:column headerText="Temps" id="time" style="width:10%">
-				        	<h:outputText value="#{dataObj.duration}" />
-				        </p:column>
-				        
-				        <p:column headerText="Description"  id="description" style="width:15%">
-					        <h:outputText id="descriptionOutput" value="#{dataObj.shortDescription}" />  
-						    <p:tooltip for="descriptionOutput" value="#{dataObj.description}" showEffect="fade" hideEffect="fade" />  
-				        </p:column>
-				        
-<!-- 				        <p:column selectionMode="multiple" style="width:2%" />  -->
-				        
-<!-- 				        <f:facet name="footer">   -->
-<!-- 				            <p:commandButton id="multiViewButton" value="Supprimer" icon="ui-icon-delete"   -->
-<!-- 				                             update=":form2, :form" oncomplete="confirmation.show()" />   -->
-<!-- 				        </f:facet>  -->
-		        
-				    </p:dataTable>
-				</div>
-				<p:confirmDialog message="Etes vous sur de vouloir supprimer ces demandes?"  
-                             header="Confirmation de suppression" severity="alert" widgetVar="confirmation">  
-	                <p:commandButton id="confirmOuiBtn" value="Oui" update=":form2, :form" oncomplete="confirmation.hide()"  
-	                                 actionListener="#{requestConsultController.deleteAll}" />  
-	                <p:commandButton id="confirmNonBtn" value="Non" onclick="confirmation.hide()" type="button" />   
-	            </p:confirmDialog>
-			</h:form>
+    <ui:define name="content" id="content">
+        <h2>Consulter les demandes</h2>
 
-	</ui:define>
+        <h:form id="form">
+            <div class="command" id="requestConsult">
+
+                <p:messages id="msg" autoUpdate="true" closable="true"/>
+
+                <div class="line">
+                    <div class="section">
+                        <h:outputLabel for="project_select" value="Projet : "/>
+                        <h:outputText styleClass="textOut" id="project_select" disabled="true"
+                                      value="#{sessionBean.request.task.project.projectName}"/>
+                    </div>
+
+                    <div class="section">
+                        <h:outputLabel for="task_select" value="Tâche : "/>
+                        <h:outputText styleClass="textOut" id="task_select" disabled="true"
+                                      value="#{sessionBean.request.task.taskName}"/>
+                    </div>
+                </div>
+
+                <div class="line floatr">
+                    <h:outputLabel for="respComment" value="Commentaire :"/>
+                    <h:inputTextarea id="respComment" disabled="true" value="#{sessionBean.request.requestCommentResp}"
+                                     rows="4" style="width:200px;"/>
+                </div>
+
+                <div class="line">
+                    <div class="section">
+                        <h:outputLabel for="from_select" value="Du : "/>
+                        <h:inputText id="from_select" disabled="true" value="#{sessionBean.request.requestStartDate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:inputText>
+                    </div>
+                    <div class="section">
+                        <h:outputLabel for="to_select" value="A : "/>
+                        <h:inputText id="to_select" disabled="true" value="#{sessionBean.request.requestEndDate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:inputText>
+                    </div>
+                </div>
+
+                <div class="line">
+                    <div class="section">
+                        <h:outputLabel for="hours" value="Temps : "/>
+                        <h:inputText id="hours" disabled="true" value="#{sessionBean.request.requestDuration}"/>
+                    </div>
+                </div>
+
+                <div class="line">
+                    <h:outputLabel for="description" value="Description :"/>
+                    <h:inputTextarea id="description" disabled="true" value="#{sessionBean.request.requestDescription}"
+                                     rows="4" style="width:538px;"/>
+                </div>
+
+                <div class="line">
+                    <h:outputLabel for="creationDate" style="width:100px" value="Date de création :"/>
+                    <h:outputText id="creationDate" styleClass="lastTextOut"
+                                  value="#{sessionBean.request.requestCreationDate}">
+                        <f:convertDateTime timeZone="#{sessionBean.timeZone}" type="date" pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </div>
+
+                <h:panelGroup class="line" rendered="#{sessionBean.request.requestStatus == 0}">
+                    <h:outputLabel for="request0" value="Demande : "/>
+                    <h:outputText id="request0" styleClass="lastTextOut" value="En Cours"/>
+                </h:panelGroup>
+                <h:panelGroup class="line"
+                              rendered="#{sessionBean.request.requestStatus == 1 or sessionBean.request.requestStatus == 2}">
+                    <h:outputLabel for="request1and2" value="Demande : "/>
+                    <h:outputText id="request1and2" styleClass="lastTextOut" value="Acceptée"/>
+                </h:panelGroup>
+                <h:panelGroup class="line" rendered="#{sessionBean.request.requestStatus == 3}">
+                    <h:outputLabel for="request3" value="Demande : "/>
+                    <h:outputText id="request3" styleClass="lastTextOut" value="Refusée"/>
+                </h:panelGroup>
+                <h:panelGroup class="line" rendered="#{sessionBean.request.requestStatus == 4}">
+                    <h:outputLabel for="request4" value="Demande : "/>
+                    <h:outputText id="request4" styleClass="lastTextOut" value="Annulée"/>
+                </h:panelGroup>
+
+                <div class="line">
+                    <h:commandButton class="buttons floatl" id="updateBtn" value="Modifier"
+                                     action="#{requestConsultController.prepareToUpdate}"
+                                     rendered="#{(sessionBean.request != null) and (sessionBean.request.requestStatus == 0) or (sessionBean.request.requestStatus == 3)}"/>
+                    <h:commandButton class="buttons floatl" id="deleteBtn" value="Supprimer"
+                                     onclick="alertDelete.show()" type="button"
+                                     rendered="#{(sessionBean.request != null) and (sessionBean.request.requestStatus != 0)}"/>
+                    <h:commandButton class="buttons floatl" id="cancelBtn" value="Annuler"
+                                     onclick="confirmationCancel.show()" type="button"
+                                     rendered="#{(sessionBean.request != null) and (sessionBean.request.requestStatus == 0)}"/>
+                    <h:commandButton class="buttons floatl" id="reactivateBtn" value="Réactiver"
+                                     action="#{requestControllerBean.reactivateRequest}"
+                                     rendered="#{(sessionBean.request != null) and (sessionBean.request.requestStatus == 4)}"/>
+                    <h:commandButton class="buttons floatr" id="newRequestBtn" value="Faire une demande"
+                                     action="toRequestCreation" immediate="true"/>
+                </div>
+                <p:confirmDialog message="Voulez vous supprimer la demande?" header="Confirmation" severity="alert"
+                                 widgetVar="alertDelete">
+                    <p:commandButton value="Oui" actionListener="#{requestControllerBean.deleteRequest}"
+                                     update=":form2, :form" oncomplete="alertDelete.hide()"/>
+                    <p:commandButton value="Non" onclick="alertDelete.hide()" type="button"/>
+                </p:confirmDialog>
+                <p:confirmDialog message="Voulez vous annuler la demande?" header="Confirmation" severity="alert"
+                                 widgetVar="confirmationCancel">
+                    <p:commandButton value="Oui" actionListener="#{requestControllerBean.cancelRequest}"
+                                     update=":form2, :form" oncomplete="confirmationCancel.hide()"/>
+                    <p:commandButton value="Non" onclick="confirmationCancel.hide()" type="button"/>
+                </p:confirmDialog>
+
+            </div>
+
+        </h:form>
+
+        <h:form id="form2">
+            <div class="display" style="margin-bottom:100px;">
+                <p:dataTable id="requestsTable" var="dataObj" value="#{requestConsultController.dataList}"
+                             selectionMode="single"
+                             style="width: 100%"
+                             rowKey="#{dataObj.id}"
+                             selection="#{requestConsultController.selectedRequest}"
+                             sortBy="#{dataObj.status}"
+                             filteredValue="#{requestConsultController.filteredRequests}">
+
+                    <p:ajax event="rowSelect" update=":form" listener="#{requestConsultController.onSelection}"/>
+
+                    <f:facet name="header">
+                        Demandes
+                    </f:facet>
+
+                    <p:column headerText="Etat" sortBy="#{dataObj.status}" id="reqStatut"
+                              style="width:5%; padding-left: 8px; padding-right: 8px;">
+                        <p:graphicImage value="../resources/images/status/#{dataObj.status}.gif"/>
+                    </p:column>
+
+                    <p:column headerText="Projet" sortBy="#{dataObj.projectName}" filterBy="#{dataObj.projectName}"
+                              id="projectName" style="width:14.7%">
+                        #{dataObj.projectName}
+                    </p:column>
+
+                    <p:column headerText="Tâche" sortBy="#{dataObj.taskName}" filterBy="#{dataObj.taskName}"
+                              id="taskName" style="width:20%">
+                        #{dataObj.taskName}
+                    </p:column>
+
+                    <p:column headerText="Responsable" id="responsibleName" style="width:20%">
+                        <h:outputText id="responsibleNameOutput" value="#{dataObj.responsiblesStringShort}"/>
+                        <p:tooltip for="responsibleNameOutput" value="#{dataObj.responsiblesString}" showEffect="fade"
+                                   hideEffect="fade"/>
+                    </p:column>
+
+                    <p:column headerText="Du" id="startDate" style="width:10%">
+                        <h:outputText value="#{dataObj.startDate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="Au" id="endDate" style="width:10%">
+                        <h:outputText value="#{dataObj.endDate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="Temps" id="time" style="width:10%">
+                        <h:outputText value="#{dataObj.duration}"/>
+                    </p:column>
+
+                    <p:column headerText="Description" id="description" style="width:15%">
+                        <h:outputText id="descriptionOutput" value="#{dataObj.shortDescription}"/>
+                        <p:tooltip for="descriptionOutput" value="#{dataObj.description}" showEffect="fade"
+                                   hideEffect="fade"/>
+                    </p:column>
+
+                    <!-- 				        <p:column selectionMode="multiple" style="width:2%" />  -->
+
+                    <!-- 				        <f:facet name="footer">   -->
+                    <!-- 				            <p:commandButton id="multiViewButton" value="Supprimer" icon="ui-icon-delete"   -->
+                    <!-- 				                             update=":form2, :form" oncomplete="confirmation.show()" />   -->
+                    <!-- 				        </f:facet>  -->
+
+                </p:dataTable>
+            </div>
+            <p:confirmDialog message="Etes vous sur de vouloir supprimer ces demandes?"
+                             header="Confirmation de suppression" severity="alert" widgetVar="confirmation">
+                <p:commandButton id="confirmOuiBtn" value="Oui" update=":form2, :form" oncomplete="confirmation.hide()"
+                                 actionListener="#{requestConsultController.deleteAll}"/>
+                <p:commandButton id="confirmNonBtn" value="Non" onclick="confirmation.hide()" type="button"/>
+            </p:confirmDialog>
+        </h:form>
+
+    </ui:define>
 </ui:composition>

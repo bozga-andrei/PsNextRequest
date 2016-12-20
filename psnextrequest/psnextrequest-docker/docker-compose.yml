@@ -8,11 +8,11 @@ services:
     environment:
       - ENVIRONMENT=local
     ports:
-      - 1043:8443
-      - 1080:8080
-      - 1090:9990
-      - 1093:9993
-      - 1087:8787
+      - 2043:8443
+      - 2080:8080
+      - 2090:9990
+      - 2093:9993
+      - 2087:8787
     links:
       - mysql-db
   mysql-db:

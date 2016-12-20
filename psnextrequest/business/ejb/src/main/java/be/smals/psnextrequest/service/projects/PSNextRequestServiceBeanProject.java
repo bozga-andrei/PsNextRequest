@@ -1,5 +1,16 @@
 package be.smals.psnextrequest.service.projects;
 
+import be.smals.psnextrequest.entity.Project;
+import be.smals.psnextrequest.entity.ProjectTeam;
+import be.smals.psnextrequest.entity.User;
+import be.smals.psnextrequest.service.exception.PSNextRequestServiceException;
+import be.smals.psnextrequest.service.users.PSNextRequestServiceRemoteUser;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.persistence.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,23 +19,6 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
-import javax.persistence.Query;
-
-import be.smals.psnextrequest.entity.Project;
-import be.smals.psnextrequest.entity.ProjectTeam;
-import be.smals.psnextrequest.entity.User;
-import be.smals.psnextrequest.service.exception.PSNextRequestServiceException;
-import be.smals.psnextrequest.service.users.PSNextRequestServiceRemoteUser;
 
 /**
  * PSNextRequest service projects implementation (EJB).

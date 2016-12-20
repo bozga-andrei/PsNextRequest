@@ -1,4 +1,3 @@
-
 package be.smals.psnextrequest.controller;
 
 import be.smals.psnextrequest.bean.SessionBean;
@@ -31,19 +30,13 @@ public class UserUpdateController implements Serializable {
      *
      */
     private static final long serialVersionUID = -233461385453334452L;
-
+    FacesContext context = FacesContext.getCurrentInstance();
     @EJB(name = "ejb/PSNextRequestBeanUser")
     private PSNextRequestServiceRemoteUser serviceUser;
-
     @ManagedProperty(value = "#{sessionBean}")
     private SessionBean sessionBean;
-
     private String oldPassword;
-
     private String newPassword;
-
-    FacesContext context = FacesContext.getCurrentInstance();
-
 
     public void userUpdate(ActionEvent actionEvent) {
         try {

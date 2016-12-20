@@ -1,78 +1,85 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui" 
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/template/layout.xhtml">
-	
-	<ui:define name="content" >
-		<h2>Gestion de projets</h2>
-		
-		<h:form styleClass="notAcces" rendered="#{!sessionBean.isAdmin}">
-			<p>Bienvenue, #{sessionBean.user.userFirstName} vous n'avez pas le droit d'acceder. </p>
-			<h:commandButton class="h160 buttons" action="toRequestsConsult" value="Retour" immediate="true"/>
-		</h:form>
-			
-		<h:panelGroup rendered="#{sessionBean.isAdmin}" class="manageProjectsAdmin">
-			
-			<h:form id="form" >
-				<div class="command">
-					
-					<p:messages id="msg" autoUpdate="true" closable="true" />
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template/layout.xhtml">
 
-					<div class="line">
-					
-						<div class="row section">
-							<h:commandButton class="buttonsRight buttons" id="createProjectBtn" action="#{projectControllerBean.createProject}" value="Créer le projet" />
-							<h:commandButton class="buttonsRight buttons" onclick="alertCancel.show()" type="button" value="Annuler"  />
-						</div>
-						
-						<div class="section">
-							<h:outputLabel for="project_name" value="Nom du Projet *: " />
-							<h:inputText id="project_name" value="#{projectControllerBean.projectName}" style="width: 432px;"/>
-						</div>
-						
-						<div class="section">
-							<h:outputLabel for="description" value="Description: " />
-							<h:inputTextarea name="description" id="description" rows="4" cols="50" value="#{projectControllerBean.projectDescription}" />
-						</div>
+    <ui:define name="content">
+        <h2>Gestion de projets</h2>
 
-						<div class="section">
-							<h:outputLabel for="pickList" value="Sélectionner le(s) membre(s) de l'équipe: " />
-							<p:pickList id="pickList" value="#{projectControllerBean.pickListUsers}" var="user"
-					                    itemValue="#{user}" itemLabel="#{user.userFirstName}" converter="userConverter"  
-					                    showSourceFilter="true" showTargetFilter="true">
-					  					
-						    	<f:facet name="sourceCaption">Disponibles</f:facet>  
-						        <f:facet name="targetCaption">Sélectionné</f:facet>  
-	
-						        <p:column>  
-						            #{user.userFirstName} #{user.userLastName}
-						        </p:column> 
-						        
-					    	</p:pickList>  
-				    	</div>
-				    	
-				    	<div class="sectionTop50 floatr">
-							<h:commandButton class="buttons floatl" id="toProjectConsultBtn" action="toProjectConsult" value="Retour" immediate="true"/>
-						</div>
-					</div>
-				</div>
-			
-				<p:confirmDialog message="Voulez vous annuler la creation de projet?" header="Confirmation" severity="alert" widgetVar="alertCancel">
-					<p:commandButton value="Oui" ajax="false" action="toProjectConsult" />
-					<p:commandButton value="Non" onclick="alertCancel.hide()" type="button"/>
-				</p:confirmDialog>
-				
-				<p:confirmDialog message="Le projet n'est pas visible par aucun utilisateur." 
-								header="Confirmation" severity="alert" widgetVar="alertMembersEmpty"
-								rendered="#{projectControllerBean.showConfirmMembersEmpty}">
-					<p:commandButton value="Oui" actionListener="toProjectManage" oncomplete="alertMembersEmpty.hide()" />
-					<p:commandButton value="Non" oncomplete="alertMembersEmpty.hide()" type="button"/>
-				</p:confirmDialog>
+        <h:form styleClass="notAcces" rendered="#{!sessionBean.isAdmin}">
+            <p>Bienvenue, #{sessionBean.user.userFirstName} vous n'avez pas le droit d'acceder. </p>
+            <h:commandButton class="h160 buttons" action="toRequestsConsult" value="Retour" immediate="true"/>
+        </h:form>
 
-			</h:form>			
-		</h:panelGroup>
-	</ui:define>
+        <h:panelGroup rendered="#{sessionBean.isAdmin}" class="manageProjectsAdmin">
+
+            <h:form id="form">
+                <div class="command">
+
+                    <p:messages id="msg" autoUpdate="true" closable="true"/>
+
+                    <div class="line">
+
+                        <div class="row section">
+                            <h:commandButton class="buttonsRight buttons" id="createProjectBtn"
+                                             action="#{projectControllerBean.createProject}" value="Créer le projet"/>
+                            <h:commandButton class="buttonsRight buttons" onclick="alertCancel.show()" type="button"
+                                             value="Annuler"/>
+                        </div>
+
+                        <div class="section">
+                            <h:outputLabel for="project_name" value="Nom du Projet *: "/>
+                            <h:inputText id="project_name" value="#{projectControllerBean.projectName}"
+                                         style="width: 432px;"/>
+                        </div>
+
+                        <div class="section">
+                            <h:outputLabel for="description" value="Description: "/>
+                            <h:inputTextarea name="description" id="description" rows="4" cols="50"
+                                             value="#{projectControllerBean.projectDescription}"/>
+                        </div>
+
+                        <div class="section">
+                            <h:outputLabel for="pickList" value="Sélectionner le(s) membre(s) de l'équipe: "/>
+                            <p:pickList id="pickList" value="#{projectControllerBean.pickListUsers}" var="user"
+                                        itemValue="#{user}" itemLabel="#{user.userFirstName}" converter="userConverter"
+                                        showSourceFilter="true" showTargetFilter="true">
+
+                                <f:facet name="sourceCaption">Disponibles</f:facet>
+                                <f:facet name="targetCaption">Sélectionné</f:facet>
+
+                                <p:column>
+                                    #{user.userFirstName} #{user.userLastName}
+                                </p:column>
+
+                            </p:pickList>
+                        </div>
+
+                        <div class="sectionTop50 floatr">
+                            <h:commandButton class="buttons floatl" id="toProjectConsultBtn" action="toProjectConsult"
+                                             value="Retour" immediate="true"/>
+                        </div>
+                    </div>
+                </div>
+
+                <p:confirmDialog message="Voulez vous annuler la creation de projet?" header="Confirmation"
+                                 severity="alert" widgetVar="alertCancel">
+                    <p:commandButton value="Oui" ajax="false" action="toProjectConsult"/>
+                    <p:commandButton value="Non" onclick="alertCancel.hide()" type="button"/>
+                </p:confirmDialog>
+
+                <p:confirmDialog message="Le projet n'est pas visible par aucun utilisateur."
+                                 header="Confirmation" severity="alert" widgetVar="alertMembersEmpty"
+                                 rendered="#{projectControllerBean.showConfirmMembersEmpty}">
+                    <p:commandButton value="Oui" actionListener="toProjectManage"
+                                     oncomplete="alertMembersEmpty.hide()"/>
+                    <p:commandButton value="Non" oncomplete="alertMembersEmpty.hide()" type="button"/>
+                </p:confirmDialog>
+
+            </h:form>
+        </h:panelGroup>
+    </ui:define>
 </ui:composition>

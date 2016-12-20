@@ -1,51 +1,42 @@
 package be.smals.psnextrequest.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-
 /**
  * The persistent class for the role database table.
- * 
+ *
  * @author AndreiBozga
- * 
  */
 
 
 @Entity
-@Table(name="psnext_role")
-public class Role implements Serializable { 
-    
+@Table(name = "psnext_role")
+public class Role implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2793276374848997267L;
 
-	@Id
-    @Column(name = "ROLE_ID",updatable = false)
+    /**
+     *
+     */
+    private static final long serialVersionUID = -2793276374848997267L;
+
+    @Id
+    @Column(name = "ROLE_ID", updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roleId;
 
-    @Column(name = "ROLE_NAME", unique=true, nullable=false, updatable=false, length=48)
+    @Column(name = "ROLE_NAME", unique = true, nullable = false, updatable = false, length = 48)
     private String roleName;
 
-   
+
     // bi-directional many-to-many association to User
-    @ManyToMany (mappedBy = "roles", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     private List<User> users;
-    
+
     public Role() {
-    	users = new ArrayList<User>();
+        users = new ArrayList<User>();
     }
 
     public void addUser(User user) {
@@ -56,15 +47,15 @@ public class Role implements Serializable {
             user.getRoles().add(this);
         }
     }
-    
-    public void setUsers(List<User> users){
-    	this.users = users;
-    }
 
     public List<User> getUsers() {
         return users;
     }
-    
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
     public Long getRoleId() {
         return this.roleId;
     }
@@ -73,12 +64,12 @@ public class Role implements Serializable {
         this.roleId = roleId;
     }
 
-	public String getRoleName() {
-		return roleName;
-	}
+    public String getRoleName() {
+        return roleName;
+    }
 
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 
 }

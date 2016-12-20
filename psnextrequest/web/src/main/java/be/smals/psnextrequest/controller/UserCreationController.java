@@ -1,4 +1,3 @@
-
 package be.smals.psnextrequest.controller;
 
 import be.smals.psnextrequest.bean.SessionBean;

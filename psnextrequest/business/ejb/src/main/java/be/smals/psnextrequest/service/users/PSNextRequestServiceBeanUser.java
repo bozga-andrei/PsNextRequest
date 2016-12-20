@@ -1,5 +1,14 @@
 package be.smals.psnextrequest.service.users;
 
+import be.smals.psnextrequest.entity.Responsible;
+import be.smals.psnextrequest.entity.Role;
+import be.smals.psnextrequest.entity.Task;
+import be.smals.psnextrequest.entity.User;
+import be.smals.psnextrequest.service.exception.PSNextRequestServiceException;
+import org.jasypt.util.password.StrongPasswordEncryptor;
+
+import javax.ejb.Stateless;
+import javax.persistence.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,23 +16,6 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
-
-
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
-import javax.persistence.Query;
-
-import org.jasypt.util.password.StrongPasswordEncryptor;
-
-import be.smals.psnextrequest.entity.Responsible;
-import be.smals.psnextrequest.entity.Role;
-import be.smals.psnextrequest.entity.Task;
-import be.smals.psnextrequest.entity.User;
-import be.smals.psnextrequest.service.exception.PSNextRequestServiceException;
 
 
 /**

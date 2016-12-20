@@ -31,7 +31,7 @@
     <resources>
         <resource-root path="eclipselink.jar">
             <filter>
-                <exclude path="javax/**" />
+                <exclude path="javax/**"/>
             </filter>
         </resource-root>
         <resource-root path="jipijapa-eclipselink-10.0.0.Final.jar"/>

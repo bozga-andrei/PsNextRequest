@@ -3,39 +3,36 @@ package be.smals.psnextrequest.entity;
 import java.io.Serializable;
 
 
-
-
 /**
  * The primary key class for the responsible database table.
- * 
+ *
  * @author AndreiBozga
- * 
  */
 public class ResponsiblePK implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private long projectId;
-    
+
     private long userId;
-    
+
 
     public ResponsiblePK() {
     }
-    
-    public ResponsiblePK(long userId, long projectId){
-    	this.userId = userId;
-    	this.projectId = projectId;
+
+    public ResponsiblePK(long userId, long projectId) {
+        this.userId = userId;
+        this.projectId = projectId;
     }
 
     public long getPrjectId() {
         return this.projectId;
     }
-    
+
     public void setProjectId(long projectId) {
         this.projectId = projectId;
     }
-    
+
     public long getUserId() {
         return this.userId;
     }
@@ -43,7 +40,7 @@ public class ResponsiblePK implements Serializable {
     public void setUserId(long userId) {
         this.userId = userId;
     }
-    
+
 
 //    public boolean equals(Object obj) {
 //    	boolean resultat = false;
@@ -68,19 +65,19 @@ public class ResponsiblePK implements Serializable {
 //        }
 //        return resultat;
 //    }
-    
+
     @Override
     public boolean equals(Object object) {
         if (object instanceof ResponsiblePK) {
-        	ResponsiblePK otherId = (ResponsiblePK) object;
-          return (otherId.userId == this.userId) && (otherId.projectId == this.projectId);
+            ResponsiblePK otherId = (ResponsiblePK) object;
+            return (otherId.userId == this.userId) && (otherId.projectId == this.projectId);
         }
         return false;
-      }
+    }
 
     @Override
     public int hashCode() {
-    	return (int)(userId + projectId);
+        return (int) (userId + projectId);
     }
 
 }

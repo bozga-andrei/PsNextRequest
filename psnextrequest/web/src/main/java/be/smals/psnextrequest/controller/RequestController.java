@@ -1,4 +1,3 @@
-
 package be.smals.psnextrequest.controller;
 
 import be.smals.psnextrequest.bean.SessionBean;
@@ -33,64 +32,37 @@ import java.util.List;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class RequestController {
 
+    FacesContext context = FacesContext.getCurrentInstance();
     private User user;
-
     private Request request = new Request();
-
     private String description;
-
     private String duration;
-
     private Date endDate;
-
     private Date startDate;
-
     private int userId;
-
     private String userFirstName;
-
     private String userLastName;
-
     private int status;
-
     private String visibleForResp;
-
     private String visibleForUser;
-
     private boolean reqChecked;
-
     private Long selectedProjectId;
-
     private Project selectedProject;
-
     private Long selectedTaskId;
-
     private Task selectedTask;
-
     private String projectName;
-
     private List<Project> projects;
-
     private List<Task> tasks;
-
     private boolean tasksVisible = true;
-
     private List<SelectItem> tasksItems;
-
-
     @ManagedProperty(value = "#{sessionBean}")
     private SessionBean sessionBean;
-
     @EJB(name = "ejb/PSNextRequestBeanRequest")
     private PSNextRequestServiceRemoteRequest serviceRequest;
-
     @EJB(name = "ejb/PSNextRequestBeanProject")
     private PSNextRequestServiceRemoteProject serviceProject;
-
     @EJB(name = "ejb/PSNextRequestBeanTask")
     private PSNextRequestServiceRemoteTask serviceTask;
-
-    FacesContext context = FacesContext.getCurrentInstance();
 
     /**
      * Initiation.
