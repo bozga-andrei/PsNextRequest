@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="section">
-                        <h:outputLabel for="task_select" value="Tâche :"/>
+                        <h:outputLabel for="task_select" value="TÃ¢che :"/>
                         <h:inputText name="task_select" id="task_select" disabled="true"
                                      value="#{sessionBean.request.task.taskName}"/>
                     </div>
@@ -35,7 +35,7 @@
                         <h:outputLabel for="from_calendar" value="Du : "/>
                         <a4j:outputPanel layout="block" style="float:left">
                             <rich:calendar value="#{sessionBean.request.requestStartDate}" id="from_calendar"
-                                           required="true" requiredMessage="Sélectionnez la date de début svp"
+                                           required="true" requiredMessage="SÃ©lectionnez la date de dÃ©but svp"
                                            locale="fr/FR"
                                            popup="true"
                                            datePattern="dd/MM/yyyy"
@@ -48,7 +48,7 @@
                         <h:outputLabel for="to_calendar" value="A : "/>
                         <a4j:outputPanel layout="block" style="float:left">
                             <rich:calendar value="#{sessionBean.request.requestEndDate}" id="to_calendar"
-                                           required="true" requiredMessage="Sélectionnez la date de fin svp"
+                                           required="true" requiredMessage="SÃ©lectionnez la date de fin svp"
                                            locale="fr/FR"
                                            popup="true"
                                            datePattern="dd/MM/yyyy"
@@ -63,7 +63,7 @@
                         <h:outputLabel for="hours" value="Heures: "/>
                         <h:inputText type="text" name="hours" id="hours" value="#{sessionBean.request.requestDuration}"
                                      required="true"
-                                     requiredMessage="Entrez la durée que vous avez passé sur la tache svp!"/>
+                                     requiredMessage="Entrez la durÃ©e que vous avez passÃ© sur la tache svp!"/>
                         <span> (jj hh mm)</span>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                     <div class="section">
                         <h:inputTextarea name="description" id="description" rows="4" cols="50"
                                          value="#{sessionBean.request.requestDescription}" required="true"
-                                         requiredMessage="Decrivez la tâche svp!"/>
+                                         requiredMessage="Decrivez la tÃ¢che svp!"/>
                     </div>
                 </div>
 

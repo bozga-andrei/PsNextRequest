@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
@@ -23,13 +23,13 @@
 
                     <div class="line">
                         <div class="section">
-                            <h:outputLabel for="task_name" value="Nom de la tâche : "/>
+                            <h:outputLabel for="task_name" value="Nom de la tÃ¢che : "/>
                             <h:inputText id="task_name" value="#{taskControllerBean.taskName}" style="width: 432px;"/>
                         </div>
 
                         <div class="row section">
                             <h:commandButton class="buttonsRight buttons" id="createProjectBtn"
-                                             action="#{adminControllerBean.createProject}" value="Créer le projet"/>
+                                             action="#{adminControllerBean.createProject}" value="CrÃ©er le projet"/>
                             <h:commandButton class="buttonsRight buttons" action="toProjectManage" immediate="true"
                                              value="Annuler"/>
                             <h:commandButton class="buttonsRight buttons" action="#{adminControllerBean.updateProject}"
@@ -37,13 +37,13 @@
                         </div>
 
                         <div class="section">
-                            <h:outputLabel for="pickList" value="Sélectionner le(s) responsable(s): "/>
+                            <h:outputLabel for="pickList" value="SÃ©lectionner le(s) responsable(s): "/>
                             <p:pickList id="pickList" value="#{adminControllerBean.pickListUsers}" var="user"
                                         itemValue="#{user}" itemLabel="#{user.userFirstName}" converter="userConverter"
                                         showSourceFilter="true" showTargetFilter="true">
 
                                 <f:facet name="sourceCaption">Disponibles</f:facet>
-                                <f:facet name="targetCaption">Sélectionné</f:facet>
+                                <f:facet name="targetCaption">SÃ©lectionnÃ©</f:facet>
 
                                 <p:column>
                                     #{user.userFirstName} #{user.userLastName}

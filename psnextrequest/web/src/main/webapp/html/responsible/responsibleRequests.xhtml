@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
@@ -11,7 +11,7 @@
         <h2>Consulter les demandes</h2>
 
         <h:form styleClass="notAcces" rendered="#{!sessionBean.isResponsible}">
-            <p>Bienvenue, #{sessionBean.user.userFirstName} vous n'avez pas le droit d'accéder à cette page. </p>
+            <p>Bienvenue, #{sessionBean.user.userFirstName} vous n'avez pas le droit d'accÃ©der Ã  cette page. </p>
             <h:commandButton class="h160 buttons" action="toRequestsConsult" value="Retour" immediate="true"/>
         </h:form>
 
@@ -24,7 +24,7 @@
 
                     <div class="line">
                         <div class="section">
-                            <h:outputLabel for="firstName" value="Prénom : "/>
+                            <h:outputLabel for="firstName" value="PrÃ©nom : "/>
                             <h:outputText styleClass="textOut" id="firstName"
                                           value="#{sessionBean.responsibleRequest.user.userFirstName}"/>
                         </div>
@@ -54,7 +54,7 @@
 
                     <div class="line">
                         <div class="section">
-                            <h:outputLabel for="task_name" value="Tâche : "/>
+                            <h:outputLabel for="task_name" value="TÃ¢che : "/>
                             <h:outputText styleClass="textOut" id="task_name"
                                           value="#{sessionBean.responsibleRequest.task.taskName}"/>
                         </div>
@@ -93,7 +93,7 @@
 
                     <div class="line">
                         <div class="section">
-                            <h:outputLabel for="managedBy" value="Modifiée par : "/>
+                            <h:outputLabel for="managedBy" value="ModifiÃ©e par : "/>
                             <h:inputText id="managedBy" disabled="true"
                                          value="#{sessionBean.responsibleRequest.requestManagedBy}"/>
                         </div>
@@ -157,7 +157,7 @@
                             #{dataObj.task.project.projectName}
                         </p:column>
 
-                        <p:column headerText="Tâche" id="taskName" sortBy="#{dataObj.task.taskName}"
+                        <p:column headerText="TÃ¢che" id="taskName" sortBy="#{dataObj.task.taskName}"
                                   filterBy="#{dataObj.task.taskName}">
                             #{dataObj.task.taskName}
                         </p:column>
@@ -185,7 +185,7 @@
                                        hideEffect="fade"/>
                         </p:column>
 
-                        <p:column headerText="Date de création" id="creationDate"
+                        <p:column headerText="Date de crÃ©ation" id="creationDate"
                                   sortBy="#{dataObj.requestCreationDate}">
                             <h:outputText value="#{dataObj.requestCreationDate}">
                                 <f:convertDateTime pattern="dd/MM/yyyy - HH:mm"/>

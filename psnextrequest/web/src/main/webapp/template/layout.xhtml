@@ -9,7 +9,7 @@
 <h:head>
     <f:facet name="first">
         <meta http-equiv="X-UA-Compatible" content="IE=10"/>
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     </f:facet>
 
     <title>
@@ -59,11 +59,11 @@
 
 
                                 <div id="formDeconnect"
-                                     class="floatr"> Authentifié: #{sessionBean.user.userFirstName} - #{sessionBean.user.userLastName} |
+                                     class="floatr"> AuthentifiÃ©: #{sessionBean.user.userFirstName} - #{sessionBean.user.userLastName} |
                                     <h:commandLink immediate="true" action="toUserUpdate"><h:outputText
-                                            value="Gérer mon compte"/> </h:commandLink> | <h:commandLink
+                                            value="GÃ©rer mon compte"/> </h:commandLink> | <h:commandLink
                                             immediate="true" action="#{loginController.handleDeconnexion}"><h:outputText
-                                            value="Se déconnecter"/> </h:commandLink></div>
+                                            value="Se dÃ©connecter"/> </h:commandLink></div>
                             </h:form>
                         </div>
                     </h:panelGroup>

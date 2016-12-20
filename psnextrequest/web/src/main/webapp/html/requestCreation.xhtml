@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
@@ -22,8 +22,8 @@
                     <div class="section">
                         <h:outputLabel for="project_select" value="Projet :"/>
                         <h:selectOneMenu id="project_select" value="#{requestControllerBean.selectedProjectId}"
-                                         required="true" requiredMessage="Sélectionnez un projet svp!">
-                            <f:selectItem itemValue="0" itemLabel="-- sélectionner --"/>
+                                         required="true" requiredMessage="SÃ©lectionnez un projet svp!">
+                            <f:selectItem itemValue="0" itemLabel="-- sÃ©lectionner --"/>
                             <f:selectItems value="#{requestControllerBean.projects}" var="projectVar"
                                            itemValue="#{projectVar.projectId}" itemLabel="#{projectVar.projectName}"/>
                             <p:ajax process="project_select" listener="#{requestControllerBean.getTasksByProject}"
@@ -33,14 +33,14 @@
                     </div>
 
                     <div class="section">
-                        <h:outputLabel for="task_select" value="Tâche :"/>
+                        <h:outputLabel for="task_select" value="TÃ¢che :"/>
                         <h:selectOneMenu id="task_select_Empty" disabled="true"
                                          styleClass="#{requestControllerBean.tasksVisible ? 'displayInline-block' : 'displayNone'}">
-                            <f:selectItem itemLabel="-- sélectionner --"/>
+                            <f:selectItem itemLabel="-- sÃ©lectionner --"/>
                         </h:selectOneMenu>
                         <h:selectOneMenu id="task_select" value="#{requestControllerBean.selectedTaskId}"
                                          styleClass="#{requestControllerBean.tasksVisible ? 'displayNone' : 'displayInline-block'}"
-                                         required="true" requiredMessage="Sélectionnez une tâche svp!">
+                                         required="true" requiredMessage="SÃ©lectionnez une tÃ¢che svp!">
                             <f:selectItems value="#{requestControllerBean.tasks}" var="taskVar"
                                            itemValue="#{taskVar.taskId}" itemLabel="#{taskVar.taskName}"/>
                             <p:ajax process="task_select" update="infoPanel"/>
@@ -51,11 +51,11 @@
                                              rendered="#{requestControllerBean.selectedTask.taskDescription != null}"
                                              type="button" value="Info"/>
 
-                            <p:dialog styleClass="infoTaskDialog" header="Info Tâche" widgetVar="infoTaskDialog"
+                            <p:dialog styleClass="infoTaskDialog" header="Info TÃ¢che" widgetVar="infoTaskDialog"
                                       modal="false" resizable="false" showEffect="clip" hideEffect="clip" width="450">
                                 <div class="line">
                                     <div class="section">
-                                        <h:outputLabel for="project_name" value="Nom de la tâche : "/>
+                                        <h:outputLabel for="project_name" value="Nom de la tÃ¢che : "/>
                                         <h:outputText id="project_name"
                                                       value="#{requestControllerBean.selectedTask.taskName}"/>
                                     </div>
@@ -83,7 +83,7 @@
                         <h:outputLabel for="from_calendar" value="Du : "/>
                         <a4j:outputPanel layout="block" style="float:left">
                             <rich:calendar value="#{requestControllerBean.startDate}" id="from_calendar" required="true"
-                                           requiredMessage="Sélectionnez la date de début svp!"
+                                           requiredMessage="SÃ©lectionnez la date de dÃ©but svp!"
                                            locale="fr/FR"
                                            popup="true"
                                            datePattern="dd/MM/yyyy"
@@ -96,7 +96,7 @@
                         <h:outputLabel for="to_calendar" value="A : "/>
                         <a4j:outputPanel layout="block" style="float:left">
                             <rich:calendar value="#{requestControllerBean.endDate}" id="to_calendar" required="true"
-                                           requiredMessage="Sélectionnez la date de fin svp!"
+                                           requiredMessage="SÃ©lectionnez la date de fin svp!"
                                            locale="fr/FR"
                                            popup="true"
                                            datePattern="dd/MM/yyyy"
@@ -111,7 +111,7 @@
                         <h:outputLabel for="hours" value="Heures: "/>
                         <h:inputText type="text" name="hours" id="hours" value="#{requestControllerBean.duration}"
                                      required="true"
-                                     requiredMessage="Entrez la durée que vous avez passé sur la tache svp!"/>
+                                     requiredMessage="Entrez la durÃ©e que vous avez passÃ© sur la tache svp!"/>
                         <span> (jj hh mm)</span>
                     </div>
                 </div>
@@ -121,7 +121,7 @@
                     <div class="section">
                         <h:inputTextarea name="description" id="description" rows="4" cols="50"
                                          value="#{requestControllerBean.description}" required="true"
-                                         requiredMessage="Decrivez la tâche svp!"/>
+                                         requiredMessage="Decrivez la tÃ¢che svp!"/>
                     </div>
                 </div>
 

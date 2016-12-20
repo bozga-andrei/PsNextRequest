@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
@@ -8,7 +8,7 @@
 
     <ui:define name="content">
 
-        <h2>Créer un nouveau utilisateur</h2>
+        <h2>CrÃ©er un nouveau utilisateur</h2>
 
         <h:panelGroup rendered="#{sessionBean.user != null}">
             <h:form id="updateForm" onkeypress="if (event.keyCode == 13) submit();">
@@ -24,10 +24,10 @@
                                 </div>
 
                                 <div class="section">
-                                    <h:outputLabel for="firstName" value="Prénom : "/>
+                                    <h:outputLabel for="firstName" value="PrÃ©nom : "/>
                                     <p:inputText type="text" id="firstName"
                                                  value="#{sessionBean.user.userFirstName}"
-                                                 required="true" requiredMessage="Entrez votre prénom svp!"/>
+                                                 required="true" requiredMessage="Entrez votre prÃ©nom svp!"/>
                                 </div>
                                 <p:commandButton id="updateNameBtn" actionListener="#{userUpdateController.userUpdate}"
                                                  update="panel" process="@this, lastName, firstName"
@@ -64,7 +64,7 @@
                                                 goodLabel="Bon" strongLabel="Fort"
                                                 value="#{userUpdateController.newPassword}" required="true"
                                                 requiredMessage="Entrez un mot de passe svp!"
-                                                validatorMessage="Le mot de passe doit contenir de 6 à 15 caractères alphanumériques">
+                                                validatorMessage="Le mot de passe doit contenir de 6 Ã  15 caractÃ¨res alphanumÃ©riques">
                                         <f:validateLength minimum="6" maximum="15" for="pwd1"/>
                                     </p:password>
                                 </div>

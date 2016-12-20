@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
@@ -42,13 +42,13 @@
                         </div>
 
                         <div class="section">
-                            <h:outputLabel for="pickList" value="Sélectionner le(s) membre(s) de l'équipe: "/>
+                            <h:outputLabel for="pickList" value="SÃ©lectionner le(s) membre(s) de l'Ã©quipe: "/>
                             <p:pickList id="pickList" value="#{taskSessionBean.pickListResponsibles}" var="user"
                                         itemValue="#{user}" itemLabel="#{user.userFirstName}" converter="userConverter"
                                         showSourceFilter="true" showTargetFilter="true">
 
                                 <f:facet name="sourceCaption">Disponibles</f:facet>
-                                <f:facet name="targetCaption">Sélectionné</f:facet>
+                                <f:facet name="targetCaption">SÃ©lectionnÃ©</f:facet>
 
                                 <p:column>
                                     #{user.userFirstName} #{user.userLastName}
@@ -64,19 +64,19 @@
                                              value="#{taskSessionBean.selectedTask.taskStatus}">
                                 <f:selectItem itemLabel="Actif" itemValue="0"/>
                                 <f:selectItem itemLabel="En Pause" itemValue="1"/>
-                                <f:selectItem itemLabel="Terminé" itemValue="2"/>
+                                <f:selectItem itemLabel="TerminÃ©" itemValue="2"/>
                             </h:selectOneMenu>
                             <h:selectOneMenu rendered="#{taskSessionBean.selectedTask.taskStatus == 1}"
                                              name="task_statut1" id="task_statut1"
                                              value="#{taskSessionBean.selectedTask.taskStatus}">
                                 <f:selectItem itemLabel="En Pause" itemValue="1"/>
                                 <f:selectItem itemLabel="Actif" itemValue="0"/>
-                                <f:selectItem itemLabel="Terminé" itemValue="2"/>
+                                <f:selectItem itemLabel="TerminÃ©" itemValue="2"/>
                             </h:selectOneMenu>
                             <h:selectOneMenu rendered="#{taskSessionBean.selectedTask.taskStatus == 2}"
                                              name="task_statut2" id="task_statut2"
                                              value="#{taskSessionBean.selectedTask.taskStatus}">
-                                <f:selectItem itemLabel="Terminé" itemValue="2"/>
+                                <f:selectItem itemLabel="TerminÃ©" itemValue="2"/>
                                 <f:selectItem itemLabel="Actif" itemValue="0"/>
                                 <f:selectItem itemLabel="En Pause" itemValue="1"/>
                             </h:selectOneMenu>

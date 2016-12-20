@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
@@ -8,7 +8,7 @@
 
     <ui:define name="content">
 
-        <h2>Créer un nouveau utilisateur</h2>
+        <h2>CrÃ©er un nouveau utilisateur</h2>
 
         <h:form id="registerForm" onkeypress="if (event.keyCode == 13) submit();">
 
@@ -33,7 +33,7 @@
                                     strongLabel="Fort"
                                     value="#{userCreationController.password}" required="true"
                                     requiredMessage="Entrez un mot de passe svp!"
-                                    validatorMessage="Le mot de passe doit contenir de 6 à 15 caractères alphanumériques">
+                                    validatorMessage="Le mot de passe doit contenir de 6 Ã  15 caractÃ¨res alphanumÃ©riques">
                             <f:validateLength minimum="6" maximum="15" for="pwd1"/>
                         </p:password>
                     </div>
@@ -54,10 +54,10 @@
                     </div>
 
                     <div class="section">
-                        <h:outputLabel for="firstname" value="Prénom : "/>
+                        <h:outputLabel for="firstname" value="PrÃ©nom : "/>
                         <p:inputText type="text" name="firstname" id="firstname"
                                      value="#{userCreationController.firstname}" required="true"
-                                     requiredMessage="Entrez votre prénom svp!"/>
+                                     requiredMessage="Entrez votre prÃ©nom svp!"/>
                     </div>
 
                     <div class="section">

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
@@ -22,7 +22,7 @@
                     </div>
 
                     <div class="section">
-                        <h:outputLabel for="task_select" value="Tâche : "/>
+                        <h:outputLabel for="task_select" value="TÃ¢che : "/>
                         <h:outputText styleClass="textOut" id="task_select" disabled="true"
                                       value="#{sessionBean.request.task.taskName}"/>
                     </div>
@@ -63,7 +63,7 @@
                 </div>
 
                 <div class="line">
-                    <h:outputLabel for="creationDate" style="width:100px" value="Date de création :"/>
+                    <h:outputLabel for="creationDate" style="width:100px" value="Date de crÃ©ation :"/>
                     <h:outputText id="creationDate" styleClass="lastTextOut"
                                   value="#{sessionBean.request.requestCreationDate}">
                         <f:convertDateTime timeZone="#{sessionBean.timeZone}" type="date" pattern="dd/MM/yyyy"/>
@@ -77,15 +77,15 @@
                 <h:panelGroup class="line"
                               rendered="#{sessionBean.request.requestStatus == 1 or sessionBean.request.requestStatus == 2}">
                     <h:outputLabel for="request1and2" value="Demande : "/>
-                    <h:outputText id="request1and2" styleClass="lastTextOut" value="Acceptée"/>
+                    <h:outputText id="request1and2" styleClass="lastTextOut" value="AcceptÃ©e"/>
                 </h:panelGroup>
                 <h:panelGroup class="line" rendered="#{sessionBean.request.requestStatus == 3}">
                     <h:outputLabel for="request3" value="Demande : "/>
-                    <h:outputText id="request3" styleClass="lastTextOut" value="Refusée"/>
+                    <h:outputText id="request3" styleClass="lastTextOut" value="RefusÃ©e"/>
                 </h:panelGroup>
                 <h:panelGroup class="line" rendered="#{sessionBean.request.requestStatus == 4}">
                     <h:outputLabel for="request4" value="Demande : "/>
-                    <h:outputText id="request4" styleClass="lastTextOut" value="Annulée"/>
+                    <h:outputText id="request4" styleClass="lastTextOut" value="AnnulÃ©e"/>
                 </h:panelGroup>
 
                 <div class="line">
@@ -98,7 +98,7 @@
                     <h:commandButton class="buttons floatl" id="cancelBtn" value="Annuler"
                                      onclick="confirmationCancel.show()" type="button"
                                      rendered="#{(sessionBean.request != null) and (sessionBean.request.requestStatus == 0)}"/>
-                    <h:commandButton class="buttons floatl" id="reactivateBtn" value="Réactiver"
+                    <h:commandButton class="buttons floatl" id="reactivateBtn" value="RÃ©activer"
                                      action="#{requestControllerBean.reactivateRequest}"
                                      rendered="#{(sessionBean.request != null) and (sessionBean.request.requestStatus == 4)}"/>
                     <h:commandButton class="buttons floatr" id="newRequestBtn" value="Faire une demande"
@@ -147,7 +147,7 @@
                         #{dataObj.projectName}
                     </p:column>
 
-                    <p:column headerText="Tâche" sortBy="#{dataObj.taskName}" filterBy="#{dataObj.taskName}"
+                    <p:column headerText="TÃ¢che" sortBy="#{dataObj.taskName}" filterBy="#{dataObj.taskName}"
                               id="taskName" style="width:20%">
                         #{dataObj.taskName}
                     </p:column>

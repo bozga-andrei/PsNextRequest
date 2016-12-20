@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
@@ -25,7 +25,7 @@
 
                         <div class="row section">
                             <h:commandButton class="buttonsRight buttons" id="createProjectBtn"
-                                             action="#{projectControllerBean.createProject}" value="Créer le projet"/>
+                                             action="#{projectControllerBean.createProject}" value="CrÃ©er le projet"/>
                             <h:commandButton class="buttonsRight buttons" onclick="alertCancel.show()" type="button"
                                              value="Annuler"/>
                         </div>
@@ -43,13 +43,13 @@
                         </div>
 
                         <div class="section">
-                            <h:outputLabel for="pickList" value="Sélectionner le(s) membre(s) de l'équipe: "/>
+                            <h:outputLabel for="pickList" value="SÃ©lectionner le(s) membre(s) de l'Ã©quipe: "/>
                             <p:pickList id="pickList" value="#{projectControllerBean.pickListUsers}" var="user"
                                         itemValue="#{user}" itemLabel="#{user.userFirstName}" converter="userConverter"
                                         showSourceFilter="true" showTargetFilter="true">
 
                                 <f:facet name="sourceCaption">Disponibles</f:facet>
-                                <f:facet name="targetCaption">Sélectionné</f:facet>
+                                <f:facet name="targetCaption">SÃ©lectionnÃ©</f:facet>
 
                                 <p:column>
                                     #{user.userFirstName} #{user.userLastName}

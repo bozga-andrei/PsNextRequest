@@ -16,13 +16,13 @@ public class EncodeFilter implements Filter {
 
     public void doFilter(final ServletRequest request, final ServletResponse response, FilterChain chain) throws IOException, ServletException {
         // Setting the character set for the request
-        request.setCharacterEncoding("ISO-8859-1");
+        request.setCharacterEncoding("UTF-8");
 
         // pass the request on
         chain.doFilter(request, response);
 
         // Setting the character set for the response
-        response.setContentType("text/html; charset=ISO-8859-1");
+        response.setContentType("text/html; charset=UTF-8");
     }
 
 

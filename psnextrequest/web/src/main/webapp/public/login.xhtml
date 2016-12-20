@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
@@ -9,7 +9,7 @@
         <h2>Authentification</h2>
 
         <h:form rendered="#{sessionBean.loggedIn}">
-            <p>Bienvenue, #{sessionBean.user.userFirstName} vous êtes déjà authentifié(e). </p>
+            <p>Bienvenue, #{sessionBean.user.userFirstName} vous Ãªtes dÃ©jÃ  authentifiÃ©(e). </p>
             <h:commandButton class="h160 buttons" action="toRequestsConsult" value="Retour" immediate="true"/>
         </h:form>
 
@@ -50,11 +50,11 @@
                     </div>
 
                     <div class="section">
-                        <h:link value="Créer un nouveau compte"
+                        <h:link value="CrÃ©er un nouveau compte"
                                 outcome="toUserCreation">
                         </h:link>
                         |
-                        <h:link value="Mot de passe oublié"
+                        <h:link value="Mot de passe oubliÃ©"
                                 outcome="toRestorePassword">
                         </h:link>
                     </div>
