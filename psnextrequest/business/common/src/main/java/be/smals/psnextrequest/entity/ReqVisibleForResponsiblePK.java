@@ -5,7 +5,7 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 /**
- * The primary key class for the psnext_visible_for_responsible database table.
+ * The primary key class for the PSNEXT_REQ_VISIBLE_FOR_RESPONSIBLE database table.
  */
 @Embeddable
 public class ReqVisibleForResponsiblePK implements Serializable {

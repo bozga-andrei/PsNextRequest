@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The persistent class for the user database table.
+ * The persistent class for the PSNEXT_USER database table.
  *
  * @author AndreiBozga
  */
@@ -21,7 +21,7 @@ import java.util.List;
 )
 
 @Entity
-@Table(name = "psnext_user", uniqueConstraints = {@UniqueConstraint(columnNames = {"USER_FIRST_NAME", "USER_LAST_NAME"})})
+@Table(name = "PSNEXT_USER", uniqueConstraints = {@UniqueConstraint(columnNames = {"USER_FIRST_NAME", "USER_LAST_NAME"})})
 public class User implements Serializable {
 
     /**
@@ -65,14 +65,14 @@ public class User implements Serializable {
 
     //bi-directional many-to-many association to Role
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "psnext_user_role",
+    @JoinTable(name = "PSNEXT_USER_ROLE",
             joinColumns = @JoinColumn(name = "USER_ID_psnext_user"),
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID_psnext_role"))
     private List<Role> roles;
 
     //bi-directional many-to-many association to ProjectTeam
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "psnext_project_team_user",
+    @JoinTable(name = "PSNEXT_PROJECT_TEAM_USER",
             joinColumns = @JoinColumn(name = "USER_ID_psnext_user"),
             inverseJoinColumns = @JoinColumn(name = "PROJECT_TEAM_ID_psnext_project_team"))
     private List<ProjectTeam> teams;

@@ -7,10 +7,10 @@ import java.util.List;
 
 
 /**
- * The persistent class for the psnext_group database table.
+ * The persistent class for the PSNEXT_GROUP database table.
  */
 @Entity
-@Table(name = "psnext_group")
+@Table(name = "PSNEXT_GROUP")
 public class Group implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -24,7 +24,7 @@ public class Group implements Serializable {
 
     // bi-directional many-to-many association to User
     @ManyToMany
-    @JoinTable(name = "psnext_user_group",
+    @JoinTable(name = "PSNEXT_USER_GROUP",
             joinColumns = @JoinColumn(name = "USER_ID_psnext_user"),
             inverseJoinColumns = @JoinColumn(name = "GROUP_ID_psnext_group"))
     private List<User> users;

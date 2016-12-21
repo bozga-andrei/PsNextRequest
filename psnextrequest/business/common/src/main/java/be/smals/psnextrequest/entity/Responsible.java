@@ -5,12 +5,12 @@ import java.io.Serializable;
 
 
 /**
- * The persistent class for the responsible database table.
+ * The persistent class for the PSNEXT_RESPONSIBLE database table.
  *
  * @author AndreiBozga
  */
 @Entity
-@Table(name = "psnext_responsible")
+@Table(name = "PSNEXT_RESPONSIBLE")
 public class Responsible implements Serializable {
 
     private static final long serialVersionUID = 1L;

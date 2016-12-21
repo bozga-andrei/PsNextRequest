@@ -241,3 +241,12 @@ CREATE TABLE psnextrequest_db.PSNEXT_USER_GROUP
   CONSTRAINT FK_UserGroupPerGroup FOREIGN KEY (GROUP_ID_psnext_group) REFERENCES PSNEXT_GROUP (GROUP_ID)
 );
 
+INSERT INTO psnextrequest_db.PSNEXT_USER (USER_ID,
+                                          USER_FIRST_NAME,
+                                          USER_LAST_NAME,
+                                          USER_DISTINGUISHED_NAME,
+                                          USER_PASSWORD,
+                                          USER_MAIL)
+VALUES (1, 'Admin', 'Admin', 'admin', 'qBE7EN0oU36vLBkPybAEwqhh6N0G0TmsSRpAiExcvHE3yWl4jXofsWt66', 'email@admin.com');
+
+INSERT INTO psnextrequest_db.PSNEXT_USER_ROLE(USER_ID_psnext_user, ROLE_ID_psnext_role) VALUES (1, 2);

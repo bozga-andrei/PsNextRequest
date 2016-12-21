@@ -5,10 +5,10 @@ import java.io.Serializable;
 
 
 /**
- * The persistent class for the psnext_visible_for_responsible database table.
+ * The persistent class for the PSNEXT_REQ_VISIBLE_FOR_RESPONSIBLE database table.
  */
 @Entity
-@Table(name = "psnext_req_visible_for_responsible")
+@Table(name = "PSNEXT_REQ_VISIBLE_FOR_RESPONSIBLE")
 public class ReqVisibleForResponsible implements Serializable {
     private static final long serialVersionUID = 1L;
 

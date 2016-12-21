@@ -7,10 +7,10 @@ import java.util.List;
 
 
 /**
- * The persistent class for the psnext_project_team database table.
+ * The persistent class for the PSNEXT_PROJECT_TEAM database table.
  */
 @Entity
-@Table(name = "psnext_project_team")
+@Table(name = "PSNEXT_PROJECT_TEAM")
 public class ProjectTeam implements Serializable {
 
     /**
@@ -33,7 +33,7 @@ public class ProjectTeam implements Serializable {
 
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "psnext_project_team_user",
+    @JoinTable(name = "PSNEXT_PROJECT_TEAM_USER",
             joinColumns = @JoinColumn(name = "PROJECT_TEAM_ID_psnext_project_team"),
             inverseJoinColumns = @JoinColumn(name = "USER_ID_psnext_user"))
     private List<User> users;

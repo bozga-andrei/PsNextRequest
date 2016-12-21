@@ -6,12 +6,12 @@ import java.util.Date;
 
 
 /**
- * The persistent class for the psnext_req_historic database table.
+ * The persistent class for the PSNEXT_REQ_HISTORIC database table.
  *
  * @author AndreiBozga
  */
 @Entity
-@Table(name = "psnext_req_historic")
+@Table(name = "PSNEXT_REQ_HISTORIC")
 public class ReqHistoric implements Serializable {
 
     private static final long serialVersionUID = 1L;

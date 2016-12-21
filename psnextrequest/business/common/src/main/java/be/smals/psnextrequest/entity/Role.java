@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The persistent class for the role database table.
+ * The persistent class for the PSNEXT_ROLE database table.
  *
  * @author AndreiBozga
  */
 
 
 @Entity
-@Table(name = "psnext_role")
+@Table(name = "PSNEXT_ROLE")
 public class Role implements Serializable {
 
 

@@ -8,12 +8,12 @@ import java.util.List;
 
 
 /**
- * The persistent class for the project database table.
+ * The persistent class for the PSNEXT_TASK database table.
  *
  * @author AndreiBozga
  */
 @Entity
-@Table(name = "psnext_task")
+@Table(name = "PSNEXT_TASK")
 public class Task implements Serializable {
 
     private static final long serialVersionUID = 1L;

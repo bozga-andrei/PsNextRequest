@@ -8,12 +8,12 @@ import java.util.List;
 
 
 /**
- * The persistent class for the Request database table.
+ * The persistent class for the PSNEXT_REQUEST database table.
  *
  * @author AndreiBozga
  */
 @Entity
-@Table(name = "psnext_request")
+@Table(name = "PSNEXT_REQUEST")
 public class Request implements Serializable {
 
     private static final long serialVersionUID = 1L;
