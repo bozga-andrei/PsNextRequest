@@ -43,13 +43,12 @@ public class PSNextRequestServiceBeanProject implements PSNextRequestServiceRemo
 	/* ---------------- Project -------------------- */
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#createProject(be.smals.psnextrequest.entity.Project)
+     * @see be.smals.psnextrequest.service.projects.PSNextRequestServiceRemoteProject#createProject(List, Project)
      */
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Project createProject(List<User> membersTeam, Project project) throws PSNextRequestServiceException {
         try {
-            em.getTransaction().begin();
             //create project team
             ProjectTeam prjTeam = createProjectTeam(membersTeam, project);
 
@@ -58,13 +57,9 @@ public class PSNextRequestServiceBeanProject implements PSNextRequestServiceRemo
             em.persist(project);
             em.flush();
             logger.log(Level.INFO, "Nouveau projet créé: " + project.getProjectName());
-            em.getTransaction().commit();
             return project;
 
         } catch (PersistenceException e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
             if (e.getMessage().contains("Error Code: 1062")) {
                 throw new PSNextRequestServiceException("Le nom du projet existe déjà", e);
             } else if (e.getMessage().contains("Error Code: 1048")) {
@@ -73,15 +68,12 @@ public class PSNextRequestServiceBeanProject implements PSNextRequestServiceRemo
                 throw new PSNextRequestServiceException("Contrainte violation exception", e);
             }
         } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
             throw new PSNextRequestServiceException("Project cannot be created", e);
         }
     }
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#updateProject(List<User>, be.smals.psnextrequest.entity.Project)
+     * @see be.smals.psnextrequest.service.projects.PSNextRequestServiceRemoteProject#updateProject(List, Project)
      */
     @Override
     public Project updateProject(List<User> users, Project project) throws PSNextRequestServiceException {
@@ -101,11 +93,9 @@ public class PSNextRequestServiceBeanProject implements PSNextRequestServiceRemo
                 //update project & project team
                 project.setProjectLastUpdateDate(new Date());
 //            	updateProjectTeam(users, project);
-                em.getTransaction().begin();
                 em.merge(project);
                 em.flush();
                 logger.log(Level.INFO, "Le projet: " + project.getProjectName() + " a été mis à jour.");
-                em.getTransaction().commit();
                 return project;
             } catch (Exception e) {
                 throw new PSNextRequestServiceException("An unexpected error has occurred: " + e.getMessage());
@@ -116,27 +106,22 @@ public class PSNextRequestServiceBeanProject implements PSNextRequestServiceRemo
     }
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#disableProject(be.smals.psnextrequest.entity.Project)
+     * @see be.smals.psnextrequest.service.projects.PSNextRequestServiceRemoteProject#disableProject(Project)
      */
     @Override
     public void disableProject(Project project) throws PSNextRequestServiceException {
         try {
-            em.getTransaction().begin();
             //disable project by status 3
             project.setProjectStatus(3);
             em.merge(project);
             em.flush();
-            em.getTransaction().commit();
         } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
             throw new PSNextRequestServiceException("An unexpected error has occurred: " + e.getMessage());
         }
     }
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#getProjectById(java.lang.Long)
+     * @see be.smals.psnextrequest.service.projects.PSNextRequestServiceRemoteProject#getProjectById(java.lang.Long)
      */
     @Override
     public Project getProjectById(Long projectId) throws PSNextRequestServiceException {
@@ -150,23 +135,21 @@ public class PSNextRequestServiceBeanProject implements PSNextRequestServiceRemo
     }
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#getProjectByTeam(be.smals.psnextrequest.entity.projectTeam)
+     * @see be.smals.psnextrequest.service.projects.PSNextRequestServiceRemoteProject#getProjectByTeam(ProjectTeam)
      */
     @Override
     public Project getProjectByTeam(ProjectTeam projectTeam) throws PSNextRequestServiceException {
         try {
-            Project project = new Project();
             Query query = em.createQuery("SELECT p FROM Project p WHERE p.projectTeam = :projectTeam");
             query.setParameter("projectTeam", projectTeam);
-            project = (Project) query.getSingleResult();
-            return project;
+            return (Project) query.getSingleResult();
         } catch (EntityNotFoundException e) {
             throw new PSNextRequestServiceException("Project cannot be found");
         }
     }
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#getAllProjects()
+     * @see be.smals.psnextrequest.service.projects.PSNextRequestServiceRemoteProject#getAllProjects()
      */
     @Override
     public List<Project> getAllProjects() throws PSNextRequestServiceException {
@@ -184,7 +167,7 @@ public class PSNextRequestServiceBeanProject implements PSNextRequestServiceRemo
     /* ---------------- Project Team -------------------- */
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#createProjectTeam()
+     * @see be.smals.psnextrequest.service.projects.PSNextRequestServiceRemoteProject#createProjectTeam(List, Project)
      */
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -209,11 +192,10 @@ public class PSNextRequestServiceBeanProject implements PSNextRequestServiceRemo
     }
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#createProjectTeam()
+     * @see be.smals.psnextrequest.service.projects.PSNextRequestServiceRemoteProject#createProjectTeam(List, Project)
      */
     @Override
     public void updateProjectTeam(List<User> membersTeam, Project project) throws PSNextRequestServiceException {
-        em.getTransaction().begin();
         ProjectTeam existingProjectTeam = null;
         try {
             if (project.getProjectTeam().getProjectTeamId() != null) {
@@ -296,7 +278,6 @@ public class PSNextRequestServiceBeanProject implements PSNextRequestServiceRemo
                 em.merge(existingProjectTeam);
                 em.flush();
                 logger.log(Level.INFO, "L' équipe de projet: " + project.getProjectName() + " a été mis à jour.");
-                em.getTransaction().commit();
             } catch (Exception e) {
                 throw new PSNextRequestServiceException("An unexpected error has occurred: " + e.getMessage());
             }
@@ -308,7 +289,7 @@ public class PSNextRequestServiceBeanProject implements PSNextRequestServiceRemo
     }
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestServiceProject#getProjectTeamByName()
+     * @see be.smals.psnextrequest.service.projects.PSNextRequestServiceRemoteProject#getProjectTeamByName(String)
      */
     @Override
     public ProjectTeam getProjectTeamByName(String name) throws PSNextRequestServiceException {

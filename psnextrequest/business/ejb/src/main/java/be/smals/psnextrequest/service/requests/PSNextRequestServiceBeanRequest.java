@@ -41,13 +41,12 @@ public class PSNextRequestServiceBeanRequest implements PSNextRequestServiceRemo
     /* ---------------- Request -------------------- */
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#createRequest(be.smals.psnextrequest.entity.Request)
+     * @see be.smals.psnextrequest.service.requests.PSNextRequestServiceRemoteRequest#createRequest(be.smals.psnextrequest.entity.Request)
      */
     @Override
     public Request createRequest(Request request) throws PSNextRequestServiceException {
         try {
             request.setRequestCreationDate(new Date());
-            em.getTransaction().begin();
             em.persist(request);
             request.getTask().getRequests().add(request);
             em.merge(request.getTask());
@@ -62,12 +61,8 @@ public class PSNextRequestServiceBeanRequest implements PSNextRequestServiceRemo
             em.merge(request);
             em.flush();
             logger.log(Level.INFO, "Nouvelle demande créée par: " + request.getUser().getUserFirstName() + ". Pour la tâche: " + request.getTask().getTaskName() + ". Description demande: " + request.getRequestDescription());
-            em.getTransaction().commit();
             return request;
         } catch (PersistenceException e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
             if (e.getMessage().contains("Error Code: 1048")) {
                 throw new PSNextRequestServiceException("Un des champs n'a pas été correctement complété ou récuperé.", e);
             } else {
@@ -75,9 +70,6 @@ public class PSNextRequestServiceBeanRequest implements PSNextRequestServiceRemo
             }
         } catch (Exception e) {
             e.printStackTrace();
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
             throw new PSNextRequestServiceException("Request cannot be created!", e);
 
         }
@@ -85,17 +77,15 @@ public class PSNextRequestServiceBeanRequest implements PSNextRequestServiceRemo
 
     /**
      * @throws PSNextRequestServiceException
-     * @see be.smals.psnextrequest.service.PSNextRequestService#updateRequest(be.smals.psnextrequest.entity.Request)
+     * @see be.smals.psnextrequest.service.requests.PSNextRequestServiceRemoteRequest#updateRequest(be.smals.psnextrequest.entity.Request)
      */
     @Override
     public void updateRequest(Request request) throws PSNextRequestServiceException {
         try {
             if (request.getRequestCreationDate() != null) {
                 request.setRequestLastUpdateDate(new Date());
-                em.getTransaction().begin();
                 em.merge(request);
                 em.flush();
-                em.getTransaction().commit();
             } else
                 throw new PSNextRequestServiceException("La demande n'a pas pu être recupérée.");
         } catch (PSNextRequestServiceException e) {
@@ -106,7 +96,7 @@ public class PSNextRequestServiceBeanRequest implements PSNextRequestServiceRemo
     }
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#deleteRequest(be.smals.psnextrequest.entity.Request)
+     * @see be.smals.psnextrequest.service.requests.PSNextRequestServiceRemoteRequest#deleteRequest(be.smals.psnextrequest.entity.Request)
      */
     @Override
     public void deleteRequest(Request requestId) throws PSNextRequestServiceException {
@@ -114,10 +104,8 @@ public class PSNextRequestServiceBeanRequest implements PSNextRequestServiceRemo
             if (requestId != null) {
                 Request existingRequest = em.find(Request.class, requestId);
                 if (existingRequest != null) {
-                    em.getTransaction().begin();
                     em.remove(existingRequest);
-                    flush();
-                    em.getTransaction().commit();
+                    em.flush();
                 } else {
                     throw new PSNextRequestServiceException("Request not found!");
                 }
@@ -132,12 +120,11 @@ public class PSNextRequestServiceBeanRequest implements PSNextRequestServiceRemo
     }
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#setRequestVisibleForResp(be.smals.psnextrequest.entity.Request, be.smals.psnextrequest.entity.User, boolean)
+     * @see be.smals.psnextrequest.service.requests.PSNextRequestServiceRemoteRequest#setRequestVisibleForResp(be.smals.psnextrequest.entity.Request, be.smals.psnextrequest.entity.User, boolean)
      */
     @Override
     public void setRequestVisibleForResp(Request req, User user, boolean isVisible) throws PSNextRequestServiceException {
         try {
-            em.getTransaction().begin();
             Query createQuery = em.createQuery("SELECT r FROM ReqVisibleForResponsible r WHERE r.request = :req AND r.user =:user");
             createQuery.setParameter("req", req);
             createQuery.setParameter("user", user);
@@ -145,14 +132,13 @@ public class PSNextRequestServiceBeanRequest implements PSNextRequestServiceRemo
             visibleForResp.setIsVisible(isVisible);
             em.merge(visibleForResp);
             em.flush();
-            em.getTransaction().commit();
         } catch (Exception e) {
             throw new PSNextRequestServiceException("Request cannot be deleted: " + e.getMessage());
         }
     }
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#getRequest(int)
+     * @see be.smals.psnextrequest.service.requests.PSNextRequestServiceRemoteRequest#getRequestById(Long)
      */
     @Override
     public Request getRequestById(Long requestId) throws PSNextRequestServiceException {
@@ -185,7 +171,7 @@ public class PSNextRequestServiceBeanRequest implements PSNextRequestServiceRemo
 
     @Override
     public List<Request> getVisibleRequestsByUser(User user) throws PSNextRequestServiceException {
-        Query createQuery = em.createQuery("SELECT r FROM Request r WHERE r.user = :user AND r.requestVisibleForUser = 1");
+        Query createQuery = em.createQuery("SELECT r FROM Request r WHERE r.user = :user AND r.requestVisibleForUser = true");
         createQuery.setParameter("user", user);
         @SuppressWarnings("unchecked")
         List<Request> resultList = (List<Request>) createQuery.getResultList();
@@ -195,7 +181,7 @@ public class PSNextRequestServiceBeanRequest implements PSNextRequestServiceRemo
     @Override
     public List<Request> getVisibleRequestsForRespByUser(User user) throws PSNextRequestServiceException {
         try {
-            Query createQuery = em.createQuery("SELECT r.request FROM ReqVisibleForResponsible r WHERE r.user = :user AND r.isVisible = 1");
+            Query createQuery = em.createQuery("SELECT r.request FROM ReqVisibleForResponsible r WHERE r.user = :user AND r.isVisible = true");
             createQuery.setParameter("user", user);
             @SuppressWarnings("unchecked")
             List<Request> resultList = (List<Request>) createQuery.getResultList();
@@ -208,7 +194,7 @@ public class PSNextRequestServiceBeanRequest implements PSNextRequestServiceRemo
 
     @Override
     public List<Request> getVisibleRequestsByTask(Task task) throws PSNextRequestServiceException {
-        Query createQuery = em.createQuery("SELECT r FROM ReqVisibleForResponsible r WHERE r.task = :task AND r.isVisible = 0");
+        Query createQuery = em.createQuery("SELECT r FROM ReqVisibleForResponsible r WHERE r.task = :task AND r.isVisible = false");
         createQuery.setParameter("task", task);
         @SuppressWarnings("unchecked")
         List<Request> resultList = (List<Request>) createQuery.getResultList();
@@ -217,25 +203,22 @@ public class PSNextRequestServiceBeanRequest implements PSNextRequestServiceRemo
 
     @Override
     public List<Request> getRequestsByTask(Task task) throws PSNextRequestServiceException {
-        em.getTransaction().begin();
         Query createQuery = em.createQuery("SELECT r FROM Request r WHERE r.task = :task");
         createQuery.setParameter("task", task);
         @SuppressWarnings("unchecked")
         List<Request> resultList = (List<Request>) createQuery.getResultList();
         em.flush();
-        em.getTransaction().commit();
         return resultList;
     }
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#getRequestsByResponsible(be.smals.psnextrequest.entity.User)
+     * @see be.smals.psnextrequest.service.requests.PSNextRequestServiceRemoteRequest#getRequestsByResponsible(be.smals.psnextrequest.entity.User)
      */
     @Override
     public List<Request> getRequestsByResponsible(User user) throws PSNextRequestServiceException {
         try {
-            em.getTransaction().begin();
 
-            Query createQuery = em.createQuery("SELECT r FROM Responsible r WHERE r.user = :user AND r.isVisible = 1");
+            Query createQuery = em.createQuery("SELECT r FROM Responsible r WHERE r.user = :user AND r.isVisible = true");
             createQuery.setParameter("user", user);
             @SuppressWarnings({"unchecked", "unused"})
             List<Responsible> responsibles = (List<Responsible>) createQuery.getResultList();
@@ -245,9 +228,9 @@ public class PSNextRequestServiceBeanRequest implements PSNextRequestServiceRemo
             }
 
 
-            List<Request> requests = new ArrayList<Request>();
-            List<Task> tasks = new ArrayList<Task>();
-            List<Request> allRequests = new ArrayList<Request>();
+            List<Request> requests;
+            List<Task> tasks;
+            List<Request> allRequests = new ArrayList<>();
 
             // find all projects for specific responsible
             tasks = serviceTask.getTasksByResponsibleId(user.getUserId());
@@ -260,32 +243,27 @@ public class PSNextRequestServiceBeanRequest implements PSNextRequestServiceRemo
                 }
             }
             em.flush();
-            em.getTransaction().commit();
             return allRequests;
-
         } catch (PSNextRequestServiceException e) {
             throw new PSNextRequestServiceException(e.getMessage());
         } catch (Exception e) {
-            em.getTransaction().rollback();
             throw new PSNextRequestServiceException("An unexpected error has occurred: " + e.getMessage());
         }
     }
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#getResponsibleByRequest(be.smals.psnextrequest.entity.Request)
+     * @see be.smals.psnextrequest.service.requests.PSNextRequestServiceRemoteRequest#getResponsiblesByRequest(Request)
      */
     @Override
     public List<User> getResponsiblesByRequest(Request request) throws PSNextRequestServiceException {
         try {
-            em.getTransaction().begin();
-            List<User> usersResp = new ArrayList<User>();
+            List<User> usersResp = new ArrayList<>();
             Request myRequest = em.find(Request.class, request.getRequestId());
             Task task = myRequest.getTask();
             List<Responsible> responsibles = task.getResponsibles();
             for (Responsible resp : responsibles) {
                 usersResp.add(resp.getUser());
             }
-            em.getTransaction().commit();
             return usersResp;
         } catch (NoResultException e) {
             throw new PSNextRequestServiceException("Responsible cannot be found");
@@ -295,15 +273,14 @@ public class PSNextRequestServiceBeanRequest implements PSNextRequestServiceRemo
     }
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#getVisibleRequestsByResponsible(be.smals.psnextrequest.entity.User)
+     * @see be.smals.psnextrequest.service.requests.PSNextRequestServiceRemoteRequest#getVisibleRequestsByResponsible(be.smals.psnextrequest.entity.User)
      */
     @Override
     public List<Request> getVisibleRequestsByResponsible(User responsible) throws PSNextRequestServiceException {
         try {
-            em.getTransaction().begin();
-            List<Request> visibleRequests = new ArrayList<Request>();
-            List<Task> tasks = new ArrayList<Task>();
-            List<Request> allVisibleRequests = new ArrayList<Request>();
+            List<Request> visibleRequests = new ArrayList<>();
+            List<Task> tasks;
+            List<Request> allVisibleRequests;
 
             // find all tasks for specific responsible
             tasks = serviceTask.getTasksByResponsibleId(responsible.getUserId());
@@ -315,16 +292,14 @@ public class PSNextRequestServiceBeanRequest implements PSNextRequestServiceRemo
                     visibleRequests.add(req);
                 }
             }
-            em.getTransaction().commit();
             return visibleRequests;
         } catch (Exception e) {
-            em.getTransaction().rollback();
             throw new PSNextRequestServiceException("An unexpected error has occurred: " + e.getMessage());
         }
     }
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#listAllRequests()
+     * @see be.smals.psnextrequest.service.requests.PSNextRequestServiceRemoteRequest#getAllRequests()
      */
     @Override
     public List<Request> getAllRequests() throws PSNextRequestServiceException {

@@ -14,12 +14,11 @@
     <!-- Packaging CAN NOT BE CHANGED -->
     <packaging>pom</packaging>
 
-    <!-- Properties -->
     <properties>
-        <!-- Add properties -->
-        <!-- Google app Engine properties-->
-        <appengine.app.version>1</appengine.app.version>
-        <appengine.target.version>1.9.48</appengine.target.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <spring.version>4.3.4.RELEASE</spring.version>
     </properties>
 
     <!-- List of all modules (eclipse java projects) -->
@@ -40,13 +39,6 @@
                     <source>1.7</source>
                     <target>1.7</target>
                 </configuration>
-            </plugin>
-
-            <!-- Google App Engine -->
-            <plugin>
-                <groupId>com.google.appengine</groupId>
-                <artifactId>appengine-maven-plugin</artifactId>
-                <version>${appengine.target.version}</version>
             </plugin>
 
         </plugins>
@@ -78,6 +70,13 @@
             <!-- dependencies -->
 
             <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.0.1</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
                 <groupId>org.apache.maven</groupId>
                 <artifactId>maven-plugin-api</artifactId>
                 <version>3.0.4</version>
@@ -93,12 +92,14 @@
                 <scope>provided</scope>
             </dependency>
 
+            <!-- Javax EJB -->
             <dependency>
                 <groupId>javax.ejb</groupId>
                 <artifactId>ejb-api</artifactId>
                 <version>3.0</version>
             </dependency>
 
+            <!-- Javax Persistence -->
             <dependency>
                 <groupId>javax.persistence</groupId>
                 <artifactId>persistence-api</artifactId>
@@ -106,13 +107,158 @@
                 <scope>compile</scope>
             </dependency>
 
+            <!-- Javax JTA -->
             <dependency>
                 <groupId>javax.transaction</groupId>
                 <artifactId>jta</artifactId>
                 <version>1.1</version>
             </dependency>
 
+            <!-- JSTL -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jstl</artifactId>
+                <version>1.2</version>
+            </dependency>
 
+
+            <!-- Commons - Utilities classes -->
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>1.1.1</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>3.2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.6</version>
+            </dependency>
+
+            <!-- Guava - Utilities classes-->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>12.0</version>
+            </dependency>
+
+            <!-- Dependencies for EclipseLink JPA Persistence API -->
+            <dependency>
+                <groupId>org.eclipse.persistence</groupId>
+                <artifactId>eclipselink</artifactId>
+                <version>2.6.4</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <!-- Hibernate -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-annotations</artifactId>
+                <version>3.5.6-Final</version>
+            </dependency>
+
+
+            <!-- Spring -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <!-- Spring Web -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <!-- JSF -->
+            <dependency>
+                <groupId>com.sun.faces</groupId>
+                <artifactId>jsf-api</artifactId>
+                <version>2.2.14</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.sun.faces</groupId>
+                <artifactId>jsf-impl</artifactId>
+                <version>2.2.14</version>
+            </dependency>
+
+
+
+
+            <!-- Richfaces -->
+            <dependency>
+                <groupId>org.richfaces</groupId>
+                <artifactId>richfaces</artifactId>
+                <version>4.5.17.Final</version>
+            </dependency>
+
+            <!-- Primefaces -->
+            <dependency>
+                <groupId>org.primefaces</groupId>
+                <artifactId>primefaces</artifactId>
+                <version>6.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.primefaces.extensions</groupId>
+                <artifactId>primefaces-extensions</artifactId>
+                <version>6.0.0</version>
+            </dependency>
+
+
+
+            <!-- MySQL driver connector library -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>5.1.40</version>
+                <scope>compile</scope>
+            </dependency>
+
+
+            <!-- JDOM accessing, manipulating, and outputting XML -->
+            <dependency>
+                <groupId>jdom</groupId>
+                <artifactId>jdom</artifactId>
+                <version>1.1</version>
+            </dependency>
+
+            <!-- Java Simplified Encryption -->
+            <dependency>
+                <groupId>org.jasypt</groupId>
+                <artifactId>jasypt</artifactId>
+                <version>1.9.0</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jasypt</groupId>
+                <artifactId>jasypt-hibernate4</artifactId>
+                <version>1.9.0</version>
+            </dependency>
+
+            <!-- Testing -->
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
@@ -126,144 +272,11 @@
                 <version>3.3.1</version>
             </dependency>
 
-
-            <dependency>
-                <groupId>commons-logging</groupId>
-                <artifactId>commons-logging</artifactId>
-                <version>1.1.1</version>
-                <scope>compile</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>org.eclipse.persistence</groupId>
-                <artifactId>eclipselink</artifactId>
-                <version>2.0.2</version>
-                <scope>compile</scope>
-            </dependency>
-
             <dependency>
                 <groupId>org.unitils</groupId>
                 <artifactId>unitils-core</artifactId>
                 <version>3.3</version>
                 <scope>test</scope>
-            </dependency>
-
-            <!-- Spring -->
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-orm</artifactId>
-                <version>4.1.6.RELEASE</version>
-                <scope>compile</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-test</artifactId>
-                <version>4.1.6.RELEASE</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>4.1.6.RELEASE</version>
-            </dependency>
-
-
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.38</version>
-                <scope>compile</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jasypt</groupId>
-                <artifactId>jasypt</artifactId>
-                <version>1.9.0</version>
-                <scope>compile</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jasypt</groupId>
-                <artifactId>jasypt-hibernate4</artifactId>
-                <version>1.9.0</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-annotations</artifactId>
-                <version>3.5.6-Final</version>
-            </dependency>
-
-            <dependency>
-                <groupId>jdom</groupId>
-                <artifactId>jdom</artifactId>
-                <version>1.1</version>
-            </dependency>
-
-            <!--  TO BE uncommented for jboss if don' work -->
-            <!--     <dependency> -->
-            <!--     	<groupId>javax.servlet</groupId> -->
-            <!--     	<artifactId>servlet-api</artifactId> -->
-            <!--     	<version>3.0-alpha-1</version> -->
-            <!--     </dependency> -->
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>javax.servlet-api</artifactId>
-                <version>3.0.1</version>
-                <scope>provided</scope>
-            </dependency>
-
-            <!--<dependency>
-                <groupId>javax.faces</groupId>
-                <artifactId>jsf-api</artifactId>
-                <version>2.1</version>
-            </dependency>-->
-            <dependency>
-                <groupId>com.sun.faces</groupId>
-                <artifactId>jsf-api</artifactId>
-                <version>2.2.14</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.sun.faces</groupId>
-                <artifactId>jsf-impl</artifactId>
-                <version>2.2.14</version>
-            </dependency>
-
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>jstl</artifactId>
-                <version>1.2</version>
-            </dependency>
-
-
-            <dependency>
-                <groupId>org.richfaces</groupId>
-                <artifactId>richfaces</artifactId>
-                <version>4.5.17.Final</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>12.0</version>
-            </dependency>
-            <dependency>
-                <groupId>net.sourceforge.cssparser</groupId>
-                <artifactId>cssparser</artifactId>
-                <version>0.9.7</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.primefaces</groupId>
-                <artifactId>primefaces</artifactId>
-                <version>6.0</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.primefaces.extensions</groupId>
-                <artifactId>primefaces-extensions</artifactId>
-                <version>6.0.0</version>
             </dependency>
 
 

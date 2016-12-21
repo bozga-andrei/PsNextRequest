@@ -11,7 +11,7 @@ import java.util.List;
 @Remote
 public interface PSNextRequestServiceRemoteUser {
 
-	/* ---------------- User -------------------- */
+    /* ---------------- User -------------------- */
 
     /**
      * Create a new user.
@@ -40,7 +40,7 @@ public interface PSNextRequestServiceRemoteUser {
      *
      * @throws PSNextRequestServiceException
      */
-    public void deleteUser(User user) throws PSNextRequestServiceException;
+    void deleteUser(User user) throws PSNextRequestServiceException;
 
     /**
      * Add administrator role for user.

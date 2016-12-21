@@ -9,18 +9,14 @@ import org.jasypt.util.password.StrongPasswordEncryptor;
 
 import javax.ejb.Stateless;
 import javax.persistence.*;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 
 /**
  * User Service Bean
- * PSNextRequest service users implementation (EJB).ss
+ * PSNextRequest service users implementation (EJB).
  *
  * @author AndreiBozga
  */
@@ -32,10 +28,6 @@ public class PSNextRequestServiceBeanUser implements PSNextRequestServiceRemoteU
 
     private Logger logger = Logger.getLogger("UserLogger");
 
-    protected void flush() {
-        em.flush();
-    }
-
     /* ---------------- User -------------------- */
     @Override
     public User createUser(User user) throws PSNextRequestServiceException {
@@ -43,7 +35,6 @@ public class PSNextRequestServiceBeanUser implements PSNextRequestServiceRemoteU
             StrongPasswordEncryptor pwEncryptor = new StrongPasswordEncryptor();
             //Encrypting password
             user.setUserPassword(pwEncryptor.encryptPassword(user.getUserPassword()));
-            em.getTransaction().begin();
             //set ressource role
             Role role = getRoleByRoleName("ressource");
             //Transaction many-to-many User_Role
@@ -51,7 +42,6 @@ public class PSNextRequestServiceBeanUser implements PSNextRequestServiceRemoteU
             em.persist(user);
             em.flush();
             logger.log(Level.INFO, "L'utilisateur: " + user.getUserFirstName() + " " + user.getUserLastName() + " a été créé.");
-            em.getTransaction().commit();
             return user;
         } catch (PersistenceException a) {
             if (a.getMessage().contains("USER_DISTINGUISHED_NAME_UNIQUE")) {
@@ -71,10 +61,8 @@ public class PSNextRequestServiceBeanUser implements PSNextRequestServiceRemoteU
     @Override
     public User updateUser(User user) throws PSNextRequestServiceException {
         try {
-            em.getTransaction().begin();
             em.merge(user);
             em.flush();
-            em.getTransaction().commit();
             return user;
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,11 +74,9 @@ public class PSNextRequestServiceBeanUser implements PSNextRequestServiceRemoteU
     @Override
     public void deleteUser(User user) throws PSNextRequestServiceException {
         try {
-            em.getTransaction().begin();
             em.remove(user);
             logger.log(Level.INFO, "L'utilisateur: " + user.getUserFirstName() + " " + user.getUserLastName() + " a été supprimé.");
-            flush();
-            em.getTransaction().commit();
+            em.flush();
         } catch (Exception e) {
             throw new PSNextRequestServiceException("Error: " + e.getMessage());
         }
@@ -121,7 +107,7 @@ public class PSNextRequestServiceBeanUser implements PSNextRequestServiceRemoteU
     }
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#getUserById(java.lang.Long)
+     * @see be.smals.psnextrequest.service.users.PSNextRequestServiceRemoteUser#getUserById(java.lang.Long)
      */
     @Override
     public User getUserById(Long user) throws PSNextRequestServiceException {
@@ -137,7 +123,7 @@ public class PSNextRequestServiceBeanUser implements PSNextRequestServiceRemoteU
     }
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#getAllUsers()
+     * @see be.smals.psnextrequest.service.users.PSNextRequestServiceRemoteUser#getAllUsers()
      */
     @Override
     public List<User> getAllUsers() throws PSNextRequestServiceException {
@@ -157,26 +143,23 @@ public class PSNextRequestServiceBeanUser implements PSNextRequestServiceRemoteU
     /* ---------------- Role -------------------- */
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#createRole(be.smals.psnextrequest.entity.Role)
+     * @see be.smals.psnextrequest.service.users.PSNextRequestServiceRemoteUser#createRole(be.smals.psnextrequest.entity.Role)
      */
     public void createRole(Role role) throws PSNextRequestServiceException {
         try {
-            em.getTransaction().begin();
             em.persist(role);
             em.flush();
             logger.log(Level.INFO, "Un nouveau rôle a été créé: " + role.getRoleName());
-            em.getTransaction().commit();
         } catch (Exception e) {
             throw new PSNextRequestServiceException("An unexpected error has occurred: " + e.getMessage());
         }
     }
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#createRole(be.smals.psnextrequest.entity.Role)
+     * @see be.smals.psnextrequest.service.users.PSNextRequestServiceRemoteUser#createRole(be.smals.psnextrequest.entity.Role)
      */
     public void populateRole() throws PSNextRequestServiceException {
         try {
-            em.getTransaction().begin();
             Role roleAdmin = new Role();
             roleAdmin.setRoleName("admin");
             em.persist(roleAdmin);
@@ -187,29 +170,26 @@ public class PSNextRequestServiceBeanUser implements PSNextRequestServiceRemoteU
 
             em.flush();
             logger.log(Level.INFO, "La methode populate Role: ");
-            em.getTransaction().commit();
         } catch (Exception e) {
             throw new PSNextRequestServiceException("An unexpected error has occurred: " + e.getMessage());
         }
     }
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#addUserResponsibleRole(be.smals.psnextrequest.entity.User)
+     * @see be.smals.psnextrequest.service.users.PSNextRequestServiceRemoteUser#addUserAdminRole(be.smals.psnextrequest.entity.User)
      */
     @Override
     public User addUserAdminRole(User user) throws PSNextRequestServiceException {
-        em.getTransaction().begin();
         Role role = getRoleByRoleName("admin");
         user.addRole(role);
         em.persist(user);
         logger.log(Level.INFO, "L'utilisateur: " + user.getUserFirstName() + " " + user.getUserLastName() + " est promové comme admin.");
-        flush();
-        em.getTransaction().commit();
+        em.flush();
         return user;
     }
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#getRoleById(java.lang.Long)
+     * @see be.smals.psnextrequest.service.users.PSNextRequestServiceRemoteUser#getRoleById(java.lang.Long)
      */
     @Override
     public Role getRoleById(Long roleId) {
@@ -217,16 +197,14 @@ public class PSNextRequestServiceBeanUser implements PSNextRequestServiceRemoteU
     }
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#getRoleById(java.lang.Long)
+     * @see be.smals.psnextrequest.service.users.PSNextRequestServiceRemoteUser#getRoleById(java.lang.Long)
      */
     @Override
     public Role getRoleByRoleName(String roleName) {
         try {
-            Role role = new Role();
             Query query = em.createQuery("SELECT r FROM Role r WHERE r.roleName = :roleName");
             query.setParameter("roleName", roleName);
-            role = (Role) query.getSingleResult();
-            return role;
+            return (Role) query.getSingleResult();
         } catch (EntityNotFoundException e) {
             e.getStackTrace();
             return null;
@@ -238,21 +216,19 @@ public class PSNextRequestServiceBeanUser implements PSNextRequestServiceRemoteU
 	/* ---------------- Responsible -------------------- */
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#getResponsibleById(be.smals.psnextrequest.entity.Responsible)
+     * @see be.smals.psnextrequest.service.users.PSNextRequestServiceRemoteUser#getResponsibleById
      */
     @Override
     public Responsible getResponsibleById(Long userId, Long taskId) throws PSNextRequestServiceException {
         try {
             User user = em.find(User.class, userId);
-            if (!user.equals(null)) {
+            if (user != null) {
                 Task task = em.find(Task.class, taskId);
-                if (!task.equals(null)) {
-                    Responsible responsible = new Responsible();
+                if (task != null) {
                     Query query = em.createQuery("SELECT r FROM Responsible r WHERE r.user = :user AND r.task = :task");
                     query.setParameter("user", user);
                     query.setParameter("task", task);
-                    responsible = (Responsible) query.getSingleResult();
-                    return responsible;
+                    return (Responsible) query.getSingleResult();
                 } else {
                     throw new PSNextRequestServiceException("Not project selected");
                 }
@@ -267,17 +243,15 @@ public class PSNextRequestServiceBeanUser implements PSNextRequestServiceRemoteU
     }
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#getVisibleResponsiblesByUser(be.smals.psnextrequest.entity.User)
+     * @see be.smals.psnextrequest.service.users.PSNextRequestServiceRemoteUser#getVisibleResponsiblesByUser(be.smals.psnextrequest.entity.User)
      */
     @SuppressWarnings("unchecked")
     @Override
     public List<Responsible> getVisibleResponsiblesByUser(User user) throws PSNextRequestServiceException {
         try {
-            List<Responsible> responsibles = new ArrayList<Responsible>();
-            Query query = em.createQuery("SELECT r FROM Responsible r WHERE r.user = :user AND r.isVisible = 1");
+            Query query = em.createQuery("SELECT r FROM Responsible r WHERE r.user = :user AND r.isVisible = true");
             query.setParameter("user", user);
-            responsibles = (List<Responsible>) query.getResultList();
-            return responsibles;
+            return (List<Responsible>) query.getResultList();
         } catch (Exception e) {
             throw new PSNextRequestServiceException("An unexpected error has occurred!");
         }
@@ -285,12 +259,12 @@ public class PSNextRequestServiceBeanUser implements PSNextRequestServiceRemoteU
     }
 
     /**
-     * @see be.smals.psnextrequest.service.PSNextRequestService#getAllResponsibles()
+     * @see be.smals.psnextrequest.service.users.PSNextRequestServiceRemoteUser#getAllResponsibles()
      */
     @Override
     public List<Responsible> getAllResponsibles() throws PSNextRequestServiceException {
         try {
-            Query createQuery = em.createQuery("SELECT r FROM Responsible ");
+            Query createQuery = em.createQuery("SELECT r FROM Responsible r");
             @SuppressWarnings("unchecked")
             List<Responsible> responsibles = (List<Responsible>) createQuery.getResultList();
             return responsibles;

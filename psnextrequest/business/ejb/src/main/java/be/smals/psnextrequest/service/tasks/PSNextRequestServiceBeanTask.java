@@ -30,10 +30,6 @@ public class PSNextRequestServiceBeanTask implements PSNextRequestServiceRemoteT
 
     private Logger logger = Logger.getLogger("UserLogger");
 
-    protected void flush() {
-        em.flush();
-    }
-    
     
     /* ---------------- Task -------------------- */
 
@@ -41,7 +37,6 @@ public class PSNextRequestServiceBeanTask implements PSNextRequestServiceRemoteT
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Task createTask(List<User> responsibles, Task task) throws PSNextRequestServiceException {
         try {
-            em.getTransaction().begin();
             if (!responsibles.isEmpty() && responsibles != null) {
                 task.setTaskCreationDate(new Date());
                 if (task.getProject().getProjectId() != null) {
@@ -61,7 +56,6 @@ public class PSNextRequestServiceBeanTask implements PSNextRequestServiceRemoteT
                             logger.log(Level.INFO, "Responsible added: " + user.getUserFirstName());
                         }
                         em.flush();
-                        em.getTransaction().commit();
                         return task;
                     }
                     throw new PSNextRequestServiceException("The project have to be open!");
@@ -72,9 +66,6 @@ public class PSNextRequestServiceBeanTask implements PSNextRequestServiceRemoteT
                 throw new PSNextRequestServiceException("Please add a responsible");
             }
         } catch (PersistenceException e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
             if (e.getMessage().contains("Error Code: 1062")) {
                 throw new PSNextRequestServiceException("Le nom de la tâche existe déjà", e);
             } else if (e.getMessage().contains("Error Code: 1048")) {
@@ -83,21 +74,14 @@ public class PSNextRequestServiceBeanTask implements PSNextRequestServiceRemoteT
                 throw new PSNextRequestServiceException("Contrainte violation exception", e);
             }
         } catch (PSNextRequestServiceException e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
             throw new PSNextRequestServiceException(e.getMessage());
         } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
             throw new PSNextRequestServiceException("Task cannot be created", e);
         }
     }
 
     @Override
     public Task updateTask(List<User> newResponsibles, List<User> responsiblesToRemove, Task task) throws PSNextRequestServiceException {
-        em.getTransaction().begin();
         Task existingTask = null;
         try {
             if (task.getTaskId() != null) {
@@ -135,7 +119,6 @@ public class PSNextRequestServiceBeanTask implements PSNextRequestServiceRemoteT
                     }
                     em.merge(task);
                     em.flush();
-                    em.getTransaction().commit();
                     logger.log(Level.INFO, "TAsk updated: " + task.getTaskName());
                     return task;
                 } else {
@@ -145,14 +128,8 @@ public class PSNextRequestServiceBeanTask implements PSNextRequestServiceRemoteT
                 throw new PSNextRequestServiceException("Task cannot be found");
             }
         } catch (PSNextRequestServiceException e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
             throw new PSNextRequestServiceException(e.getMessage());
         } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
             throw new PSNextRequestServiceException("An unexpected error has occurred: " + e.getMessage());
         }
 
@@ -162,16 +139,11 @@ public class PSNextRequestServiceBeanTask implements PSNextRequestServiceRemoteT
     @Override
     public void disableTask(Task task) throws PSNextRequestServiceException {
         try {
-            em.getTransaction().begin();
             //disable Task by status 3
             task.setTaskStatus(3);
             em.merge(task);
             em.flush();
-            em.getTransaction().commit();
         } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
             throw new PSNextRequestServiceException("An unexpected error has occurred: " + e.getMessage());
         }
     }
@@ -232,9 +204,7 @@ public class PSNextRequestServiceBeanTask implements PSNextRequestServiceRemoteT
                             task.getResponsibles().size();
                         }
                         em.flush();
-                        em.getTransaction().commit();
                     } else {
-                        em.getTransaction().rollback();
                         throw new PSNextRequestServiceException("Not project selected");
                     }
                 } else {
@@ -270,7 +240,6 @@ public class PSNextRequestServiceBeanTask implements PSNextRequestServiceRemoteT
 
     public List<User> getResponsiblesByTask(Task task) throws PSNextRequestServiceException {
         try {
-            em.getTransaction().begin();
             List<User> userResponsibles = new ArrayList<User>();
             Task myTask = em.find(Task.class, task.getTaskId());
             List<Responsible> responsibles = myTask.getResponsibles();
@@ -278,7 +247,6 @@ public class PSNextRequestServiceBeanTask implements PSNextRequestServiceRemoteT
             for (Responsible resp : responsibles) {
                 userResponsibles.add(resp.getUser());
             }
-            em.getTransaction().commit();
             return userResponsibles;
         } catch (NoResultException e) {
             throw new PSNextRequestServiceException("Responsible cannot be found");
@@ -291,5 +259,5 @@ public class PSNextRequestServiceBeanTask implements PSNextRequestServiceRemoteT
     public void setTaskVisibleForResp(Request req, User resp, boolean isVisible) throws PSNextRequestServiceException {
         //TODO
     }
-    
+
 }

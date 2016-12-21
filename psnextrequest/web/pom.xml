@@ -38,34 +38,6 @@
     </contributors>
 
     <build>
-        <plugins>
-
-            <plugin>
-                <groupId>com.google.appengine</groupId>
-                <artifactId>appengine-maven-plugin</artifactId>
-            </plugin>
-
-
-            <!--       war plugin to select the DD to put in the target artifact
-                  <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>2.1.1</version>
-                    <configuration>
-                      <webResources>
-                        <resource>
-                          <directory>src/env/${env}/WEB-INF</directory>
-                          override the destination directory for this resource
-                          <targetPath>WEB-INF</targetPath>
-                          enable filtering
-                          <filtering>true</filtering>
-                        </resource>
-                      </webResources>
-                    </configuration>
-                  </plugin> -->
-            <!-- Add here configuration of plugins -->
-
-        </plugins>
 
         <!-- Configuration of resources -->
         <resources>
@@ -82,38 +54,6 @@
     <dependencies>
 
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sun.faces</groupId>
-            <artifactId>jsf-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.faces</groupId>
-            <artifactId>jsf-impl</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.ejb</groupId>
-            <artifactId>ejb-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>jdom</groupId>
-            <artifactId>jdom</artifactId>
-        </dependency>
-        <dependency>
             <groupId>${groupId}</groupId>
             <artifactId>psnextrequest-business-common</artifactId>
             <version>${version}</version>
@@ -126,24 +66,55 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- Javax -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+
+        <!-- Javax EJB -->
+        <dependency>
+            <groupId>javax.ejb</groupId>
+            <artifactId>ejb-api</artifactId>
+        </dependency>
+
+        <!-- Javax Persistence -->
         <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>persistence-api</artifactId>
         </dependency>
 
+        <!-- JSTL -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+
+
+        <!-- Guava - Utilities classes-->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
+
+        <!-- JSF -->
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-impl</artifactId>
+        </dependency>
+
+        <!-- Richfaces -->
         <dependency>
             <groupId>org.richfaces</groupId>
             <artifactId>richfaces</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.sourceforge.cssparser</groupId>
-            <artifactId>cssparser</artifactId>
-        </dependency>
+        <!-- Primefaces -->
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
@@ -152,6 +123,18 @@
         <dependency>
             <groupId>org.primefaces.extensions</groupId>
             <artifactId>primefaces-extensions</artifactId>
+        </dependency>
+
+        <!-- JDOM accessing, manipulating, and outputting XML -->
+        <dependency>
+            <groupId>jdom</groupId>
+            <artifactId>jdom</artifactId>
+        </dependency>
+
+        <!-- Testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
         </dependency>
 
     </dependencies>

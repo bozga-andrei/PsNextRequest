@@ -48,30 +48,6 @@
         <param-value>client</param-value>
     </context-param>
 
-    <!-- Recommendation from GAE pages  fix InitialContex ERROR: http://java.dzone.com/news/jsf2-configuration-google-app-->
-    <!--   <context-param>  -->
-    <!--     <param-name>javax.faces.PROJECT_STAGE</param-name>  -->
-    <!--     <param-value>Production</param-value>  -->
-    <!--   </context-param> -->
-
-    <!-- Disable use of threading for single-threaded environments such as
-       the Google AppEngine. -->
-    <!-- <context-param>
-         <param-name>com.sun.faces.enableThreading</param-name>
-         <param-value>false</param-value>
-         &lt;!&ndash;
-         <description>
-         When enabled, the runtime initialization and default ResourceHandler
-         implementation will use threads to perform their functions. Set this
-         value to false if threads aren't desired (as in the case of running
-         within the Google Application Engine).
-
-         Note that when this option is disabled, the ResourceHandler will not
-         pick up new versions of resources when ProjectStage is development.
-         </description>
-         &ndash;&gt;
-     </context-param>-->
-
     <context-param>
         <param-name>javax.faces.SKIP_COMMENTS</param-name>
         <param-value>true</param-value>
