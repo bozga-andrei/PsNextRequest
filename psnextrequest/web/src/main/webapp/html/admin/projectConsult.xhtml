@@ -37,7 +37,7 @@
                         <div class="row section">
                             <h:commandButton
                                     rendered="#{(projectSessionBean.selectedProject != null) and (projectSessionBean.selectedProject.projectStatus == 0)}"
-                                    class="buttonsRight buttons" id="taskCreateBtn" onclick="createTask.show();"
+                                    class="buttonsRight buttons" id="taskCreateBtn" onclick="PF('createTask').show();"
                                     type="button" value="Créer une nouvelle tâche"/>
                             <h:commandButton rendered="#{projectSessionBean.selectedProject != null}"
                                              class="buttonsRight buttons" id="projectUpdateBtn" action="toProjectUpdate"
@@ -157,7 +157,7 @@
 
                             <div class="dialogFooter">
                                 <h:form>
-                                    <p:commandButton id="retourBtn" onclick="createTask.hide();" type="button"
+                                    <p:commandButton id="retourBtn" onclick="PF('createTask').hide();" type="button"
                                                      value="Annuler"/>
                                     <p:commandButton actionListener="#{taskControllerBean.createTask}" update=":form"
                                                      onsuccess="setTimeout ( '$(\'#formDialog\\\\:msg\').hide(1000)', 3000); setTimeout ( '$(\'#form\\\\:msg\').hide(1000)', 3000);"

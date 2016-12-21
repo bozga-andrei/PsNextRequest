@@ -35,7 +35,7 @@
 
                         <div class="row section">
                             <h:commandButton class="buttonsRight buttons" id="createTaskBtn" charset="UTF-8"
-                                             onclick="createTask.show()" type="button"
+                                             onclick="PF('createTask').show();" type="button"
                                              value="Créer une nouvelle tâche"/>
                             <h:commandButton rendered="#{taskSessionBean.selectedTask != null}"
                                              class="buttonsRight buttons" action="toTaskUpdate" immediate="true"
@@ -149,7 +149,7 @@
 
                             <div class="dialogFooter">
                                 <h:form>
-                                    <p:commandButton id="retourBtn" onclick="createTask.hide();" type="button"
+                                    <p:commandButton id="retourBtn" onclick="PF('createTask').hide();" type="button"
                                                      value="Annuler"/>
                                     <p:commandButton actionListener="#{taskControllerBean.createTask}"
                                                      update=":form, :formTasks" charset="UTF-8"

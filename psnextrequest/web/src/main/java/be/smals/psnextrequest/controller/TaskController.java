@@ -138,7 +138,7 @@ public class TaskController {
                 }
                 if (selectedResponsibles != null && !selectedResponsibles.isEmpty()) {
                     task = serviceTask.createTask(selectedResponsibles, task);
-                    RequestContext.getCurrentInstance().execute("createTask.hide()");
+                    RequestContext.getCurrentInstance().execute("PF('createTask').hide()");
                     context.addMessage("msg", new FacesMessage("Nouvelle tâche créée."));
                 } else {
                     RequestContext.getCurrentInstance().execute("createTask.jq.effect('shake', { times:3 }, 100)");
