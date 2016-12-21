@@ -32,7 +32,6 @@ public class PSNextRequestServiceBeanProject implements PSNextRequestServiceRemo
     private EntityManager em;
 
     private Logger logger = Logger.getLogger("UserLogger");
-    FileHandler fh = setLogger();
 
     @EJB
     private PSNextRequestServiceRemoteUser serviceUser;
@@ -324,21 +323,5 @@ public class PSNextRequestServiceBeanProject implements PSNextRequestServiceRemo
         }
     }
 
-    //Initialiser et formater un fichier log 
-    public FileHandler setLogger() {
-        try {
-            // This block configure the logger with handler and formatter
-            fh = new FileHandler("c:\\PsNextLogs\\UserLogFile.log", true);
-            logger.addHandler(fh);
-            logger.setLevel(Level.ALL);
-            SimpleFormatter formatter = new SimpleFormatter();
-            fh.setFormatter(formatter);
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return fh;
-    }
 
 }
