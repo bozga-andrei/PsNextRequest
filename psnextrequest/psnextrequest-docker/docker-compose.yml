@@ -7,6 +7,10 @@ services:
     container_name: psnextrequest-wildfly
     environment:
       - ENVIRONMENT=local
+      - MYSQL_HOST=mysql-db
+      - MYSQL_DATABASE=psnextrequest_db
+      - MYSQL_USER=psnext
+      - MYSQL_PASSWORD=1234
     ports:
       - 2043:8443
       - 2080:8080
@@ -21,13 +25,10 @@ services:
     image: psnextrequest/image-mysql:1.0
     container_name: psnextrequest-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: '1234'
-      MYSQL_USER: 'psnext'
-      MYSQL_PASS: '1234'
-      STARTUP_SQL: '/tmp/test_psnextrequest_db.sql'
-    volumes:
-      - mysql-datavolume:/var/lib/mysql
-      - ./volume:/var/lib/mysql
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=psnextrequest_db
+      - MYSQL_USER=psnext
+      - MYSQL_PASSWORD=1234
     ports:
       - 3306:3306
 volumes:

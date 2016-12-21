@@ -141,12 +141,12 @@
             <datasources>
                 <datasource jndi-name="java:jboss/datasource/psnextrequest" pool-name="psnextrequest" enabled="true"
                             use-java-context="true">
-                    <connection-url>jdbc:mysql://localhost:3306/psnextrequest_db</connection-url>
+                    <connection-url>jdbc:mysql://${env.MYSQL_HOST}/${env.MYSQL_DATABASE}?autoReconnect=true&amp;autoReconnectForPools=true&amp;useUnicode=yes&amp;characterEncoding=UTF-8&amp;useSSL=false</connection-url>
                     <driver-class>com.mysql.jdbc.Driver</driver-class>
                     <driver>mysql-connector-java-5.1.40-bin.jar_com.mysql.jdbc.Driver_5_1</driver>
                     <security>
-                        <user-name>root</user-name>
-                        <password>1234</password>
+                        <user-name>${env.MYSQL_USER}</user-name>
+                        <password>${env.MYSQL_PASSWORD}</password>
                     </security>
                     <validation>
                         <valid-connection-checker
