@@ -33,9 +33,6 @@ public class PSNextRequestServiceBeanProject implements PSNextRequestServiceRemo
     @EJB
     private PSNextRequestServiceRemoteUser serviceUser;
 
-    protected void flush() {
-        em.flush();
-    }
     
 	/* ---------------- Project -------------------- */
 
@@ -62,7 +59,7 @@ public class PSNextRequestServiceBeanProject implements PSNextRequestServiceRemo
             } else if (e.getMessage().contains("Error Code: 1048")) {
                 throw new PSNextRequestServiceException("Le projet n'a pas été sélectioné", e);
             } else {
-                throw new PSNextRequestServiceException("Contrainte violation exception", e);
+                throw new PSNextRequestServiceException("Constraint violation exception", e);
             }
         } catch (Exception e) {
             throw new PSNextRequestServiceException("Project cannot be created", e);
